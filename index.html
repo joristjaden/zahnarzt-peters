@@ -9,7 +9,7 @@
 <meta property="og:description" content="Familienpraxis in Norden mit über 40 Jahren Erfahrung. Allgemeine Zahnheilkunde, Implantologie, Prophylaxe, Angstpatienten willkommen.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="main.logo.zahnarzt.peters.png">
-<link rel="icon" href="favicon.peters.png" type="image/png">
+<link rel="icon" href="favicon.peters.new.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,9 +62,10 @@ section{padding:100px 0;position:relative;}
 /* ============ HEADER ============ */
 .header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:1100px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.5);box-shadow:0 10px 40px rgba(14,27,34,.09);z-index:1000;transition:all .35s var(--ease);}
 .header.scrolled{top:0;left:0;transform:none;width:100%;max-width:none;border-radius:0;background:rgba(250,250,247,.92);border:none;border-bottom:1px solid rgba(14,27,34,.08);box-shadow:0 4px 24px rgba(14,27,34,.06);}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;}
-.header.scrolled .header-inner{padding:14px 40px;max-width:1240px;margin:0 auto;}
-.header-logo img{height:38px;width:auto;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
+.header.scrolled .header-inner{padding:16px 40px;max-width:1240px;margin:0 auto;}
+.header-logo img{height:56px;width:auto;}
+@media(max-width:767px){.header-logo img{height:46px;}}
 .header-nav{display:none;}
 @media(min-width:1024px){
   .header-nav{display:flex;align-items:center;gap:32px;font-size:14.5px;font-weight:500;}
@@ -73,8 +74,8 @@ section{padding:100px 0;position:relative;}
   .header-nav a:hover::after{width:100%;}
 }
 .header-phone{display:none;}
-@media(min-width:1024px){.header-phone{display:inline-flex;background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;align-items:center;gap:8px;}
-.header-phone:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,27,34,.25);}}
+@media(min-width:1024px){.header-phone{display:inline-flex;background:var(--gradient);color:var(--ink);padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;align-items:center;gap:8px;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.header-phone:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(2,204,255,.35);}}
 .header-burger{display:flex;flex-direction:column;gap:5px;padding:8px;z-index:1200;}
 @media(min-width:1024px){.header-burger{display:none;}}
 .header-burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s;}
@@ -105,13 +106,16 @@ section{padding:100px 0;position:relative;}
 @media(min-width:768px){.hero-bullets{grid-template-columns:repeat(4,auto);}}
 .hero-bullets li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.92);}
 .hero-bullets .icon{color:var(--aqua-2);width:18px;height:18px;flex-shrink:0;}
-.float-cta{position:fixed;right:22px;bottom:22px;z-index:900;background:var(--ink);color:#fff;padding:15px 22px;border-radius:999px;display:none;align-items:center;gap:9px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(14,27,34,.35);opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
+.float-cta{position:fixed;right:22px;bottom:22px;z-index:900;background:var(--gradient);color:var(--ink);padding:15px 22px;border-radius:999px;display:none;align-items:center;gap:9px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(2,204,255,.4);opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease),box-shadow .25s var(--ease);}
+.float-cta:hover{box-shadow:0 14px 34px rgba(2,204,255,.55);}
 .float-cta.show{display:inline-flex;opacity:1;transform:translateY(0);}
 
 /* ============ MARQUEE ============ */
-.marquee{background:var(--ink);color:#fff;overflow:hidden;padding:16px 0;white-space:nowrap;}
+.marquee{background:var(--gradient);overflow:hidden;padding:16px 0;white-space:nowrap;}
 .marquee-track{display:inline-flex;animation:marquee 38s linear infinite;}
-.marquee-track span{font-size:14px;letter-spacing:.1em;font-weight:500;padding:0 14px;color:rgba(255,255,255,.88);}
+.marquee-track span{font-size:14px;letter-spacing:.1em;font-weight:600;color:var(--ink);}
+.marquee-track .mq-dot{padding:0 14px;opacity:.6;}
+.marquee-track .mq-item{padding:0;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 /* ============ INFO BAR ============ */
@@ -135,7 +139,7 @@ section{padding:100px 0;position:relative;}
 .philo-text p{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:560px;}
 .philo-stats{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
 .stat-box{background:#fff;border-radius:18px;padding:20px 26px;box-shadow:0 12px 30px -10px rgba(14,27,34,.1);border:1px solid rgba(14,27,34,.05);}
-.stat-box .n{font-family:var(--serif);font-size:26px;font-style:italic;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat-box .n{font-family:var(--serif);font-size:26px;font-weight:600;font-style:italic;color:#08CCFF;}
 .stat-box .t{font-size:12.5px;color:var(--muted);font-weight:500;margin-top:2px;}
 
 /* ============ LEISTUNGEN ============ */
@@ -143,8 +147,17 @@ section{padding:100px 0;position:relative;}
 @media(min-width:900px){.serv-grid{grid-template-columns:repeat(4,1fr);}}
 .serv-card{background:#fff;border-radius:24px;padding:28px 22px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;}
 .serv-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -16px rgba(2,204,255,.25);border-color:rgba(2,204,255,.3);}
-.serv-card .ic{width:48px;height:48px;border-radius:14px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:18px;}
+.serv-card .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:transform .3s var(--ease);}
+.serv-card:hover .ic{transform:scale(1.05);}
 .serv-card .ic .icon{width:23px;height:23px;stroke-width:1.9;}
+.ic-mint{background:#D4F4E8;color:#1D8A5F;}
+.ic-blue{background:#DCEEFB;color:#1E6FAE;}
+.ic-aqua{background:#D5F5F7;color:#0A7A85;}
+.ic-peach{background:#FCE4D6;color:#C55A2A;}
+.ic-lavender{background:#E7DFF7;color:#5E3FAE;}
+.ic-rose{background:#FADADD;color:#B04A5F;}
+.ic-yellow{background:#FBF1C7;color:#A67C1A;}
+.ic-coral{background:#FBD8D3;color:#B03A2E;}
 .serv-card h3{font-size:19px;margin-bottom:8px;}
 .serv-card p{font-size:13.5px;color:var(--muted);}
 
@@ -356,7 +369,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
     <p class="hero-subline">Praxis Dr. Peters · Norden</p>
     <p class="hero-services">Allgemeine Zahnheilkunde · Implantologie · Prophylaxe · Angstpatienten-Behandlung · Notfallversorgung</p>
     <div class="hero-ctas">
-      <a href="tel:04931 4551" class="btn btn-dark" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
+      <a href="tel:04931 4551" class="btn btn-gradient" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
       <a href="#leistungen" class="btn btn-outline">Unsere Leistungen</a>
     </div>
     <ul class="hero-bullets">
@@ -372,8 +385,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>4,8 BEI GOOGLE · IMPLANTOLOGIE · SEIT ÜBER 40 JAHREN IN NORDEN · ANGSTPATIENTEN WILLKOMMEN · NOTFALLTERMINE · GLÜCKAUF 8A · MODERNSTE TECHNIK · PROPHYLAXE · ÄSTHETISCHE ZAHNHEILKUNDE · 110 REZENSIONEN · </span>
-    <span>4,8 BEI GOOGLE · IMPLANTOLOGIE · SEIT ÜBER 40 JAHREN IN NORDEN · ANGSTPATIENTEN WILLKOMMEN · NOTFALLTERMINE · GLÜCKAUF 8A · MODERNSTE TECHNIK · PROPHYLAXE · ÄSTHETISCHE ZAHNHEILKUNDE · 110 REZENSIONEN · </span>
+    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">·</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">·</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">·</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">·</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">·</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">·</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">·</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">·</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">·</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">·</span>
+    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">·</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">·</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">·</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">·</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">·</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">·</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">·</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">·</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">·</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">·</span>
   </div>
 </div>
 
@@ -414,14 +427,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <h2 class="section-title">Was wir für Sie tun.</h2>
     </div>
     <div class="serv-grid reveal">
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-stetho"/></svg></div><h3>Allgemeine Zahnheilkunde</h3><p>Kontrolle, Füllungen, Wurzelbehandlung.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg></div><h3>Implantologie</h3><p>Hochwertige Implantate, langfristige Lösungen.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Prophylaxe</h3><p>Professionelle Zahnreinigung, Vorsorge.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></div><h3>Ästhetische Zahnheilkunde</h3><p>Bleaching, Veneers, sichtbar schöner.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-crown"/></svg></div><h3>Zahnersatz</h3><p>Kronen, Brücken, Prothesen.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><h3>Angstpatienten</h3><p>Einfühlsame Behandlung, Ihre Zeit.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-baby"/></svg></div><h3>Kinderzahnheilkunde</h3><p>Von klein auf gesunde Zähne.</p></div>
-      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></div><h3>Notfallbehandlung</h3><p>Schnelle Termine bei akuten Schmerzen.</p></div>
+      <div class="serv-card"><div class="ic ic-mint"><svg class="icon" aria-hidden="true"><use href="#i-stetho"/></svg></div><h3>Allgemeine Zahnheilkunde</h3><p>Kontrolle, Füllungen, Wurzelbehandlung.</p></div>
+      <div class="serv-card"><div class="ic ic-blue"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg></div><h3>Implantologie</h3><p>Hochwertige Implantate, langfristige Lösungen.</p></div>
+      <div class="serv-card"><div class="ic ic-aqua"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Prophylaxe</h3><p>Professionelle Zahnreinigung, Vorsorge.</p></div>
+      <div class="serv-card"><div class="ic ic-peach"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></div><h3>Ästhetische Zahnheilkunde</h3><p>Bleaching, Veneers, sichtbar schöner.</p></div>
+      <div class="serv-card"><div class="ic ic-lavender"><svg class="icon" aria-hidden="true"><use href="#i-crown"/></svg></div><h3>Zahnersatz</h3><p>Kronen, Brücken, Prothesen.</p></div>
+      <div class="serv-card"><div class="ic ic-rose"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><h3>Angstpatienten</h3><p>Einfühlsame Behandlung, Ihre Zeit.</p></div>
+      <div class="serv-card"><div class="ic ic-yellow"><svg class="icon" aria-hidden="true"><use href="#i-baby"/></svg></div><h3>Kinderzahnheilkunde</h3><p>Von klein auf gesunde Zähne.</p></div>
+      <div class="serv-card"><div class="ic ic-coral"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></div><h3>Notfallbehandlung</h3><p>Schnelle Termine bei akuten Schmerzen.</p></div>
     </div>
   </div>
 </section>
@@ -448,12 +461,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
           <div class="panel-note" id="panelNote" style="display:none;"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin nötig? Rufen Sie uns an: 04931 / 4551</div>
           <div class="chips-title">Häufige Beschwerden</div>
           <div class="chips">
-            <button class="chip" data-marker="weisheit">Zahnschmerzen</button>
-            <button class="chip" data-marker="parodontitis">Blutendes Zahnfleisch</button>
-            <button class="chip" data-marker="karies">Empfindliche Zähne (heiß/kalt)</button>
-            <button class="chip" data-marker="cmd">Knirschen nachts / Kiefer-Verspannung</button>
-            <button class="chip" data-marker="implantat">Lockere Zähne</button>
-            <button class="chip" data-marker="aesthetik">Verfärbungen / Ästhetik</button>
+            <button class="chip" data-complaint="pain">Zahnschmerzen</button>
+            <button class="chip" data-complaint="bleeding">Blutendes Zahnfleisch</button>
+            <button class="chip" data-complaint="cold">Empfindliche Zähne (heiß/kalt)</button>
+            <button class="chip" data-complaint="bruxism">Knirschen nachts / Kiefer-Verspannung</button>
+            <button class="chip" data-complaint="loose">Lockere Zähne</button>
+            <button class="chip" data-complaint="stain">Verfärbungen / Ästhetik</button>
           </div>
           <div class="panel-cta">
             <strong>Nichts davon dabei?</strong>
@@ -474,7 +487,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <h2 class="section-title">Ein Ort zum Wohlfühlen.</h2>
     </div>
     <div class="praxis-grid reveal">
-      <div class="pg-item pg-eingang"><img src="eingang.peters.png" alt="Empfang der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Empfang</div></div>
+      <div class="pg-item pg-eingang"><img src="eingang.peters.png" alt="Eingang der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Eingang außen</div></div>
       <div class="pg-item"><img src="wartezimmer.peters.png" alt="Wartezimmer der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Wartezimmer</div></div>
       <div class="pg-item"><img src="behandlungsraum1.peters.png" alt="Behandlungsraum 1 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 1</div></div>
       <div class="pg-item pg-full"><img src="behandlungsraum2.peters.png" alt="Behandlungsraum 2 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 2</div></div>
@@ -801,13 +814,13 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   renderDots(); update(); restart();
 })();
 
-/* ============ SCANNER: CHIP <-> MARKER BRIDGE ============ */
-window.scannerSelectMarker = null; // gets assigned by scanner module (3D or fallback)
+/* ============ SCANNER: CHIP <-> BESCHWERDE BRIDGE ============ */
+window.scannerSelectComplaint = null; // gets assigned by scanner module (3D or fallback)
 document.querySelectorAll('.chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
     chip.classList.add('active');
-    if(window.scannerSelectMarker) window.scannerSelectMarker(chip.dataset.marker);
+    if(window.scannerSelectComplaint) window.scannerSelectComplaint(chip.dataset.complaint);
   });
 });
 </script>
@@ -820,7 +833,7 @@ document.querySelectorAll('.chip').forEach(chip=>{
 } }
 </script>
 <script type="module">
-/* Beschwerde-Content: bildet die 6 Zahn-Marker-Positionen auf Titel/Beschreibung im Info-Panel ab */
+/* Statischer Info-Text bei Direktklick auf einen 3D-Marker / SVG-Hotspot */
 const MARKER_INFO = {
   weisheit:     { title: "Weisheitszähne — Extraktion & Nachsorge", desc: "Wenn Weisheitszähne drücken, schief wachsen oder sich entzünden, prüfen wir schonend, ob eine Entfernung sinnvoll ist. Die Nachsorge liegt uns dabei besonders am Herzen." },
   karies:       { title: "Karies & Füllungen — Moderne Composite-Restaurationen", desc: "Kleine Löcher, große Wirkung: Mit zahnfarbenen Composite-Füllungen versorgen wir Karies unsichtbar und erhalten so viel gesunde Zahnsubstanz wie möglich." },
@@ -828,6 +841,17 @@ const MARKER_INFO = {
   parodontitis: { title: "Parodontitis & Prophylaxe — Gesundes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen. Mit professioneller Prophylaxe und, wenn nötig, einer Parodontitis-Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
   implantat:    { title: "Implantologie & Zahnersatz — Ihre Lücke schließen", desc: "Ein fehlender Zahn muss nicht auffallen. Mit hochwertigen Implantaten oder festsitzendem Zahnersatz schließen wir Lücken dauerhaft und natürlich." },
   cmd:          { title: "CMD & Knirschen — Schiene und Behandlung", desc: "Nächtliches Knirschen oder ein verspannter Kiefer können auf eine CMD hindeuten. Mit einer individuellen Schiene und gezielter Behandlung schaffen wir Entlastung." },
+};
+
+/* Beschwerde-Chips: jeder Chip triggert denselben Fokus wie der zugeordnete Marker
+   (targetMarker) plus eine eigene, laufende Zahn-Animation (siehe animateComplaints). */
+const COMPLAINT_INFO = {
+  pain:     { targetMarker: "karies",       title: "Zahnschmerzen", desc: "Ein pochender oder ziehender Schmerz deutet häufig auf Karies oder eine Entzündung hin. Wir finden die Ursache und lindern den Schmerz schnellstmöglich." },
+  bleeding: { targetMarker: "parodontitis", title: "Blutendes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen für Parodontitis. Mit professioneller Prophylaxe und gezielter Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
+  cold:     { targetMarker: "aesthetik",    title: "Empfindliche Zähne", desc: "Ein ziehender Schmerz bei Heißem oder Kaltem kann an freiliegenden Zahnhälsen oder feinen Rissen liegen. Wir finden die Ursache und schützen Ihre Zähne nachhaltig." },
+  bruxism:  { targetMarker: "cmd",          title: "Knirschen & Kiefer-Verspannung", desc: "Nächtliches Knirschen belastet Zähne, Kaufläche und Kiefergelenk. Mit einer individuell angepassten Schiene schaffen wir spürbare Entlastung." },
+  loose:    { targetMarker: null,           title: "Lockere Zähne", desc: "Lockere Zähne können auf Knochenabbau durch Parodontitis hindeuten. Eine frühzeitige Behandlung hilft, Ihre Zähne dauerhaft zu erhalten." },
+  stain:    { targetMarker: "aesthetik",    title: "Verfärbungen & Ästhetik", desc: "Verfärbte oder unregelmäßige Frontzähne lassen sich mit Bleaching oder hauchdünnen Veneers dezent und natürlich verschönern." },
 };
 
 const panelHeading = document.getElementById('panel-heading');
@@ -842,7 +866,15 @@ function showMarkerInfo(id){
   panelHeading.textContent = info.title;
   panelDesc.textContent = info.desc;
   panelNote.style.display = 'flex';
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.marker===id));
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+}
+function showComplaintInfo(id){
+  const info = COMPLAINT_INFO[id];
+  if(!info) return;
+  panelHeading.textContent = info.title;
+  panelDesc.textContent = info.desc;
+  panelNote.style.display = 'flex';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.complaint===id));
 }
 function resetPanel(){
   panelHeading.textContent = 'Wählen Sie einen Bereich am Gebiss.';
@@ -859,6 +891,9 @@ function hasWebGL(){
 }
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* prefers-reduced-motion führt bewusst direkt in den statischen SVG-Fallback:
+   damit entfallen Blutstropfen/Frost-Partikel/Kamera-Fahrten automatisch, ohne
+   Sonderfälle im 3D-Code — die Andeutung dort ist rein statisch. */
 if(!hasWebGL() || reduceMotion){
   initFallback();
 } else {
@@ -896,9 +931,11 @@ function initFallback(){
     h.addEventListener('click', activate);
     h.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); activate(); } });
   });
-  window.scannerSelectMarker = (id)=>{
-    wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.toggle('active', x.dataset.marker===id));
-    showMarkerInfo(id);
+  window.scannerSelectComplaint = (id)=>{
+    const info = COMPLAINT_INFO[id];
+    if(!info) return;
+    wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.toggle('active', !!info.targetMarker && x.dataset.marker===info.targetMarker));
+    showComplaintInfo(id);
     document.getElementById('scanner')?.scrollIntoView({behavior:'smooth', block:'center'});
   };
 }
@@ -908,22 +945,30 @@ async function init3D(){
   const THREE = await import('three');
   const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
   const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
+  const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
 
   const holder = document.getElementById('scannerHolder');
   const canvas = document.getElementById('scanner-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
 
   const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   const INITIAL_POS = new THREE.Vector3(0, 2.2, 7.6);
   const INITIAL_TARGET = new THREE.Vector3(0, -0.15, 0.4);
   camera.position.copy(INITIAL_POS);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4,6,5); scene.add(key);
-  const rim = new THREE.DirectionalLight(0x99ffff, 0.4); rim.position.set(-4,2,-4); scene.add(rim);
+  /* 3-Punkt-Licht: warmes Key von schräg oben, kühles Fill frontal, neutrales Rim von hinten */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.28));
+  const key = new THREE.DirectionalLight(0xfff8e7, 1.2); key.position.set(3.5,6,4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xe7f0ff, 0.6); fill.position.set(-3,1.5,6); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.4); rim.position.set(-2,3,-5); scene.add(rim);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enablePan = false;
@@ -932,15 +977,24 @@ async function init3D(){
   controls.minDistance = 3.2;
   controls.maxDistance = 11;
   controls.target.copy(INITIAL_TARGET);
-  controls.autoRotate = !reduceMotion;
+  controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
 
-  const toothMat = new THREE.MeshStandardMaterial({ color: 0xF5F5F0, roughness: 0.4, metalness: 0.02 });
-  const gumMat = new THREE.MeshStandardMaterial({ color: 0xF5C7C2, roughness: 0.6 });
+  /* Hinweis: bewusst ohne transmission — bei ~28 individuellen Material-Klonen löst jede
+     Transmission-Fläche einen eigenen Extra-Renderpass pro Frame aus (teuer, auch auf Desktop-GPUs).
+     clearcoat liefert den gewünschten glasig-glänzigen Schmelz-Look ohne diesen Perf-Einbruch. */
+  const toothMatBase = new THREE.MeshPhysicalMaterial({ color:0xF8F5EE, roughness:0.35, clearcoat:0.6, clearcoatRoughness:0.2, metalness:0 });
+  const gumMat = new THREE.MeshStandardMaterial({ color:0xE8A8A0, roughness:0.7, metalness:0 });
   const markerMat = new THREE.MeshStandardMaterial({ color: 0x02FFFF, emissive: 0x02CCFF, emissiveIntensity: 0.7, roughness: 0.3 });
+  const COLOR_GUM_BASE = new THREE.Color(0xE8A8A0);
+  const COLOR_GUM_INFLAMED = new THREE.Color(0xC8746B);
+  const COLOR_PAIN = new THREE.Color(0xD94848);
+  const COLOR_COLD = new THREE.Color(0xBFE4F0);
 
   const jaw = new THREE.Group();
   scene.add(jaw);
+  const lowerJawGroup = new THREE.Group(); // eigene Gruppe: wird beim Knirschen/CMD-Klick um die X-Achse geklappt
+  jaw.add(lowerJawGroup);
 
   /* ---- Kiefer-Bögen (Zahnfleisch) ---- */
   /* Bogen-Parametrisierung: angle 0 = Frontzahn (max. z, nah an der Kamera),
@@ -949,7 +1003,7 @@ async function init3D(){
   function arcPoint(angle, radiusX, radiusZ){
     return { x: Math.sin(angle)*radiusX, z: Math.cos(angle)*radiusZ };
   }
-  function buildGum(y, radiusX, radiusZ){
+  function buildGum(y, radiusX, radiusZ, targetGroup){
     const pts = [];
     const N = 40;
     for(let i=0;i<=N;i++){
@@ -960,10 +1014,10 @@ async function init3D(){
     const path = new THREE.CatmullRomCurve3(pts);
     const geo = new THREE.TubeGeometry(path, 60, 0.13, 8, false);
     const mesh = new THREE.Mesh(geo, gumMat);
-    jaw.add(mesh);
+    targetGroup.add(mesh);
   }
-  buildGum(0.85, 2.6, 2.0);
-  buildGum(-0.85, 2.4, 1.85);
+  buildGum(0.85, 2.6, 2.0, jaw);
+  buildGum(-0.85, 2.4, 1.85, lowerJawGroup);
 
   /* ---- Zahn-Positionen entlang des Bogens ---- */
   function archPositions(count, radiusX, radiusZ){
@@ -977,35 +1031,88 @@ async function init3D(){
     return positions;
   }
 
+  /* ---- Zahntypen entlang des Bogens: Schneide-/Eck-/Prämolar/Molar, gespiegelt um die Mitte ---- */
+  const TOOTH_TYPES = ['incisor','incisor','canine','premolar','premolar','molar','molar'];
+  const SIZE_BY_TYPE = {
+    incisor:  { w:0.34, h:0.62, d:0.3 },
+    canine:   { w:0.34, h:0.7,  d:0.34 },
+    premolar: { w:0.42, h:0.56, d:0.42 },
+    molar:    { w:0.52, h:0.5,  d:0.5 },
+  };
+  function toothType(i, count){
+    const half = i < count/2 ? (count/2 - 1 - i) : (i - count/2);
+    return TOOTH_TYPES[Math.min(half, TOOTH_TYPES.length-1)];
+  }
+  function buildTooth(type, size, mat){
+    const group = new THREE.Group();
+    let crown, cusps = [];
+    if(type === 'incisor'){
+      crown = new THREE.Mesh(new RoundedBoxGeometry(size.w, size.h, size.d, 2, 0.05), mat);
+    } else if(type === 'canine'){
+      crown = new THREE.Mesh(new THREE.ConeGeometry(size.w*0.46, size.h*1.05, 10), mat);
+      crown.position.y = size.h*0.05;
+    } else if(type === 'premolar'){
+      crown = new THREE.Mesh(new THREE.CylinderGeometry(size.w*0.46, size.w*0.38, size.h*0.8, 10), mat);
+      [-1,1].forEach(sign=>{
+        const cusp = new THREE.Mesh(new THREE.SphereGeometry(size.w*0.24, 10, 10), mat);
+        cusp.position.set(sign*size.w*0.2, size.h*0.36, 0);
+        cusp.scale.y = 0.75;
+        group.add(cusp); cusps.push(cusp);
+      });
+    } else { // molar
+      crown = new THREE.Mesh(new RoundedBoxGeometry(size.w*1.05, size.h*0.78, size.d, 2, 0.07), mat);
+      const cx = size.w*0.3, cz = size.d*0.3;
+      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx,sz])=>{
+        const cusp = new THREE.Mesh(new THREE.SphereGeometry(size.w*0.21, 10, 10), mat);
+        cusp.position.set(sx*cx, size.h*0.34, sz*cz);
+        group.add(cusp); cusps.push(cusp);
+      });
+    }
+    group.add(crown);
+    group.userData.crown = crown;
+    group.userData.cusps = cusps;
+    return group;
+  }
+
+  /* Marker-Zuordnung: Index 13 = hinten rechts (Weisheitszahn), Index 1 = links hinten (Backenzahn),
+     Index 6-7 = Mitte oben (Schneidezahn). Unten: Index 10 wird ausgelassen (Lücke/Implantat-Marker). */
+  const SKIP_LOWER_INDEX = 10;
+
+  function buildArch(positions, y, isUpper, arr, targetGroup){
+    positions.forEach((p, i)=>{
+      if(!isUpper && i === SKIP_LOWER_INDEX) return; // Zahnlücke für Implantat-Marker
+      const type = toothType(i, positions.length);
+      const size = SIZE_BY_TYPE[type];
+      const mat = toothMatBase.clone();
+      const group = buildTooth(type, size, mat);
+      const yOff = isUpper ? -size.h*0.32 : size.h*0.32;
+      group.position.set(p.x, y + yOff, p.z);
+      group.rotation.y = -p.angle;
+      targetGroup.add(group);
+      arr.push({
+        group, mat, cusps: group.userData.cusps,
+        basePos: group.position.clone(), baseColor: mat.color.clone(), baseRotY: -p.angle,
+        index:i, type, isUpper, angle:p.angle, phase: i*0.7 + (isUpper?0:3.14),
+      });
+    });
+  }
   const upperPos = archPositions(14, 2.55, 1.95);
   const lowerPos = archPositions(14, 2.35, 1.8);
   const teeth = { upper: [], lower: [] };
+  buildArch(upperPos, 0.78, true, teeth.upper, jaw);
+  buildArch(lowerPos, -0.78, false, teeth.lower, lowerJawGroup);
+  const allTeeth = [...teeth.upper, ...teeth.lower];
 
-  function toothSize(i, count){
-    const centerDist = Math.abs(i - (count-1)/2) / ((count-1)/2); // 0 = Mitte, 1 = hinten
-    if(centerDist > 0.72) return { w:0.46, h:0.5, d:0.46 };   // Molaren
-    if(centerDist > 0.4)  return { w:0.36, h:0.58, d:0.36 };  // Prämolaren/Eckzahn
-    return { w:0.3, h:0.62, d:0.3 };                          // Schneidezähne
-  }
+  /* Baseline-Abrieb: obere Molaren-Höcker permanent leicht abgeflacht (Bruxismus-Spuren) */
+  teeth.upper.filter(t=>t.type==='molar').forEach(t=>t.cusps.forEach(c=>c.scale.y *= 0.4));
 
-  /* Marker-Zuordnung: Index 13 = hinten rechts (Weisheitszahn), Index 1-2 = links hinten (Backenzahn),
-     Index 6-7 = Mitte oben (Schneidezahn). Unten: Index 10 wird ausgelassen (Lücke). */
-  const SKIP_LOWER_INDEX = 10;
-
-  function buildArch(positions, y, isUpper, arr){
-    positions.forEach((p, i)=>{
-      if(!isUpper && i === SKIP_LOWER_INDEX) return; // Zahnlücke für Implantat-Marker
-      const s = toothSize(i, positions.length);
-      const geo = new RoundedBoxGeometry(s.w, s.h, s.d, 2, 0.06);
-      const mesh = new THREE.Mesh(geo, toothMat);
-      mesh.position.set(p.x, y + (isUpper ? -s.h*0.3 : s.h*0.3), p.z);
-      mesh.rotation.y = -p.angle;
-      jaw.add(mesh);
-      arr.push({ mesh, pos: mesh.position.clone(), index:i });
-    });
-  }
-  buildArch(upperPos, 0.78, true, teeth.upper);
-  buildArch(lowerPos, -0.78, false, teeth.lower);
+  /* Beschwerde-Zielzähne */
+  const painTooth = teeth.upper[1];                                   // Backenzahn oben links
+  const frontTeeth = [teeth.upper[5], teeth.upper[6], teeth.upper[7], teeth.upper[8]]; // Schneidezähne oben mitte
+  frontTeeth.forEach(t=>{
+    t.stainColor = new THREE.Color(0xD9C084).offsetHSL((Math.random()-0.5)*0.02, (Math.random()-0.5)*0.08, (Math.random()-0.5)*0.08);
+  });
+  [teeth.upper[3], teeth.upper[10], teeth.lower[4]].forEach(t=>{ if(t) t.looseExtra = true; });
 
   /* ---- Marker: Aqua-Kugeln mit Pulse, Klick öffnet Info-Panel ---- */
   function addMarker(id, worldPos, offsetY=0.32){
@@ -1018,10 +1125,11 @@ async function init3D(){
   }
 
   const markers = [];
-  markers.push(addMarker('weisheit', teeth.upper[13].pos, 0.32));
-  markers.push(addMarker('karies', teeth.upper[1].pos, 0.32));
-  markers.push(addMarker('aesthetik', teeth.upper[6].pos, 0.34));
+  markers.push(addMarker('weisheit', teeth.upper[13].basePos, 0.32));
+  markers.push(addMarker('karies', painTooth.basePos, 0.32));
+  markers.push(addMarker('aesthetik', teeth.upper[6].basePos, 0.34));
   const lowerFront = lowerPos[6];
+  const bleedingOrigin = new THREE.Vector3(lowerFront.x, -0.95, lowerFront.z);
   markers.push(addMarker('parodontitis', new THREE.Vector3(lowerFront.x, -1.15, lowerFront.z), 0));
   const gapPos = lowerPos[SKIP_LOWER_INDEX];
   markers.push(addMarker('implantat', new THREE.Vector3(gapPos.x, -0.78, gapPos.z), 0));
@@ -1037,8 +1145,9 @@ async function init3D(){
   window.addEventListener('resize', fitCamera);
   new ResizeObserver(fitCamera).observe(holder);
 
-  /* ---- Kamera-Tween (easeInOutCubic) beim Marker-Klick ---- */
+  /* ---- Kamera-Tween (easeInOutCubic) beim Marker-/Chip-Klick ---- */
   let tween = null;
+  let activeComplaint = null;
   function easeInOutCubic(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
   function tweenCamera(toPos, toTarget, duration=1200){
     const fromPos = camera.position.clone();
@@ -1054,6 +1163,8 @@ async function init3D(){
     };
   }
   function focusMarker(mesh){
+    activeComplaint = null;
+    clenchActive = false;
     const dir = mesh.position.clone().normalize();
     const toPos = mesh.position.clone().add(dir.multiplyScalar(1.6)).add(new THREE.Vector3(0,0.3,0.6));
     tweenCamera(toPos, mesh.position.clone(), 1200);
@@ -1062,18 +1173,43 @@ async function init3D(){
     hint.style.opacity = '0';
     showMarkerInfo(mesh.userData.id);
   }
+  function focusComplaint(id){
+    const info = COMPLAINT_INFO[id];
+    if(!info) return;
+    activeComplaint = id;
+    clenchActive = false;
+    if(info.targetMarker){
+      const m = markers.find(mk=>mk.userData.id===info.targetMarker);
+      if(m){
+        const dir = m.position.clone().normalize();
+        const toPos = m.position.clone().add(dir.multiplyScalar(1.6)).add(new THREE.Vector3(0,0.3,0.6));
+        tweenCamera(toPos, m.position.clone(), 1200);
+        markers.forEach(mk=>mk.userData.active = mk===m);
+      }
+    } else {
+      tweenCamera(INITIAL_POS, INITIAL_TARGET, 1200);
+      markers.forEach(mk=>mk.userData.active = false);
+    }
+    resetBtn.classList.add('show');
+    hint.style.opacity = '0';
+    showComplaintInfo(id);
+    if(id==='bleeding') lastDropTime = -99;
+    if(id==='bruxism') lastClenchTime = -99;
+  }
   function resetView(){
+    activeComplaint = null;
+    clenchActive = false;
     tweenCamera(INITIAL_POS, INITIAL_TARGET, 1000);
     markers.forEach(m=>m.userData.active=false);
     resetBtn.classList.remove('show');
     hint.style.opacity = '1';
     resetPanel();
-    if(!reduceMotion) setTimeout(()=>controls.autoRotate = true, 1000);
+    setTimeout(()=>{ if(!activeComplaint) controls.autoRotate = true; }, 1000);
   }
   resetBtn.addEventListener('click', resetView);
-  window.scannerSelectMarker = (id)=>{
-    const m = markers.find(mk=>mk.userData.id===id);
-    if(m){ focusMarker(m); document.getElementById('scanner').scrollIntoView({behavior:'smooth', block:'center'}); }
+  window.scannerSelectComplaint = (id)=>{
+    focusComplaint(id);
+    document.getElementById('scanner').scrollIntoView({behavior:'smooth', block:'center'});
   };
 
   const raycaster = new THREE.Raycaster();
@@ -1090,15 +1226,169 @@ async function init3D(){
   }
   canvas.addEventListener('pointerup', onPointerUp);
 
+  /* ---- Beschwerde-Animationen ---- */
+  const ZERO = new THREE.Vector3();
+
+  // Zahnschmerzen: Vibration + Rot-Verfärbung + pulsierender Glow-Ring
+  const painGlow = new THREE.Mesh(
+    new THREE.RingGeometry(0.16, 0.24, 24),
+    new THREE.MeshBasicMaterial({ color:0xD94848, transparent:true, opacity:0, side:THREE.DoubleSide, blending:THREE.AdditiveBlending, depthWrite:false })
+  );
+  jaw.add(painGlow);
+
+  // Blutendes Zahnfleisch: periodisch fallende Bluttropfen
+  let bloodDrops = [];
+  let lastDropTime = -99;
+  const bloodMat = new THREE.MeshPhysicalMaterial({ color:0xB0181F, roughness:0.1, clearcoat:1, metalness:0 });
+  function spawnBloodDrop(){
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), bloodMat);
+    mesh.position.copy(bleedingOrigin).add(new THREE.Vector3((Math.random()-0.5)*0.2, -0.04, (Math.random()-0.5)*0.1));
+    jaw.add(mesh);
+    bloodDrops.push({ mesh, vy:-0.1, born: performance.now() });
+  }
+  function updateBloodDrops(dt){
+    const now = performance.now();
+    bloodDrops = bloodDrops.filter(d=>{
+      d.vy -= dt*0.9;
+      d.mesh.position.y += d.vy*dt;
+      const age = (now-d.born)/1000;
+      d.mesh.scale.y = 1 + Math.min(0.6, age*0.4);
+      d.mesh.scale.x = d.mesh.scale.z = 1 - Math.min(0.3, age*0.2);
+      if(age > 2.5){ jaw.remove(d.mesh); return false; }
+      return true;
+    });
+  }
+
+  // Empfindliche Zähne: Frost-Partikel um die Frontzähne
+  const frostCenter = frontTeeth[1].basePos;
+  const FROST_N = 28;
+  const frostPos = new Float32Array(FROST_N*3);
+  for(let i=0;i<FROST_N;i++){
+    frostPos[i*3]   = frostCenter.x + (Math.random()-0.5)*1.3;
+    frostPos[i*3+1] = frostCenter.y + (Math.random()-0.5)*0.8;
+    frostPos[i*3+2] = frostCenter.z + (Math.random()-0.5)*0.5 + 0.15;
+  }
+  const frostGeo = new THREE.BufferGeometry();
+  frostGeo.setAttribute('position', new THREE.BufferAttribute(frostPos, 3));
+  const frostPoints = new THREE.Points(frostGeo, new THREE.PointsMaterial({ color:0xBFE4F0, size:0.045, transparent:true, opacity:0, depthWrite:false }));
+  frostPoints.visible = false;
+  jaw.add(frostPoints);
+  function animateFrost(elapsed){
+    const arr = frostGeo.attributes.position.array;
+    for(let i=0;i<FROST_N;i++){
+      arr[i*3+1] += 0.0018;
+      if(arr[i*3+1] > frostCenter.y + 0.9) arr[i*3+1] -= 1.3;
+    }
+    frostGeo.attributes.position.needsUpdate = true;
+    frostPoints.material.opacity = 0.32 + Math.sin(elapsed*2)*0.1;
+  }
+
+  // Knirschen / CMD: Unterkiefer-Klapp-Animation + Impact-Ring + Modell-Shake, im Loop
+  let clenchActive = false, clenchStart = 0, impactFired = false, lastClenchTime = -99;
+  let jawShakeUntil = 0;
+  let impactRings = [];
+  function triggerClench(elapsed){ clenchActive = true; clenchStart = elapsed; lastClenchTime = elapsed; impactFired = false; }
+  function triggerImpact(){
+    const mesh = new THREE.Mesh(
+      new THREE.RingGeometry(0.1, 0.16, 24),
+      new THREE.MeshBasicMaterial({ color:0x02CCFF, transparent:true, opacity:0.6, side:THREE.DoubleSide })
+    );
+    mesh.position.set(0, -0.05, 1.5);
+    mesh.rotation.x = -Math.PI/2;
+    jaw.add(mesh);
+    impactRings.push({ mesh, born: performance.now() });
+    jawShakeUntil = performance.now() + 100;
+  }
+  function updateImpactRings(){
+    const now = performance.now();
+    impactRings = impactRings.filter(r=>{
+      const age = (now-r.born)/450;
+      if(age >= 1){ jaw.remove(r.mesh); return false; }
+      r.mesh.scale.setScalar(1 + age*2.2);
+      r.mesh.material.opacity = 0.6*(1-age);
+      return true;
+    });
+  }
+  function updateClench(dt, elapsed){
+    if(!clenchActive){
+      lowerJawGroup.rotation.x += (0 - lowerJawGroup.rotation.x) * Math.min(1, dt*6);
+      return;
+    }
+    const UP=0.3, HOLD=0.15, DOWN=0.4;
+    const maxAngle = -THREE.MathUtils.degToRad(5);
+    const t = elapsed - clenchStart;
+    let angle;
+    if(t < UP){ angle = maxAngle*easeInOutCubic(t/UP); }
+    else if(t < UP+HOLD){
+      angle = maxAngle;
+      if(!impactFired){ triggerImpact(); impactFired = true; }
+    }
+    else if(t < UP+HOLD+DOWN){ angle = maxAngle*(1-easeInOutCubic((t-UP-HOLD)/DOWN)); }
+    else { angle = 0; clenchActive = false; }
+    lowerJawGroup.rotation.x = angle;
+  }
+
+  /* ---- Gesamtes per-Frame-Update aller Beschwerde-Effekte ---- */
+  function updateComplaintVisuals(dt, elapsed){
+    allTeeth.forEach(t=>{
+      let desiredColor = t.baseColor, posOffset = null, rotZ = 0, rotYExtra = 0;
+      if(activeComplaint==='pain' && t===painTooth){
+        desiredColor = COLOR_PAIN;
+        posOffset = new THREE.Vector3(Math.sin(elapsed*40)*0.02, 0, Math.cos(elapsed*40)*0.02);
+      } else if(activeComplaint==='cold' && frontTeeth.includes(t)){
+        desiredColor = COLOR_COLD;
+      } else if(activeComplaint==='stain' && frontTeeth.includes(t)){
+        desiredColor = t.stainColor;
+      } else if(activeComplaint==='loose'){
+        rotZ = Math.sin(elapsed*2 + t.phase) * (t.looseExtra ? 0.1 : 0.06);
+        if(t.looseExtra) rotYExtra = 0.26;
+      }
+      t.mat.color.lerp(desiredColor, Math.min(1, dt*3));
+      const targetPos = posOffset ? t.basePos.clone().add(posOffset) : t.basePos;
+      t.group.position.lerp(targetPos, Math.min(1, dt*6));
+      t.group.rotation.z += (rotZ - t.group.rotation.z) * Math.min(1, dt*5);
+      t.group.rotation.y += ((t.baseRotY + rotYExtra) - t.group.rotation.y) * Math.min(1, dt*5);
+    });
+
+    const painActive = activeComplaint==='pain';
+    const painTargetOpacity = painActive ? (0.4 + Math.sin(elapsed*2*Math.PI*0.8)*0.2) : 0;
+    painGlow.material.opacity += (painTargetOpacity - painGlow.material.opacity) * Math.min(1, dt*5);
+    painGlow.position.copy(painTooth.group.position).add(new THREE.Vector3(0,0,0.18));
+    painGlow.quaternion.copy(camera.quaternion);
+
+    gumMat.color.lerp(activeComplaint==='bleeding' ? COLOR_GUM_INFLAMED : COLOR_GUM_BASE, Math.min(1, dt*3));
+    if(activeComplaint==='bleeding' && elapsed - lastDropTime > 1.5){ spawnBloodDrop(); lastDropTime = elapsed; }
+    updateBloodDrops(dt);
+
+    const coldActive = activeComplaint==='cold';
+    frostPoints.visible = coldActive || frostPoints.material.opacity > 0.01;
+    const frostTarget = coldActive ? 1 : 0;
+    if(coldActive) animateFrost(elapsed);
+    else frostPoints.material.opacity += (0 - frostPoints.material.opacity) * Math.min(1, dt*5);
+
+    if(activeComplaint==='bruxism' && !clenchActive && elapsed - lastClenchTime > 2.0){ triggerClench(elapsed); }
+    updateClench(dt, elapsed);
+    updateImpactRings();
+
+    if(performance.now() < jawShakeUntil){
+      jaw.position.set((Math.random()-0.5)*0.03, (Math.random()-0.5)*0.03, 0);
+    } else {
+      jaw.position.lerp(ZERO, Math.min(1, dt*8));
+    }
+  }
+
   const clock = new THREE.Clock();
+  let elapsedTime = 0;
   function animate(){
     requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
+    const dt = Math.min(0.05, clock.getDelta());
+    elapsedTime += dt;
     markers.forEach(m=>{
       const base = m.userData.active ? 1.5 : 1;
-      const s = base + Math.sin(t*3 + m.userData.pulseOffset)*0.18;
+      const s = base + Math.sin(elapsedTime*3 + m.userData.pulseOffset)*0.18;
       m.scale.setScalar(s);
     });
+    updateComplaintVisuals(dt, elapsedTime);
     if(tween) tween(performance.now());
     controls.update();
     renderer.render(scene, camera);
