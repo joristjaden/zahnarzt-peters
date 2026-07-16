@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Zahnarztpraxis Dr. Peters, Norden</title>
+<meta name="description" content="Lernen Sie das Team der Zahnarztpraxis Dr. Peters in Norden kennen — eine Familienpraxis mit über 40 Jahren Erfahrung.">
+<meta property="og:title" content="Team — Zahnarztpraxis Dr. Peters">
+<meta property="og:description" content="Die Menschen hinter der Zahnarztpraxis Dr. Peters in Norden.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="main.logo.zahnarzt.peters.png">
+<link rel="icon" href="favicon.peters.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --aqua-1:#99FFFF;--aqua-2:#00CCFF;--aqua-3:#02FFFF;
+  --gradient:linear-gradient(135deg,#99FFFF 0%,#02FFFF 50%,#00CCFF 100%);
+  --ink:#0E1B22;--off:#FAFAF7;--muted:#5C6B72;
+  --serif:'Fraunces',serif;--sans:'Inter',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{font-family:var(--sans);color:var(--ink);background:var(--off);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+ul{list-style:none;}
+:focus-visible{outline:2px solid var(--aqua-2);outline-offset:3px;border-radius:4px;}
+.icon{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+@media(min-width:768px){.wrap{padding:0 40px;}}
+.label{display:flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:20px;}
+.label .bar{width:26px;height:3px;border-radius:3px;background:var(--gradient);display:inline-block;}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:-.01em;}
+.section-title{font-size:clamp(28px,4vw,44px);color:var(--ink);}
+.section-title em{font-style:italic;font-weight:500;}
+.section-sub{color:var(--muted);font-size:16px;margin-top:14px;max-width:560px;}
+.section-head{margin-bottom:56px;}
+section{padding:100px 0;position:relative;}
+@media(max-width:767px){section{padding:64px 0;}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:15px;padding:16px 30px;border-radius:999px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s;white-space:nowrap;}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(14,27,34,.28),0 0 0 3px rgba(153,255,255,.25);}
+
+/* HEADER — permanently docked (kein Hero auf dieser Seite) */
+.header{position:fixed;top:0;left:0;width:100%;border-radius:0;background:rgba(250,250,247,.92);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(14,27,34,.08);box-shadow:0 4px 24px rgba(14,27,34,.06);z-index:1000;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1240px;margin:0 auto;}
+@media(min-width:768px){.header-inner{padding:14px 40px;}}
+.header-logo img{height:38px;width:auto;}
+.header-nav{display:none;}
+@media(min-width:1024px){
+  .header-nav{display:flex;align-items:center;gap:32px;font-size:14.5px;font-weight:500;}
+  .header-nav a{position:relative;padding:4px 0;}
+  .header-nav a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--gradient);transition:width .25s var(--ease);}
+  .header-nav a:hover::after{width:100%;}
+  .header-nav a.active::after{width:100%;}
+}
+.header-phone{display:none;}
+@media(min-width:1024px){.header-phone{display:inline-flex;background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;align-items:center;gap:8px;}
+.header-phone:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,27,34,.25);}}
+.header-burger{display:flex;flex-direction:column;gap:5px;padding:8px;z-index:1200;}
+@media(min-width:1024px){.header-burger{display:none;}}
+.header-burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s;}
+.header-burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.header-burger.active span:nth-child(2){opacity:0;}
+.header-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(250,250,247,.98);backdrop-filter:blur(10px);z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);}
+.mobile-menu.active{opacity:1;pointer-events:auto;}
+.mobile-menu a{font-family:var(--serif);font-size:26px;color:var(--ink);}
+.mobile-menu a.btn{margin-top:10px;font-family:var(--sans);font-size:15px;color:#fff;}
+@media(min-width:1024px){.mobile-menu{display:none;}}
+
+/* PAGE INTRO */
+.page-intro{padding-top:170px;text-align:center;}
+@media(max-width:767px){.page-intro{padding-top:140px;}}
+.page-intro .label{justify-content:center;}
+
+/* TEAM GRID */
+.team-grid{display:grid;grid-template-columns:1fr;gap:28px;}
+@media(min-width:640px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.team-grid{grid-template-columns:repeat(3,1fr);}}
+.team-card{background:#fff;border-radius:24px;overflow:hidden;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -14px rgba(14,27,34,.1);transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -18px rgba(2,204,255,.22);}
+.team-photo{aspect-ratio:4/4.6;overflow:hidden;position:relative;}
+.team-photo img{width:100%;height:100%;object-fit:cover;}
+.team-photo .todo{position:absolute;top:10px;left:10px;background:rgba(14,27,34,.75);color:#fff;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;font-weight:600;}
+.team-body{padding:22px 22px 26px;}
+.team-body .name{font-family:var(--serif);font-size:19px;margin-bottom:4px;}
+.team-body .role{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#008fb3;font-weight:600;margin-bottom:12px;}
+.team-body p{font-size:13.5px;color:var(--muted);}
+
+.callcard{background:var(--ink);border-radius:32px;padding:52px 40px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;color:#fff;}
+@media(min-width:768px){.callcard{flex-direction:row;justify-content:space-between;text-align:left;padding:52px 60px;}}
+.callcard .lbl{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600;margin-bottom:10px;}
+.callcard .num{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-style:italic;}
+.btn-gradient{background:var(--gradient);color:var(--ink);}
+.btn-gradient:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(2,255,255,.35);}
+
+footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.09);}
+@media(min-width:768px){.footer-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+.footer-logo img{height:34px;margin-bottom:18px;filter:brightness(0) invert(1);}
+.footer-grid p{font-size:14px;max-width:280px;color:rgba(255,255,255,.55);}
+.footer-grid h4{color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;font-weight:600;}
+.footer-grid ul{display:flex;flex-direction:column;gap:11px;font-size:14.5px;}
+.footer-grid ul a:hover{color:#fff;}
+.footer-bottom{padding:26px 0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.45);}
+@media(min-width:768px){.footer-bottom{flex-direction:row;}}
+.footer-bottom a:hover{color:#fff;}
+.footer-bottom-links{display:flex;gap:20px;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+<defs>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+</defs>
+</svg>
+
+<header class="header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo" aria-label="Zur Startseite"><img src="main.logo.zahnarzt.peters.png" alt="Zahnarztpraxis Dr. Peters Logo"></a>
+    <nav class="header-nav">
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#scanner">Zahn-Scanner</a>
+      <a href="index.html#praxis">Praxis</a>
+      <a href="index.html#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="team.html" class="active">Team</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <a href="tel:04931 4551" class="header-phone" aria-label="Praxis anrufen unter 04931 / 4551"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+    <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#leistungen">Leistungen</a>
+  <a href="index.html#scanner">Zahn-Scanner</a>
+  <a href="index.html#praxis">Praxis</a>
+  <a href="index.html#oeffnungszeiten">Öffnungszeiten</a>
+  <a href="team.html">Team</a>
+  <a href="index.html#kontakt">Kontakt</a>
+  <a href="tel:04931 4551" class="btn btn-dark" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+</div>
+
+<section class="page-intro">
+  <div class="wrap reveal">
+    <div class="label"><span class="bar"></span>Team</div>
+    <h1 class="section-title">Die Menschen hinter der <em>Praxis</em></h1>
+    <p class="section-sub" style="margin:16px auto 0;">Als Familienpraxis behandeln wir mittlerweile in zweiter Generation — getragen von einem eingespielten Team, das für Sie da ist.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Foto einsetzen</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Dr. Peters senior" loading="lazy"></div>
+        <div class="team-body"><div class="name">Dr. Peters</div><div class="role">Zahnarzt · Praxisgründer</div><p>Seit über 40 Jahren in Norden für seine Patientinnen und Patienten da — mit Erfahrung, Ruhe und einem offenen Ohr für Angstpatienten.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Foto einsetzen</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Dr. Leif Peters" loading="lazy"></div>
+        <div class="team-body"><div class="name">Dr. Leif Peters</div><div class="role">Zahnarzt</div><p>Führt die Praxis in zweiter Generation fort und verbindet moderne Zahnmedizin mit der Geduld und Herzlichkeit, für die die Praxis bekannt ist.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Name & Foto</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Mitarbeiterin" loading="lazy"></div>
+        <div class="team-body"><div class="name">TODO: Name</div><div class="role">Zahnmedizinische Fachangestellte</div><p>Kümmert sich mit viel Einfühlungsvermögen um einen reibungslosen Ablauf und das Wohlbefinden unserer Patientinnen und Patienten.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Name & Foto</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Mitarbeiterin" loading="lazy"></div>
+        <div class="team-body"><div class="name">TODO: Name</div><div class="role">Zahnmedizinische Fachangestellte</div><p>Unterstützt bei Behandlungen und sorgt für eine angenehme, ruhige Atmosphäre im Praxisalltag.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Name & Foto</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Mitarbeiterin" loading="lazy"></div>
+        <div class="team-body"><div class="name">TODO: Name</div><div class="role">Prophylaxe-Assistentin</div><p>Begleitet Sie bei der professionellen Zahnreinigung und berät Sie rund um die häusliche Zahnpflege.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span class="todo">TODO: Name & Foto</span><img src="wartezimmer.peters.png" alt="Platzhalterfoto Mitarbeiterin" loading="lazy"></div>
+        <div class="team-body"><div class="name">TODO: Name</div><div class="role">Rezeption & Terminmanagement</div><p>Ihre erste Ansprechperson am Telefon und am Empfang — für Termine, Fragen und einen freundlichen Empfang.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="callcard reveal">
+      <div><div class="lbl">Termin vereinbaren</div><div class="num">04931 / 4551</div></div>
+      <a href="tel:04931 4551" class="btn btn-gradient" aria-label="Jetzt anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Jetzt anrufen</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="main.logo.zahnarzt.peters.png" alt="Zahnarztpraxis Dr. Peters Logo"></div>
+        <p>Familienpraxis in Norden, Ostfriesland — seit über 40 Jahren für Ihre Zahngesundheit da.</p>
+        <p style="margin-top:16px;">© 2026 Zahnarztpraxis Dr. Peters</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Glückauf 8a, 26506 Norden</li>
+          <li><a href="tel:04931 4551">04931 / 4551</a></li>
+          <li><a href="mailto:info@zahnaerzte-peters.de">info@zahnaerzte-peters.de</a></li>
+          <li>Mo–Do 07:30–17 · Fr 07:30–12 Uhr</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Quick-Links</h4>
+        <ul>
+          <li><a href="index.html#leistungen">Leistungen</a></li>
+          <li><a href="index.html#scanner">Zahn-Scanner</a></li>
+          <li><a href="index.html#praxis">Praxis</a></li>
+          <li><a href="index.html#oeffnungszeiten">Öffnungszeiten</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
+      <div>Made with care in Ostfriesland</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burger = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burger?.addEventListener('click', ()=>{
+  const active = mobileMenu.classList.toggle('active');
+  burger.classList.toggle('active', active);
+  burger.setAttribute('aria-expanded', String(active));
+});
+mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
+}));
+const revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12, rootMargin:'-60px'});
+  revealEls.forEach(el=>io.observe(el));
+} else { revealEls.forEach(el=>el.classList.add('in')); }
+</script>
+</body>
+</html>

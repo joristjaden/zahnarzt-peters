@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahnarztpraxis Dr. Peters — Zahnarzt in Norden</title>
+<meta name="description" content="Zahnarztpraxis Dr. Peters in Norden, Ostfriesland — Familienpraxis mit über 40 Jahren Erfahrung. Allgemeine Zahnheilkunde, Implantologie, Prophylaxe und einfühlsame Behandlung für Angstpatienten. Jetzt Termin vereinbaren.">
+<meta property="og:title" content="Zahnarztpraxis Dr. Peters — Zahnarzt in Norden">
+<meta property="og:description" content="Familienpraxis in Norden mit über 40 Jahren Erfahrung. Allgemeine Zahnheilkunde, Implantologie, Prophylaxe, Angstpatienten willkommen.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="main.logo.zahnarzt.peters.png">
+<link rel="icon" href="favicon.peters.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --aqua-1:#99FFFF;--aqua-2:#00CCFF;--aqua-3:#02FFFF;
+  --gradient:linear-gradient(135deg,#99FFFF 0%,#02FFFF 50%,#00CCFF 100%);
+  --ink:#0E1B22;--off:#FAFAF7;--muted:#5C6B72;
+  --serif:'Fraunces',serif;--sans:'Inter',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--off);
+  -webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+ul{list-style:none;}
+:focus-visible{outline:2px solid var(--aqua-2);outline-offset:3px;border-radius:4px;}
+.icon{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+@media(min-width:768px){.wrap{padding:0 40px;}}
+
+/* ============ TYPE HELPERS ============ */
+.label{display:flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:20px;}
+.label .bar{width:26px;height:3px;border-radius:3px;background:var(--gradient);display:inline-block;}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:-.01em;}
+.section-title{font-size:clamp(28px,4vw,44px);color:var(--ink);}
+.section-title em{font-style:italic;font-weight:500;}
+.section-sub{color:var(--muted);font-size:16px;margin-top:14px;max-width:520px;}
+.section-head{margin-bottom:56px;}
+section{padding:100px 0;position:relative;}
+@media(max-width:767px){section{padding:64px 0;}}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:15px;padding:16px 30px;border-radius:999px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s;white-space:nowrap;}
+.btn-dark{background:var(--ink);color:#fff;}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(14,27,34,.28),0 0 0 3px rgba(153,255,255,.25);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.65);}
+.btn-outline:hover{background:rgba(255,255,255,.12);border-color:#fff;}
+.btn-gradient{background:var(--gradient);color:var(--ink);}
+.btn-gradient:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(2,255,255,.35);}
+.btn-ghost-dark{background:transparent;color:var(--ink);border:1.5px solid rgba(14,27,34,.18);}
+.btn-ghost-dark:hover{border-color:var(--ink);}
+
+/* ============ HEADER ============ */
+.header{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:1100px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.5);box-shadow:0 10px 40px rgba(14,27,34,.09);z-index:1000;transition:all .35s var(--ease);}
+.header.scrolled{top:0;left:0;transform:none;width:100%;max-width:none;border-radius:0;background:rgba(250,250,247,.92);border:none;border-bottom:1px solid rgba(14,27,34,.08);box-shadow:0 4px 24px rgba(14,27,34,.06);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;}
+.header.scrolled .header-inner{padding:14px 40px;max-width:1240px;margin:0 auto;}
+.header-logo img{height:38px;width:auto;}
+.header-nav{display:none;}
+@media(min-width:1024px){
+  .header-nav{display:flex;align-items:center;gap:32px;font-size:14.5px;font-weight:500;}
+  .header-nav a{position:relative;padding:4px 0;}
+  .header-nav a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--gradient);transition:width .25s var(--ease);}
+  .header-nav a:hover::after{width:100%;}
+}
+.header-phone{display:none;}
+@media(min-width:1024px){.header-phone{display:inline-flex;background:var(--ink);color:#fff;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;align-items:center;gap:8px;}
+.header-phone:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,27,34,.25);}}
+.header-burger{display:flex;flex-direction:column;gap:5px;padding:8px;z-index:1200;}
+@media(min-width:1024px){.header-burger{display:none;}}
+.header-burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s;}
+.header-burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.header-burger.active span:nth-child(2){opacity:0;}
+.header-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(250,250,247,.98);backdrop-filter:blur(10px);z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);}
+.mobile-menu.active{opacity:1;pointer-events:auto;}
+.mobile-menu a{font-family:var(--serif);font-size:26px;color:var(--ink);}
+.mobile-menu a.btn{margin-top:10px;font-family:var(--sans);font-size:15px;color:#fff;}
+@media(min-width:1024px){.mobile-menu{display:none;}}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:720px;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;color:#fff;text-align:center;background:var(--ink);}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.38) 60%,rgba(0,0,0,.58) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 20px;max-width:900px;display:flex;flex-direction:column;align-items:center;}
+.live-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);padding:8px 18px 8px 14px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.03em;margin-bottom:28px;}
+.live-pill .dot{width:8px;height:8px;border-radius:50%;background:#ff5c5c;box-shadow:0 0 0 4px rgba(255,92,92,.2);}
+.live-pill.is-open .dot{background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.22);}
+.hero h1{font-size:clamp(34px,6vw,64px);text-shadow:0 4px 24px rgba(0,0,0,.4);color:#fff;}
+.hero .hl{font-style:italic;position:relative;display:inline-block;}
+.hero .hl svg{position:absolute;left:0;bottom:-.16em;width:100%;height:.3em;overflow:visible;}
+.hero-subline{margin-top:22px;font-size:18px;letter-spacing:.04em;font-weight:500;}
+.hero-services{margin-top:10px;font-size:14.5px;color:rgba(255,255,255,.82);max-width:640px;}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px;}
+.hero-bullets{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;margin-top:52px;max-width:620px;}
+@media(min-width:768px){.hero-bullets{grid-template-columns:repeat(4,auto);}}
+.hero-bullets li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.92);}
+.hero-bullets .icon{color:var(--aqua-2);width:18px;height:18px;flex-shrink:0;}
+.float-cta{position:fixed;right:22px;bottom:22px;z-index:900;background:var(--ink);color:#fff;padding:15px 22px;border-radius:999px;display:none;align-items:center;gap:9px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(14,27,34,.35);opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
+.float-cta.show{display:inline-flex;opacity:1;transform:translateY(0);}
+
+/* ============ MARQUEE ============ */
+.marquee{background:var(--ink);color:#fff;overflow:hidden;padding:16px 0;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:marquee 38s linear infinite;}
+.marquee-track span{font-size:14px;letter-spacing:.1em;font-weight:500;padding:0 14px;color:rgba(255,255,255,.88);}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============ INFO BAR ============ */
+.info-bar{background:#fff;border-bottom:1px solid rgba(14,27,34,.06);}
+.info-bar .wrap{display:grid;grid-template-columns:1fr;gap:0;padding-top:0;padding-bottom:0;}
+@media(min-width:768px){.info-bar .wrap{grid-template-columns:repeat(3,1fr);}}
+.info-card{display:flex;align-items:center;gap:14px;padding:26px 12px;border-bottom:1px solid rgba(14,27,34,.06);}
+@media(min-width:768px){.info-card{border-bottom:none;border-right:1px solid rgba(14,27,34,.06);}
+.info-card:last-child{border-right:none;}}
+.info-card:last-child{border-bottom:none;}
+.info-card .ic{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(153,255,255,.25),rgba(0,204,255,.18));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#008fb3;}
+.info-card .ic .icon{width:19px;height:19px;}
+.info-card .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px;}
+.info-card .val{font-size:15px;font-weight:600;}
+
+/* ============ PHILOSOPHIE ============ */
+.philo-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
+@media(min-width:900px){.philo-grid{grid-template-columns:.85fr 1fr;gap:70px;}}
+.philo-img{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px -20px rgba(14,27,34,.25);}
+.philo-img img{width:100%;height:100%;object-fit:cover;}
+.philo-text p{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:560px;}
+.philo-stats{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
+.stat-box{background:#fff;border-radius:18px;padding:20px 26px;box-shadow:0 12px 30px -10px rgba(14,27,34,.1);border:1px solid rgba(14,27,34,.05);}
+.stat-box .n{font-family:var(--serif);font-size:26px;font-style:italic;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat-box .t{font-size:12.5px;color:var(--muted);font-weight:500;margin-top:2px;}
+
+/* ============ LEISTUNGEN ============ */
+.serv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+@media(min-width:900px){.serv-grid{grid-template-columns:repeat(4,1fr);}}
+.serv-card{background:#fff;border-radius:24px;padding:28px 22px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;}
+.serv-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -16px rgba(2,204,255,.25);border-color:rgba(2,204,255,.3);}
+.serv-card .ic{width:48px;height:48px;border-radius:14px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:18px;}
+.serv-card .ic .icon{width:23px;height:23px;stroke-width:1.9;}
+.serv-card h3{font-size:19px;margin-bottom:8px;}
+.serv-card p{font-size:13.5px;color:var(--muted);}
+
+/* ============ SCANNER ============ */
+.scanner-wrap{display:grid;grid-template-columns:1fr;gap:32px;}
+@media(min-width:1024px){.scanner-wrap{grid-template-columns:1.5fr 1fr;gap:36px;}}
+.scanner-canvas-holder{position:relative;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#F5FEFF 0%,#E8F9FA 100%);box-shadow:inset 0 2px 24px rgba(14,27,34,.06),0 20px 50px -20px rgba(14,27,34,.15);aspect-ratio:4/3.2;}
+#scanner-canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
+#scanner-canvas:active{cursor:grabbing;}
+.scanner-reset{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid rgba(14,27,34,.08);border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 6px 16px rgba(14,27,34,.1);}
+.scanner-reset.show{opacity:1;pointer-events:auto;}
+.scanner-reset .icon{width:14px;height:14px;}
+.scanner-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(14,27,34,.72);color:#fff;font-size:12px;padding:8px 16px;border-radius:999px;backdrop-filter:blur(6px);pointer-events:none;transition:opacity .4s;}
+.scanner-fallback{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;}
+.scanner-fallback svg{width:100%;max-width:340px;height:auto;}
+.hotspot{cursor:pointer;transform-origin:center;transition:transform .2s;}
+.hotspot:hover,.hotspot.active{transform:scale(1.25);}
+.hotspot circle{fill:url(#hotspotGradient);}
+.panel{background:#fff;border-radius:24px;padding:28px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);}
+.panel-title{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.panel-title .icon{width:15px;height:15px;color:#02c4de;}
+#panel-heading{font-family:var(--serif);font-size:21px;color:var(--ink);margin-bottom:10px;min-height:26px;}
+#panel-desc{font-size:14.5px;color:var(--muted);min-height:66px;}
+.panel-note{margin-top:14px;font-size:12.5px;color:#008fb3;font-weight:600;display:flex;align-items:center;gap:6px;}
+.chips-title{font-size:13px;font-weight:600;margin:26px 0 14px;color:var(--ink);}
+.chips{display:flex;flex-wrap:wrap;gap:9px;}
+.chip{background:#F1FAFB;border:1px solid rgba(2,196,222,.25);padding:9px 15px;border-radius:999px;font-size:12.5px;font-weight:500;color:var(--ink);transition:.2s;}
+.chip:hover,.chip.active{background:var(--gradient);color:var(--ink);border-color:transparent;font-weight:600;}
+.panel-cta{margin-top:22px;background:var(--ink);color:#fff;border-radius:20px;padding:22px;}
+.panel-cta p{font-size:13.5px;color:rgba(255,255,255,.75);margin:6px 0 16px;}
+.panel-cta strong{font-family:var(--serif);font-size:18px;font-style:italic;display:block;color:#fff;}
+
+/* ============ PRAXIS ============ */
+.praxis-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+@media(min-width:900px){
+  .praxis-grid{grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:18px;}
+  .pg-eingang{grid-row:1/3;}
+}
+.pg-item{position:relative;border-radius:20px;overflow:hidden;min-height:240px;}
+.pg-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .6s var(--ease);}
+.pg-item:hover img{transform:scale(1.05);}
+.pg-eingang{aspect-ratio:3/4;}
+@media(min-width:900px){.pg-eingang{aspect-ratio:auto;}}
+.pg-cap{position:absolute;left:0;right:0;bottom:0;padding:20px;background:linear-gradient(0deg,rgba(0,0,0,.6) 0%,transparent 100%);color:#fff;font-weight:600;font-size:14.5px;z-index:2;}
+.pg-full{grid-column:1/-1;aspect-ratio:16/6;}
+
+/* ============ REVIEWS ============ */
+.rev-rating{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:10px;}
+.rev-rating .stars{color:#00CCFF;letter-spacing:2px;}
+.reviews-viewport{overflow:hidden;}
+.reviews-track{display:flex;transition:transform .55s var(--ease);}
+.review-card{flex:0 0 100%;padding:6px;}
+@media(min-width:900px){.review-card{flex:0 0 33.3333%;}}
+.review-inner{background:#fff;border-radius:24px;padding:28px;height:100%;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -14px rgba(14,27,34,.1);}
+.review-inner .stars{color:#00CCFF;letter-spacing:2px;font-size:14px;margin-bottom:14px;}
+.review-inner blockquote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--ink);}
+.review-meta{margin-top:20px;display:flex;flex-direction:column;gap:2px;}
+.review-meta .name{font-weight:600;font-size:14px;}
+.review-meta .sub{font-size:12px;color:var(--muted);}
+.rev-dots{display:flex;justify-content:center;gap:8px;margin-top:34px;}
+.rev-dots button{width:8px;height:8px;border-radius:50%;background:rgba(14,27,34,.15);transition:.25s;}
+.rev-dots button.active{background:var(--ink);width:22px;border-radius:5px;}
+
+/* ============ GUT ZU WISSEN ============ */
+.tip-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+@media(min-width:768px){.tip-grid{grid-template-columns:repeat(4,1fr);}}
+.tip-card{background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(14,27,34,.06);}
+.tip-card .ic{color:#00a7c2;margin-bottom:14px;}
+.tip-card .ic .icon{width:24px;height:24px;}
+.tip-card h3{font-size:15.5px;margin-bottom:8px;}
+.tip-card p{font-size:13.5px;color:var(--muted);}
+
+/* ============ OEFFNUNGSZEITEN ============ */
+.oz-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:900px){.oz-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+.oz-left{display:flex;flex-direction:column;gap:22px;}
+.oz-cta{background:var(--gradient);border-radius:24px;padding:32px;color:var(--ink);}
+.oz-cta p{font-size:14px;margin:8px 0 20px;color:rgba(14,27,34,.75);}
+.oz-cta .call{font-family:var(--serif);font-size:30px;font-style:italic;display:flex;align-items:center;gap:10px;}
+.oz-card{background:var(--ink);border-radius:24px;padding:8px 32px;color:#fff;}
+.oz-row{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.09);font-size:15px;transition:.3s;}
+.oz-row:last-child{border-bottom:none;}
+.oz-row .day{font-weight:500;color:rgba(255,255,255,.65);}
+.oz-row .time{font-weight:600;}
+.oz-row.is-today{margin:0 -20px;padding:16px 20px;border-radius:14px;background:rgba(153,255,255,.08);box-shadow:0 0 0 1px rgba(2,255,255,.25),0 0 24px rgba(2,255,255,.12);border-bottom-color:transparent;}
+.oz-row.is-today .day,.oz-row.is-today .time{color:var(--aqua-3);}
+
+/* ============ ANFAHRT ============ */
+.anf-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:center;}
+@media(min-width:900px){.anf-grid{grid-template-columns:1fr .8fr;}}
+.anf-text{display:flex;gap:16px;align-items:flex-start;}
+.anf-text .ic{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,rgba(153,255,255,.25),rgba(0,204,255,.18));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#008fb3;}
+.anf-text p{color:var(--muted);font-size:15.5px;max-width:420px;}
+.anf-call{background:var(--gradient);border-radius:24px;padding:32px;text-align:center;}
+.anf-call .num{font-family:var(--serif);font-size:clamp(28px,4vw,38px);font-style:italic;color:var(--ink);margin:10px 0 20px;}
+
+/* ============ FAQ ============ */
+.faq-item{border-bottom:1px solid rgba(14,27,34,.1);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px 4px;text-align:left;font-weight:600;font-size:16px;gap:20px;}
+.faq-q .icon{flex-shrink:0;transition:transform .3s var(--ease);color:#00a7c2;}
+.faq-item.open .faq-q .icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+.faq-a p{padding:0 4px 24px;color:var(--muted);font-size:14.5px;max-width:640px;}
+
+/* ============ ANRUFEN CARD ============ */
+.callcard{background:var(--ink);border-radius:32px;padding:52px 40px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;color:#fff;}
+@media(min-width:768px){.callcard{flex-direction:row;justify-content:space-between;text-align:left;padding:52px 60px;}}
+.callcard .lbl{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600;margin-bottom:10px;}
+.callcard .num{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-style:italic;}
+
+/* ============ KONTAKT ============ */
+.kontakt-grid{display:grid;grid-template-columns:1fr;gap:40px;}
+@media(min-width:900px){.kontakt-grid{grid-template-columns:.9fr 1.1fr;}}
+.kcard-list{display:flex;flex-direction:column;gap:14px;}
+.kcard{display:flex;gap:16px;align-items:flex-start;background:#fff;border-radius:18px;padding:20px;border:1px solid rgba(14,27,34,.06);}
+.kcard .ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(153,255,255,.25),rgba(0,204,255,.18));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#008fb3;}
+.kcard .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:3px;}
+.kcard .val{font-weight:600;font-size:14.5px;}
+.map-wrap{border-radius:24px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(14,27,34,.2);}
+.map-wrap iframe{width:100%;height:340px;border:0;display:block;}
+.map-links{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;font-size:14px;font-weight:600;}
+.map-links a{display:flex;align-items:center;gap:6px;color:#008fb3;}
+.map-links a:hover{text-decoration:underline;}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.09);}
+@media(min-width:768px){.footer-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+.footer-logo img{height:34px;margin-bottom:18px;filter:brightness(0) invert(1);}
+.footer-grid p{font-size:14px;max-width:280px;color:rgba(255,255,255,.55);}
+.footer-grid h4{color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;font-weight:600;}
+.footer-grid ul{display:flex;flex-direction:column;gap:11px;font-size:14.5px;}
+.footer-grid ul a:hover{color:#fff;}
+.footer-bottom{padding:26px 0;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.45);}
+@media(min-width:768px){.footer-bottom{flex-direction:row;}}
+.footer-bottom a:hover{color:#fff;}
+.footer-bottom-links{display:flex;gap:20px;}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  .marquee-track{animation:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg style="display:none" aria-hidden="true">
+<defs>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/><circle cx="12" cy="12" r="2.4"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M11 18s-7-4.35-9-8.5C.5 6 2.5 3 6 3c2 0 3.3 1 5 3 1.7-2 3-3 5-3 3.5 0 5.5 3 4 6.5-.7 1.6-2 3-3.3 4.2"/><path d="m16 15 2 2 4-4"/></symbol>
+<symbol id="i-stetho" viewBox="0 0 24 24"><path d="M5 4v6a5 5 0 0 0 10 0V4M5 4H3M15 4h2"/><circle cx="19" cy="15" r="2.5"/><path d="M15 10v2a4 4 0 0 0 4 4"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .9-5.2 4.9 1.4 7-6.2-3.5-6.2 3.5 1.4-7L2 9.5l7-.9z"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="m3 8 4 3 5-6 5 6 4-3-2 11H5z"/><path d="M5 21h14"/></symbol>
+<symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M9 8c0 1.5 1.3 2.5 3 2.5S15 9.5 15 8"/><path d="M12 13c-4 0-7 2.5-7 7h14c0-4.5-3-7-7-7z"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 6 6L20 6"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.4 6.4L3 16M3 21v-5h5"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+<symbol id="i-nav" viewBox="0 0 24 24"><path d="M3 11 21 3l-8 18-2-8z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M3 8V5a2 2 0 0 1 2-2h3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M21 16v3a2 2 0 0 1-2 2h-3"/></symbol>
+</defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo" aria-label="Zur Startseite"><img src="main.logo.zahnarzt.peters.png" alt="Zahnarztpraxis Dr. Peters Logo"></a>
+    <nav class="header-nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#scanner">Zahn-Scanner</a>
+      <a href="#praxis">Praxis</a>
+      <a href="#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="tel:04931 4551" class="header-phone" aria-label="Praxis anrufen unter 04931 / 4551"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+    <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#leistungen">Leistungen</a>
+  <a href="#scanner">Zahn-Scanner</a>
+  <a href="#praxis">Praxis</a>
+  <a href="#oeffnungszeiten">Öffnungszeiten</a>
+  <a href="team.html">Team</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="tel:04931 4551" class="btn btn-dark" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <video autoplay loop muted playsinline preload="metadata" aria-hidden="true">
+    <source src="main.hero.peters.northsea.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="live-pill" data-live-pill><span class="dot"></span><span class="live-text">Aktuell geöffnet</span></div>
+    <h1>Zahngesundheit, der Sie<br><span class="hl">vertrauen<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="swooshGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#99FFFF"/><stop offset="50%" stop-color="#02FFFF"/><stop offset="100%" stop-color="#00CCFF"/></linearGradient></defs><path d="M2 14 C 50 3, 150 3, 198 12" stroke="url(#swooshGrad)" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span>.</h1>
+    <p class="hero-subline">Praxis Dr. Peters · Norden</p>
+    <p class="hero-services">Allgemeine Zahnheilkunde · Implantologie · Prophylaxe · Angstpatienten-Behandlung · Notfallversorgung</p>
+    <div class="hero-ctas">
+      <a href="tel:04931 4551" class="btn btn-dark" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
+      <a href="#leistungen" class="btn btn-outline">Unsere Leistungen</a>
+    </div>
+    <ul class="hero-bullets">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Über 40 Jahre Erfahrung</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>Moderne Ausstattung</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Angstpatienten willkommen</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Kurzfristige Notfalltermine</li>
+    </ul>
+  </div>
+</section>
+<a href="tel:04931 4551" class="float-cta" id="floatCta" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>4,8 BEI GOOGLE · IMPLANTOLOGIE · SEIT ÜBER 40 JAHREN IN NORDEN · ANGSTPATIENTEN WILLKOMMEN · NOTFALLTERMINE · GLÜCKAUF 8A · MODERNSTE TECHNIK · PROPHYLAXE · ÄSTHETISCHE ZAHNHEILKUNDE · 110 REZENSIONEN · </span>
+    <span>4,8 BEI GOOGLE · IMPLANTOLOGIE · SEIT ÜBER 40 JAHREN IN NORDEN · ANGSTPATIENTEN WILLKOMMEN · NOTFALLTERMINE · GLÜCKAUF 8A · MODERNSTE TECHNIK · PROPHYLAXE · ÄSTHETISCHE ZAHNHEILKUNDE · 110 REZENSIONEN · </span>
+  </div>
+</div>
+
+<!-- ============ INFO BAR ============ -->
+<div class="info-bar">
+  <div class="wrap">
+    <div class="info-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></div><div><div class="lbl">Telefon</div><a class="val" href="tel:04931 4551">04931 / 4551</a></div></div>
+    <div class="info-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></div><div><div class="lbl">Adresse</div><div class="val">Glückauf 8a, 26506 Norden</div></div></div>
+    <div class="info-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></div><div><div class="lbl">Öffnungszeiten</div><div class="val">Mo–Do 07:30–17 · Fr 07:30–12 Uhr</div></div></div>
+  </div>
+</div>
+
+<!-- ============ PHILOSOPHIE ============ -->
+<section id="philosophie">
+  <div class="wrap philo-grid reveal">
+    <div class="philo-img">
+      <!-- TODO: Inhaber-Foto einsetzen -->
+      <img src="wartezimmer.peters.png" alt="Praxisräume Dr. Peters" loading="lazy">
+    </div>
+    <div class="philo-text">
+      <div class="label"><span class="bar"></span>Philosophie</div>
+      <h2 class="section-title">Zahnmedizin mit <em>Herz</em> und Präzision</h2>
+      <p style="margin-top:20px;">Seit über 40 Jahren steht unsere Praxis für Zahnmedizin, die den Menschen in den Mittelpunkt stellt. Als Familienpraxis behandeln wir mittlerweile in zweiter Generation — mit derselben Sorgfalt, demselben Anspruch an höchste Qualität und derselben Ruhe, die unsere Patientinnen und Patienten seit Jahrzehnten schätzen.</p>
+      <p>Besonders am Herzen liegt uns die einfühlsame Begleitung von Angstpatienten: Wir nehmen uns Zeit, erklären jeden Schritt und schaffen eine Atmosphäre, in der Vertrauen wachsen kann — für Groß und Klein, von der ersten Kontrolle bis zur komplexen Behandlung.</p>
+      <div class="philo-stats">
+        <div class="stat-box"><div class="n">40+</div><div class="t">Jahre in Norden</div></div>
+        <div class="stat-box"><div class="n">5/5</div><div class="t">Notfall-Empfehlungen</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Leistungen</div>
+      <h2 class="section-title">Was wir für Sie tun.</h2>
+    </div>
+    <div class="serv-grid reveal">
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-stetho"/></svg></div><h3>Allgemeine Zahnheilkunde</h3><p>Kontrolle, Füllungen, Wurzelbehandlung.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg></div><h3>Implantologie</h3><p>Hochwertige Implantate, langfristige Lösungen.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Prophylaxe</h3><p>Professionelle Zahnreinigung, Vorsorge.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></div><h3>Ästhetische Zahnheilkunde</h3><p>Bleaching, Veneers, sichtbar schöner.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-crown"/></svg></div><h3>Zahnersatz</h3><p>Kronen, Brücken, Prothesen.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><h3>Angstpatienten</h3><p>Einfühlsame Behandlung, Ihre Zeit.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-baby"/></svg></div><h3>Kinderzahnheilkunde</h3><p>Von klein auf gesunde Zähne.</p></div>
+      <div class="serv-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></div><h3>Notfallbehandlung</h3><p>Schnelle Termine bei akuten Schmerzen.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCANNER ============ -->
+<section id="scanner">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Zahn-Scanner</div>
+      <h2 class="section-title">Wo drückt der Schuh?</h2>
+      <p class="section-sub">Tippen Sie auf die betroffene Zahnregion — wir zeigen Ihnen sofort die passende Behandlung.</p>
+    </div>
+    <div class="scanner-wrap reveal">
+      <div class="scanner-canvas-holder" id="scannerHolder" role="img" aria-label="Interaktives 3D-Modell eines Gebisses mit sechs anklickbaren Problemzonen">
+        <canvas id="scanner-canvas"></canvas>
+        <button class="scanner-reset" id="scannerReset" aria-label="Zurück zur Übersicht"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>Übersicht</button>
+        <div class="scanner-hint" id="scannerHint">Ziehen zum Drehen · Tippen auf einen Punkt</div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="panel-title"><svg class="icon" aria-hidden="true"><use href="#i-scan"/></svg>Zahn-Scanner</div>
+          <div id="panel-heading">Wählen Sie einen Bereich am Gebiss.</div>
+          <p id="panel-desc">Klicken Sie auf einen der markierten Punkte am 3D-Modell oder wählen Sie unten eine Beschwerde aus.</p>
+          <div class="panel-note" id="panelNote" style="display:none;"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin nötig? Rufen Sie uns an: 04931 / 4551</div>
+          <div class="chips-title">Häufige Beschwerden</div>
+          <div class="chips">
+            <button class="chip" data-marker="weisheit">Zahnschmerzen</button>
+            <button class="chip" data-marker="parodontitis">Blutendes Zahnfleisch</button>
+            <button class="chip" data-marker="karies">Empfindliche Zähne (heiß/kalt)</button>
+            <button class="chip" data-marker="cmd">Knirschen nachts / Kiefer-Verspannung</button>
+            <button class="chip" data-marker="implantat">Lockere Zähne</button>
+            <button class="chip" data-marker="aesthetik">Verfärbungen / Ästhetik</button>
+          </div>
+          <div class="panel-cta">
+            <strong>Nichts davon dabei?</strong>
+            <p>Kein Problem — vereinbaren Sie einfach einen Kontrolltermin, wir schauen uns das gemeinsam an.</p>
+            <a href="#oeffnungszeiten" class="btn btn-gradient" style="width:100%;">Termin vereinbaren</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRAXIS ============ -->
+<section id="praxis" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Praxis</div>
+      <h2 class="section-title">Ein Ort zum Wohlfühlen.</h2>
+    </div>
+    <div class="praxis-grid reveal">
+      <div class="pg-item pg-eingang"><img src="eingang.peters.png" alt="Empfang der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Empfang</div></div>
+      <div class="pg-item"><img src="wartezimmer.peters.png" alt="Wartezimmer der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Wartezimmer</div></div>
+      <div class="pg-item"><img src="behandlungsraum1.peters.png" alt="Behandlungsraum 1 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 1</div></div>
+      <div class="pg-item pg-full"><img src="behandlungsraum2.peters.png" alt="Behandlungsraum 2 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 2</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="stimmen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="rev-rating"><span class="stars">★★★★★</span> 4,8 — 110 Rezensionen auf Google</div>
+      <div class="label"><span class="bar"></span>Stimmen</div>
+      <h2 class="section-title">Was unsere Patienten sagen.</h2>
+    </div>
+    <div class="reviews-viewport reveal" id="revViewport">
+      <div class="reviews-track" id="revTrack">
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Seit einem halben Jahr bin ich Patientin bei Dr. Leif Peters und habe Dank der Geduld, Herzlichkeit sowie der professionellen und freundlichen Behandlung nicht mehr die Angst wie zuvor."</blockquote><div class="review-meta"><span class="name">Heike Bondzio</span><span class="sub">Google-Rezension · vor 3 Monaten</span></div></div></div>
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Kompetenz trifft Freundlichkeit. Dr. Peters ist ein sehr kompetenter Zahnarzt mit einem tollen Team an seiner Seite."</blockquote><div class="review-meta"><span class="name">Susanne Berner</span><span class="sub">Google-Rezension · vor 5 Monaten</span></div></div></div>
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Sehr zu empfehlen. Bin seit Jahren Patientin dort. Die Ärzte sehr nett, nehmen sich Zeit. Personal auch super lieb. Ich bin froh, so einen guten Zahnarzt gefunden zu haben."</blockquote><div class="review-meta"><span class="name">Annemarie Martin</span><span class="sub">Google-Rezension · vor 1 Monat</span></div></div></div>
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Ich bin seit Jahren bei Dr. Peters in Behandlung und könnte nicht zufriedener sein. Vom ersten Tag an habe ich mich bei ihm bestens aufgehoben gefühlt."</blockquote><div class="review-meta"><span class="name">Stefan Weingarten</span><span class="sub">Google-Rezension · vor 1 Jahr</span></div></div></div>
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Ich bin als Angstpatient hin und habe mittlerweile keine Angst mehr zum Zahnarzt zu gehen. Es wird sich Zeit genommen und auf alles eingegangen."</blockquote><div class="review-meta"><span class="name">TheDiva25</span><span class="sub">Google-Rezension · vor 8 Monaten</span></div></div></div>
+        <div class="review-card"><div class="review-inner"><div class="stars">★★★★★</div><blockquote>„Top Zahnarzt, der einem die Angst wegnimmt. Ich habe seit Jahren eine Phobie und bei dieser Praxis ist die Angst so gut wie fast verschwunden. Sehr freundlicher Arzt, moderne Einrichtung."</blockquote><div class="review-meta"><span class="name">Marvin Newiger</span><span class="sub">Google-Rezension · vor 2 Jahren</span></div></div></div>
+      </div>
+    </div>
+    <div class="rev-dots" id="revDots"></div>
+  </div>
+</section>
+
+<!-- ============ GUT ZU WISSEN ============ -->
+<section style="background:#fff;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Gut zu wissen</div>
+      <h2 class="section-title">Bevor Sie zu uns kommen.</h2>
+    </div>
+    <div class="tip-grid reveal">
+      <div class="tip-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div><h3>Neupatient?</h3><p>Bringen Sie Ihre Versichertenkarte und ggf. Bonusheft mit.</p></div>
+      <div class="tip-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><h3>Angstpatient?</h3><p>Sagen Sie es uns beim Anrufen — wir planen extra Zeit ein.</p></div>
+      <div class="tip-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></div><h3>Notfall?</h3><p>Rufen Sie direkt an, wir versuchen einen Termin am selben Tag.</p></div>
+      <div class="tip-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></div><h3>Parken?</h3><p>Direkt vor der Praxis in der Glückauf-Straße möglich.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OEFFNUNGSZEITEN ============ -->
+<section id="oeffnungszeiten">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Öffnungszeiten</div>
+      <h2 class="section-title">Wann Sie uns finden.</h2>
+      <p class="section-sub">Termine nach Vereinbarung — rufen Sie uns gerne an.</p>
+    </div>
+    <div class="oz-grid reveal">
+      <div class="oz-left">
+        <div class="live-pill" data-live-pill style="background:rgba(14,27,34,.05);border-color:rgba(14,27,34,.1);color:var(--ink);"><span class="dot"></span><span class="live-text">Aktuell geöffnet</span></div>
+        <div class="oz-cta">
+          <div class="label" style="color:var(--ink);"><span class="bar" style="background:var(--ink);"></span>Termin vereinbaren</div>
+          <a href="tel:04931 4551" class="call" aria-label="Anrufen unter 04931 / 4551"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+          <p>Rufen Sie uns an — wir finden gemeinsam den passenden Termin für Sie.</p>
+        </div>
+      </div>
+      <div class="oz-card">
+        <div class="oz-row" data-hours-row data-day="1"><span class="day">Montag</span><span class="time">07:30–17:00 Uhr</span></div>
+        <div class="oz-row" data-hours-row data-day="2"><span class="day">Dienstag</span><span class="time">07:30–17:00 Uhr</span></div>
+        <div class="oz-row" data-hours-row data-day="3"><span class="day">Mittwoch</span><span class="time">07:30–17:00 Uhr</span></div>
+        <div class="oz-row" data-hours-row data-day="4"><span class="day">Donnerstag</span><span class="time">07:30–17:00 Uhr</span></div>
+        <div class="oz-row" data-hours-row data-day="5"><span class="day">Freitag</span><span class="time">07:30–12:00 Uhr</span></div>
+        <div class="oz-row" data-hours-row data-day="6"><span class="day">Samstag</span><span class="time">Geschlossen</span></div>
+        <div class="oz-row" data-hours-row data-day="0"><span class="day">Sonntag</span><span class="time">Geschlossen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANFAHRT ============ -->
+<section style="background:#fff;">
+  <div class="wrap">
+    <div class="anf-grid reveal">
+      <div class="anf-text">
+        <div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-nav"/></svg></div>
+        <div>
+          <h3 style="font-size:20px;margin-bottom:8px;">Direkt in der Innenstadt</h3>
+          <p>Sie finden uns in der Glückauf 8a, 26506 Norden — mitten in Norden, mit Parkplätzen direkt vor der Praxis.</p>
+        </div>
+      </div>
+      <div class="anf-call">
+        <div class="label" style="color:var(--ink);justify-content:center;"><span class="bar" style="background:var(--ink);"></span>Anrufen</div>
+        <div class="num"><a href="tel:04931 4551">04931 / 4551</a></div>
+        <a href="tel:04931 4551" class="btn btn-dark" aria-label="Jetzt anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Jetzt anrufen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="wrap" style="max-width:840px;">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Häufige Fragen</div>
+      <h2 class="section-title">Antworten auf einen Blick.</h2>
+    </div>
+    <div class="reveal" id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q" aria-expanded="true">Nehmen Sie neue Patienten auf?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Ja, wir freuen uns über neue Patientinnen und Patienten. Rufen Sie uns einfach an.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Sind Sie Kassenarzt?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Ja, wir behandeln Kassen- und Privatpatienten.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Behandeln Sie Angstpatienten?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Ja, mit besonderer Ruhe und Geduld. Sagen Sie es uns bei der Terminvereinbarung.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Gibt es Notfalltermine?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Bei akuten Beschwerden versuchen wir immer, Sie noch am selben Tag zu sehen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Was kostet eine Prophylaxe?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Die professionelle Zahnreinigung ist eine Selbstzahlerleistung. Sprechen Sie uns gerne auf ein Angebot an.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Behandeln Sie auch Kinder?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        <div class="faq-a"><p>Ja, wir kümmern uns um die ganze Familie — vom Milchzahn bis zum Weisheitszahn.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANRUFEN CARD ============ -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="callcard reveal">
+      <div><div class="lbl">Termin vereinbaren</div><div class="num">04931 / 4551</div></div>
+      <a href="tel:04931 4551" class="btn btn-gradient" aria-label="Jetzt anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Jetzt anrufen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label"><span class="bar"></span>Kontakt</div>
+      <h2 class="section-title">Wir freuen uns auf Ihren Anruf.</h2>
+    </div>
+    <div class="kontakt-grid reveal">
+      <div class="kcard-list">
+        <div class="kcard"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></div><div><div class="lbl">Telefon</div><a class="val" href="tel:04931 4551">04931 / 4551</a></div></div>
+        <div class="kcard"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div><div><div class="lbl">E-Mail</div><a class="val" href="mailto:info@zahnaerzte-peters.de">info@zahnaerzte-peters.de</a></div></div>
+        <div class="kcard"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></div><div><div class="lbl">Adresse</div><div class="val">Glückauf 8a, 26506 Norden</div></div></div>
+        <div class="kcard"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-nav"/></svg></div><div><div class="lbl">Anfahrt</div><div class="val">Parkplätze direkt vor dem Haus</div></div></div>
+      </div>
+      <div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps?q=Gl%C3%BCckauf+8a,+26506+Norden&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort der Zahnarztpraxis Dr. Peters"></iframe>
+        </div>
+        <div class="map-links">
+          <a href="https://www.google.com/maps?q=Gl%C3%BCckauf+8a,+26506+Norden" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>Google Maps öffnen</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Gl%C3%BCckauf+8a,+26506+Norden" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Route planen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="main.logo.zahnarzt.peters.png" alt="Zahnarztpraxis Dr. Peters Logo"></div>
+        <p>Familienpraxis in Norden, Ostfriesland — seit über 40 Jahren für Ihre Zahngesundheit da.</p>
+        <p style="margin-top:16px;">© 2026 Zahnarztpraxis Dr. Peters</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Glückauf 8a, 26506 Norden</li>
+          <li><a href="tel:04931 4551">04931 / 4551</a></li>
+          <li><a href="mailto:info@zahnaerzte-peters.de">info@zahnaerzte-peters.de</a></li>
+          <li>Mo–Do 07:30–17 · Fr 07:30–12 Uhr</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Quick-Links</h4>
+        <ul>
+          <li><a href="#leistungen">Leistungen</a></li>
+          <li><a href="#scanner">Zahn-Scanner</a></li>
+          <li><a href="#praxis">Praxis</a></li>
+          <li><a href="#oeffnungszeiten">Öffnungszeiten</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
+      <div>Made with care in Ostfriesland</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ ÖFFNUNGSZEITEN — SINGLE SOURCE OF TRUTH ============ */
+/* Split-Hours-fähige Struktur: mehrere Zeitspannen pro Tag möglich (aktuell je 1) */
+const HOURS = [
+  { day: 1, ranges: [{ from: "07:30", to: "17:00" }] }, // Montag
+  { day: 2, ranges: [{ from: "07:30", to: "17:00" }] }, // Dienstag
+  { day: 3, ranges: [{ from: "07:30", to: "17:00" }] }, // Mittwoch
+  { day: 4, ranges: [{ from: "07:30", to: "17:00" }] }, // Donnerstag
+  { day: 5, ranges: [{ from: "07:30", to: "12:00" }] }, // Freitag
+  { day: 6, ranges: [] }, // Samstag
+  { day: 0, ranges: [] }, // Sonntag
+];
+function toMinutes(str){ const [h,m] = str.split(":").map(Number); return h*60+m; }
+function isOpenNow(date = new Date()){
+  const today = HOURS.find(h => h.day === date.getDay());
+  if(!today) return false;
+  const nowMin = date.getHours()*60 + date.getMinutes();
+  return today.ranges.some(r => nowMin >= toMinutes(r.from) && nowMin < toMinutes(r.to));
+}
+function updateLivePills(){
+  const open = isOpenNow();
+  document.querySelectorAll('[data-live-pill]').forEach(el=>{
+    el.classList.toggle('is-open', open);
+    const t = el.querySelector('.live-text');
+    if(t) t.textContent = open ? 'Aktuell geöffnet' : 'Aktuell geschlossen';
+  });
+}
+function highlightToday(){
+  const day = new Date().getDay();
+  document.querySelectorAll('[data-hours-row]').forEach(row=>{
+    row.classList.toggle('is-today', Number(row.dataset.day) === day);
+  });
+}
+updateLivePills();
+highlightToday();
+setInterval(updateLivePills, 60000);
+
+/* ============ HEADER SCROLL STATE ============ */
+const header = document.getElementById('siteHeader');
+const heroEl = document.getElementById('hero');
+function onScroll(){
+  const threshold = heroEl ? heroEl.offsetHeight * 0.9 : 200;
+  header.classList.toggle('scrolled', window.scrollY > threshold);
+  document.getElementById('floatCta')?.classList.toggle('show', window.scrollY > threshold);
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ============ MOBILE MENU ============ */
+const burger = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burger?.addEventListener('click', ()=>{
+  const active = mobileMenu.classList.toggle('active');
+  burger.classList.toggle('active', active);
+  burger.setAttribute('aria-expanded', String(active));
+});
+mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
+}));
+
+/* ============ REVEAL ON SCROLL ============ */
+const revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12, rootMargin:'-60px'});
+  revealEls.forEach(el=>io.observe(el));
+} else { revealEls.forEach(el=>el.classList.add('in')); }
+
+/* ============ FAQ ACCORDION ============ */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const btn = item.querySelector('.faq-q');
+  const ans = item.querySelector('.faq-a');
+  if(item.classList.contains('open')) ans.style.maxHeight = ans.scrollHeight + 'px';
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      if(o!==item){ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight=null; o.querySelector('.faq-q').setAttribute('aria-expanded','false'); }
+    });
+    item.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    ans.style.maxHeight = !isOpen ? ans.scrollHeight + 'px' : null;
+  });
+});
+
+/* ============ REVIEWS CAROUSEL ============ */
+(function(){
+  const track = document.getElementById('revTrack');
+  const dotsWrap = document.getElementById('revDots');
+  const viewport = document.getElementById('revViewport');
+  const total = track.children.length;
+  let index = 0, timer = null;
+  function visibleCount(){ return window.innerWidth >= 900 ? 3 : 1; }
+  function maxIndex(){ return Math.max(0, total - visibleCount()); }
+  function renderDots(){
+    dotsWrap.innerHTML = '';
+    for(let i=0;i<=maxIndex();i++){
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Rezension ' + (i+1) + ' anzeigen');
+      if(i===index) b.classList.add('active');
+      b.addEventListener('click', ()=>{ index = i; update(); restart(); });
+      dotsWrap.appendChild(b);
+    }
+  }
+  function update(){
+    const pct = (100 / visibleCount()) * index;
+    track.style.transform = `translateX(-${pct}%)`;
+    [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===index));
+  }
+  function next(){ index = index >= maxIndex() ? 0 : index + 1; update(); }
+  function restart(){
+    clearInterval(timer);
+    timer = setInterval(next, window.innerWidth >= 900 ? 6000 : 5500);
+  }
+  viewport.addEventListener('mouseenter', ()=>clearInterval(timer));
+  viewport.addEventListener('mouseleave', restart);
+  window.addEventListener('resize', ()=>{ index = Math.min(index, maxIndex()); renderDots(); update(); });
+  renderDots(); update(); restart();
+})();
+
+/* ============ SCANNER: CHIP <-> MARKER BRIDGE ============ */
+window.scannerSelectMarker = null; // gets assigned by scanner module (3D or fallback)
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    if(window.scannerSelectMarker) window.scannerSelectMarker(chip.dataset.marker);
+  });
+});
+</script>
+
+<!-- ============ 3D ZAHN-SCANNER MODULE ============ -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+/* Beschwerde-Content: bildet die 6 Zahn-Marker-Positionen auf Titel/Beschreibung im Info-Panel ab */
+const MARKER_INFO = {
+  weisheit:     { title: "Weisheitszähne — Extraktion & Nachsorge", desc: "Wenn Weisheitszähne drücken, schief wachsen oder sich entzünden, prüfen wir schonend, ob eine Entfernung sinnvoll ist. Die Nachsorge liegt uns dabei besonders am Herzen." },
+  karies:       { title: "Karies & Füllungen — Moderne Composite-Restaurationen", desc: "Kleine Löcher, große Wirkung: Mit zahnfarbenen Composite-Füllungen versorgen wir Karies unsichtbar und erhalten so viel gesunde Zahnsubstanz wie möglich." },
+  aesthetik:    { title: "Ästhetik & Veneers — Sichtbar schöne Frontzähne", desc: "Verfärbte oder unregelmäßige Frontzähne lassen sich mit Bleaching oder hauchdünnen Veneers dezent und natürlich verschönern." },
+  parodontitis: { title: "Parodontitis & Prophylaxe — Gesundes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen. Mit professioneller Prophylaxe und, wenn nötig, einer Parodontitis-Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
+  implantat:    { title: "Implantologie & Zahnersatz — Ihre Lücke schließen", desc: "Ein fehlender Zahn muss nicht auffallen. Mit hochwertigen Implantaten oder festsitzendem Zahnersatz schließen wir Lücken dauerhaft und natürlich." },
+  cmd:          { title: "CMD & Knirschen — Schiene und Behandlung", desc: "Nächtliches Knirschen oder ein verspannter Kiefer können auf eine CMD hindeuten. Mit einer individuellen Schiene und gezielter Behandlung schaffen wir Entlastung." },
+};
+
+const panelHeading = document.getElementById('panel-heading');
+const panelDesc = document.getElementById('panel-desc');
+const panelNote = document.getElementById('panelNote');
+const resetBtn = document.getElementById('scannerReset');
+const hint = document.getElementById('scannerHint');
+
+function showMarkerInfo(id){
+  const info = MARKER_INFO[id];
+  if(!info) return;
+  panelHeading.textContent = info.title;
+  panelDesc.textContent = info.desc;
+  panelNote.style.display = 'flex';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.marker===id));
+}
+function resetPanel(){
+  panelHeading.textContent = 'Wählen Sie einen Bereich am Gebiss.';
+  panelDesc.textContent = 'Klicken Sie auf einen der markierten Punkte am 3D-Modell oder wählen Sie unten eine Beschwerde aus.';
+  panelNote.style.display = 'none';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+}
+
+function hasWebGL(){
+  try{
+    const c = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+  }catch(e){ return false; }
+}
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if(!hasWebGL() || reduceMotion){
+  initFallback();
+} else {
+  init3D().catch(initFallback);
+}
+
+/* ============ FALLBACK: STATIC SVG JAW ============ */
+function initFallback(){
+  const holder = document.getElementById('scannerHolder');
+  holder.querySelector('canvas')?.remove();
+  hint.style.display = 'none';
+  resetBtn.style.display = 'none';
+  const wrap = document.createElement('div');
+  wrap.className = 'scanner-fallback';
+  wrap.innerHTML = `
+  <svg viewBox="0 0 300 260" aria-hidden="true">
+    <defs><radialGradient id="hotspotGradient"><stop offset="0%" stop-color="#99FFFF"/><stop offset="100%" stop-color="#00CCFF"/></radialGradient></defs>
+    <ellipse cx="150" cy="60" rx="105" ry="50" fill="#F5F5F0" stroke="#E3E3DC" stroke-width="2"/>
+    <ellipse cx="150" cy="190" rx="95" ry="46" fill="#F5F5F0" stroke="#E3E3DC" stroke-width="2"/>
+    <ellipse cx="150" cy="125" rx="60" ry="18" fill="#F5C7C2" opacity="0.5"/>
+    <g class="hotspot" data-marker="weisheit" tabindex="0" role="button" aria-label="Weisheitszähne"><circle cx="248" cy="70" r="9"/></g>
+    <g class="hotspot" data-marker="karies" tabindex="0" role="button" aria-label="Karies und Füllungen"><circle cx="70" cy="55" r="9"/></g>
+    <g class="hotspot" data-marker="aesthetik" tabindex="0" role="button" aria-label="Ästhetik und Veneers"><circle cx="150" cy="22" r="9"/></g>
+    <g class="hotspot" data-marker="parodontitis" tabindex="0" role="button" aria-label="Parodontitis und Prophylaxe"><circle cx="150" cy="150" r="9"/></g>
+    <g class="hotspot" data-marker="implantat" tabindex="0" role="button" aria-label="Implantologie und Zahnersatz"><circle cx="95" cy="205" r="9"/></g>
+    <g class="hotspot" data-marker="cmd" tabindex="0" role="button" aria-label="CMD und Knirschen"><circle cx="255" cy="200" r="9"/></g>
+  </svg>`;
+  holder.appendChild(wrap);
+  wrap.querySelectorAll('.hotspot').forEach(h=>{
+    const activate = ()=>{
+      wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('active'));
+      h.classList.add('active');
+      showMarkerInfo(h.dataset.marker);
+    };
+    h.addEventListener('click', activate);
+    h.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); activate(); } });
+  });
+  window.scannerSelectMarker = (id)=>{
+    wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.toggle('active', x.dataset.marker===id));
+    showMarkerInfo(id);
+    document.getElementById('scanner')?.scrollIntoView({behavior:'smooth', block:'center'});
+  };
+}
+
+/* ============ 3D: PROCEDURAL GEBISS ============ */
+async function init3D(){
+  const THREE = await import('three');
+  const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
+  const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
+
+  const holder = document.getElementById('scannerHolder');
+  const canvas = document.getElementById('scanner-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  const INITIAL_POS = new THREE.Vector3(0, 2.2, 7.6);
+  const INITIAL_TARGET = new THREE.Vector3(0, -0.15, 0.4);
+  camera.position.copy(INITIAL_POS);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+  const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4,6,5); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x99ffff, 0.4); rim.position.set(-4,2,-4); scene.add(rim);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enablePan = false;
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.minDistance = 3.2;
+  controls.maxDistance = 11;
+  controls.target.copy(INITIAL_TARGET);
+  controls.autoRotate = !reduceMotion;
+  controls.autoRotateSpeed = 0.5;
+
+  const toothMat = new THREE.MeshStandardMaterial({ color: 0xF5F5F0, roughness: 0.4, metalness: 0.02 });
+  const gumMat = new THREE.MeshStandardMaterial({ color: 0xF5C7C2, roughness: 0.6 });
+  const markerMat = new THREE.MeshStandardMaterial({ color: 0x02FFFF, emissive: 0x02CCFF, emissiveIntensity: 0.7, roughness: 0.3 });
+
+  const jaw = new THREE.Group();
+  scene.add(jaw);
+
+  /* ---- Kiefer-Bögen (Zahnfleisch) ---- */
+  /* Bogen-Parametrisierung: angle 0 = Frontzahn (max. z, nah an der Kamera),
+     angle ±~86° = hinterster Molar (min. z, weiter hinten). Teeth-Positionen
+     und Zahnfleisch-Tube nutzen dieselbe Formel, damit beides deckungsgleich bleibt. */
+  function arcPoint(angle, radiusX, radiusZ){
+    return { x: Math.sin(angle)*radiusX, z: Math.cos(angle)*radiusZ };
+  }
+  function buildGum(y, radiusX, radiusZ){
+    const pts = [];
+    const N = 40;
+    for(let i=0;i<=N;i++){
+      const angle = -1.5 + (i/N)*3.0;
+      const p = arcPoint(angle, radiusX, radiusZ);
+      pts.push(new THREE.Vector3(p.x, y, p.z));
+    }
+    const path = new THREE.CatmullRomCurve3(pts);
+    const geo = new THREE.TubeGeometry(path, 60, 0.13, 8, false);
+    const mesh = new THREE.Mesh(geo, gumMat);
+    jaw.add(mesh);
+  }
+  buildGum(0.85, 2.6, 2.0);
+  buildGum(-0.85, 2.4, 1.85);
+
+  /* ---- Zahn-Positionen entlang des Bogens ---- */
+  function archPositions(count, radiusX, radiusZ){
+    const positions = [];
+    for(let i=0;i<count;i++){
+      const t = i/(count-1);
+      const angle = -1.5 + t*3.0; // -~86° bis +~86°
+      const p = arcPoint(angle, radiusX, radiusZ);
+      positions.push({ x: p.x, z: p.z, angle });
+    }
+    return positions;
+  }
+
+  const upperPos = archPositions(14, 2.55, 1.95);
+  const lowerPos = archPositions(14, 2.35, 1.8);
+  const teeth = { upper: [], lower: [] };
+
+  function toothSize(i, count){
+    const centerDist = Math.abs(i - (count-1)/2) / ((count-1)/2); // 0 = Mitte, 1 = hinten
+    if(centerDist > 0.72) return { w:0.46, h:0.5, d:0.46 };   // Molaren
+    if(centerDist > 0.4)  return { w:0.36, h:0.58, d:0.36 };  // Prämolaren/Eckzahn
+    return { w:0.3, h:0.62, d:0.3 };                          // Schneidezähne
+  }
+
+  /* Marker-Zuordnung: Index 13 = hinten rechts (Weisheitszahn), Index 1-2 = links hinten (Backenzahn),
+     Index 6-7 = Mitte oben (Schneidezahn). Unten: Index 10 wird ausgelassen (Lücke). */
+  const SKIP_LOWER_INDEX = 10;
+
+  function buildArch(positions, y, isUpper, arr){
+    positions.forEach((p, i)=>{
+      if(!isUpper && i === SKIP_LOWER_INDEX) return; // Zahnlücke für Implantat-Marker
+      const s = toothSize(i, positions.length);
+      const geo = new RoundedBoxGeometry(s.w, s.h, s.d, 2, 0.06);
+      const mesh = new THREE.Mesh(geo, toothMat);
+      mesh.position.set(p.x, y + (isUpper ? -s.h*0.3 : s.h*0.3), p.z);
+      mesh.rotation.y = -p.angle;
+      jaw.add(mesh);
+      arr.push({ mesh, pos: mesh.position.clone(), index:i });
+    });
+  }
+  buildArch(upperPos, 0.78, true, teeth.upper);
+  buildArch(lowerPos, -0.78, false, teeth.lower);
+
+  /* ---- Marker: Aqua-Kugeln mit Pulse, Klick öffnet Info-Panel ---- */
+  function addMarker(id, worldPos, offsetY=0.32){
+    const geo = new THREE.SphereGeometry(0.09, 16, 16);
+    const mesh = new THREE.Mesh(geo, markerMat);
+    mesh.position.copy(worldPos).add(new THREE.Vector3(0, offsetY, 0));
+    mesh.userData = { id, pulseOffset: Math.random()*Math.PI*2 };
+    jaw.add(mesh);
+    return mesh;
+  }
+
+  const markers = [];
+  markers.push(addMarker('weisheit', teeth.upper[13].pos, 0.32));
+  markers.push(addMarker('karies', teeth.upper[1].pos, 0.32));
+  markers.push(addMarker('aesthetik', teeth.upper[6].pos, 0.34));
+  const lowerFront = lowerPos[6];
+  markers.push(addMarker('parodontitis', new THREE.Vector3(lowerFront.x, -1.15, lowerFront.z), 0));
+  const gapPos = lowerPos[SKIP_LOWER_INDEX];
+  markers.push(addMarker('implantat', new THREE.Vector3(gapPos.x, -0.78, gapPos.z), 0));
+  markers.push(addMarker('cmd', new THREE.Vector3(2.9, 0.3, -0.6), 0));
+
+  function fitCamera(){
+    const rect = holder.getBoundingClientRect();
+    camera.aspect = rect.width / rect.height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(rect.width, rect.height, false);
+  }
+  fitCamera();
+  window.addEventListener('resize', fitCamera);
+  new ResizeObserver(fitCamera).observe(holder);
+
+  /* ---- Kamera-Tween (easeInOutCubic) beim Marker-Klick ---- */
+  let tween = null;
+  function easeInOutCubic(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+  function tweenCamera(toPos, toTarget, duration=1200){
+    const fromPos = camera.position.clone();
+    const fromTarget = controls.target.clone();
+    const start = performance.now();
+    controls.autoRotate = false;
+    tween = (now)=>{
+      const t = Math.min(1, (now-start)/duration);
+      const e = easeInOutCubic(t);
+      camera.position.lerpVectors(fromPos, toPos, e);
+      controls.target.lerpVectors(fromTarget, toTarget, e);
+      if(t>=1) tween = null;
+    };
+  }
+  function focusMarker(mesh){
+    const dir = mesh.position.clone().normalize();
+    const toPos = mesh.position.clone().add(dir.multiplyScalar(1.6)).add(new THREE.Vector3(0,0.3,0.6));
+    tweenCamera(toPos, mesh.position.clone(), 1200);
+    markers.forEach(m=>m.userData.active = m===mesh);
+    resetBtn.classList.add('show');
+    hint.style.opacity = '0';
+    showMarkerInfo(mesh.userData.id);
+  }
+  function resetView(){
+    tweenCamera(INITIAL_POS, INITIAL_TARGET, 1000);
+    markers.forEach(m=>m.userData.active=false);
+    resetBtn.classList.remove('show');
+    hint.style.opacity = '1';
+    resetPanel();
+    if(!reduceMotion) setTimeout(()=>controls.autoRotate = true, 1000);
+  }
+  resetBtn.addEventListener('click', resetView);
+  window.scannerSelectMarker = (id)=>{
+    const m = markers.find(mk=>mk.userData.id===id);
+    if(m){ focusMarker(m); document.getElementById('scanner').scrollIntoView({behavior:'smooth', block:'center'}); }
+  };
+
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  function onPointerUp(e){
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.clientX ?? (e.changedTouches && e.changedTouches[0].clientX);
+    const cy = e.clientY ?? (e.changedTouches && e.changedTouches[0].clientY);
+    pointer.x = ((cx-rect.left)/rect.width)*2-1;
+    pointer.y = -((cy-rect.top)/rect.height)*2+1;
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObjects(markers);
+    if(hits.length){ focusMarker(hits[0].object); }
+  }
+  canvas.addEventListener('pointerup', onPointerUp);
+
+  const clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    markers.forEach(m=>{
+      const base = m.userData.active ? 1.5 : 1;
+      const s = base + Math.sin(t*3 + m.userData.pulseOffset)*0.18;
+      m.scale.setScalar(s);
+    });
+    if(tween) tween(performance.now());
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+</script>
+</body>
+</html>
