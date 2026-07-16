@@ -164,7 +164,7 @@ section{padding:100px 0;position:relative;}
 /* ============ SCANNER ============ */
 .scanner-wrap{display:grid;grid-template-columns:1fr;gap:32px;}
 @media(min-width:1024px){.scanner-wrap{grid-template-columns:1.5fr 1fr;gap:36px;}}
-.scanner-canvas-holder{position:relative;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#F5FEFF 0%,#E8F9FA 100%);box-shadow:inset 0 2px 24px rgba(14,27,34,.06),0 20px 50px -20px rgba(14,27,34,.15);aspect-ratio:4/3.2;}
+.scanner-canvas-holder{position:relative;border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#F0F9FA 0%,#E4F2F4 100%);box-shadow:inset 0 2px 24px rgba(14,27,34,.06),0 20px 50px -20px rgba(14,27,34,.15);aspect-ratio:4/3.2;}
 #scanner-canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
 #scanner-canvas:active{cursor:grabbing;}
 .scanner-reset{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid rgba(14,27,34,.08);border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 6px 16px rgba(14,27,34,.1);}
@@ -943,7 +943,6 @@ function initFallback(){
 async function init3D(){
   const THREE = await import('three');
   const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
-  const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
   const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
 
   const holder = document.getElementById('scannerHolder');
@@ -973,26 +972,63 @@ async function init3D(){
   controls.enablePan = false;
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
-  controls.minDistance = 3.2;
+  controls.minDistance = 0.8; // niedrig genug für den engen Zahnschmerz-Fokus
   controls.maxDistance = 11;
   controls.target.copy(INITIAL_TARGET);
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
 
-  /* Hinweis: bewusst ohne transmission — bei ~28 individuellen Material-Klonen löst jede
-     Transmission-Fläche einen eigenen Extra-Renderpass pro Frame aus (teuer, auch auf Desktop-GPUs).
-     clearcoat liefert den gewünschten glasig-glänzigen Schmelz-Look ohne diesen Perf-Einbruch. */
-  const toothMatBase = new THREE.MeshPhysicalMaterial({ color:0xF8F5EE, roughness:0.35, clearcoat:0.6, clearcoatRoughness:0.2, metalness:0 });
-  const gumMat = new THREE.MeshStandardMaterial({ color:0xE8A8A0, roughness:0.7, metalness:0 });
+  /* ---- Materialien: keramisch-glatter, warmer Elfenbein-Look mit leichter Farbstreuung pro Zahn ---- */
+  const IVORY_PALETTE = [0xF7F1E3, 0xF5EFE0, 0xF3ECDC, 0xF6F0E2].map(c=>new THREE.Color(c));
+  const CLEARCOAT_BASE = 0.7;
+  function makeToothMaterial(baseColor){
+    return new THREE.MeshPhysicalMaterial({
+      color: baseColor.clone(),
+      roughness: 0.28,
+      clearcoat: CLEARCOAT_BASE,
+      clearcoatRoughness: 0.15,
+      sheen: 0.1,
+      sheenColor: new THREE.Color(0xFFF5DC),
+      emissive: 0x000000,
+      emissiveIntensity: 0,
+      metalness: 0,
+    });
+  }
+  /* Prozedurale Rausch-Textur fürs Zahnfleisch (bumpScale), statt eines externen Bild-Assets */
+  function makeNoiseTexture(size=64){
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const img = ctx.createImageData(size, size);
+    for(let i=0;i<size*size;i++){
+      const v = 128 + (Math.random()-0.5)*70;
+      img.data[i*4]=v; img.data[i*4+1]=v; img.data[i*4+2]=v; img.data[i*4+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(6,3);
+    return tex;
+  }
+  const gumBump = makeNoiseTexture();
+  const gumMatSolid = new THREE.MeshStandardMaterial({ color:0xE8A8A0, roughness:0.65, metalness:0, bumpMap:gumBump, bumpScale:0.012 });
+  /* Eigenes Material für den unteren Zahnfleisch-Bogen: Vertex-Colors erlauben eine lokal
+     begrenzte Entzündungsfärbung (blutendes Zahnfleisch), statt den ganzen Bogen einzufärben. */
+  const gumMatVertex = new THREE.MeshStandardMaterial({ color:0xffffff, roughness:0.65, metalness:0, vertexColors:true, bumpMap:gumBump, bumpScale:0.012 });
   const markerMat = new THREE.MeshStandardMaterial({ color: 0x02FFFF, emissive: 0x02CCFF, emissiveIntensity: 0.7, roughness: 0.3 });
+
   const COLOR_GUM_BASE = new THREE.Color(0xE8A8A0);
-  const COLOR_GUM_INFLAMED = new THREE.Color(0xC8746B);
+  const COLOR_GUM_INFLAMED = new THREE.Color(0xB84545);
   const COLOR_PAIN = new THREE.Color(0xD94848);
-  const COLOR_COLD = new THREE.Color(0xBFE4F0);
+  const COLOR_COLD = new THREE.Color(0xB8DDE8);
+  const EMISSIVE_COLD = new THREE.Color(0x5DA8C4);
+  const BLACK = new THREE.Color(0x000000);
+  const STAIN_PALETTE = [0xD9BE6A,0xC9A94E,0xBFA044,0xCDB055].map(c=>new THREE.Color(c));
+  const RESET_SPEED = 3.75; // Lerp-Faktor: ~0.8s Rückkehr zur Ruhelage/-farbe
 
   const jaw = new THREE.Group();
   scene.add(jaw);
-  const lowerJawGroup = new THREE.Group(); // eigene Gruppe: wird beim Knirschen/CMD-Klick um die X-Achse geklappt
+  const lowerJawGroup = new THREE.Group(); // eigene Gruppe: wird beim Knirschen/CMD-Klick bewegt
   jaw.add(lowerJawGroup);
 
   /* ---- Kiefer-Bögen (Zahnfleisch) ---- */
@@ -1002,7 +1038,9 @@ async function init3D(){
   function arcPoint(angle, radiusX, radiusZ){
     return { x: Math.sin(angle)*radiusX, z: Math.cos(angle)*radiusZ };
   }
-  function buildGum(y, radiusX, radiusZ, targetGroup){
+  const BLEED_ZONE_ANGLE = -0.62; // seitlicher Bereich unten links, siehe CAMERA_CONFIGS.bleeding
+  const BLEED_ZONE_WIDTH = 0.55;
+  function buildGum(y, radiusX, radiusZ, targetGroup, isUpper){
     const pts = [];
     const N = 40;
     for(let i=0;i<=N;i++){
@@ -1011,12 +1049,44 @@ async function init3D(){
       pts.push(new THREE.Vector3(p.x, y, p.z));
     }
     const path = new THREE.CatmullRomCurve3(pts);
-    const geo = new THREE.TubeGeometry(path, 60, 0.13, 8, false);
-    const mesh = new THREE.Mesh(geo, gumMat);
+    const tubularSegments = 60, radialSegments = 10;
+    const geo = new THREE.TubeGeometry(path, tubularSegments, 0.15, radialSegments, false);
+    if(isUpper){
+      const mesh = new THREE.Mesh(geo, gumMatSolid);
+      targetGroup.add(mesh);
+      return mesh;
+    }
+    const count = geo.attributes.position.count;
+    const colorAttr = new Float32Array(count*3);
+    const zoneWeights = new Float32Array(count);
+    const ringVerts = radialSegments+1;
+    for(let vi=0; vi<count; vi++){
+      const ring = Math.floor(vi/ringVerts);
+      const u = ring/tubularSegments;
+      const angle = -1.5 + u*3.0;
+      const dist = Math.abs(angle - BLEED_ZONE_ANGLE);
+      const w = Math.max(0, 1 - dist/BLEED_ZONE_WIDTH);
+      zoneWeights[vi] = w*w;
+      COLOR_GUM_BASE.toArray(colorAttr, vi*3);
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(colorAttr, 3));
+    const mesh = new THREE.Mesh(geo, gumMatVertex);
+    mesh.userData.colorAttr = colorAttr;
+    mesh.userData.zoneWeights = zoneWeights;
     targetGroup.add(mesh);
+    return mesh;
   }
-  buildGum(0.85, 2.6, 2.0, jaw);
-  buildGum(-0.85, 2.4, 1.85, lowerJawGroup);
+  /* Subtile Interdental-Papillen: weiche Erhebungen zwischen den Zahnwurzeln */
+  function buildPapillae(positions, y, radiusX, radiusZ, isUpper, targetGroup){
+    for(let i=0;i<positions.length-1;i++){
+      const mid = (positions[i].angle + positions[i+1].angle)/2;
+      const p = arcPoint(mid, radiusX, radiusZ);
+      const papilla = new THREE.Mesh(new THREE.SphereGeometry(0.065, 8, 8), gumMatSolid);
+      papilla.scale.set(1, 0.7, 0.55);
+      papilla.position.set(p.x, y + (isUpper ? 0.06 : -0.06), p.z);
+      targetGroup.add(papilla);
+    }
+  }
 
   /* ---- Zahn-Positionen entlang des Bogens ---- */
   function archPositions(count, radiusX, radiusZ){
@@ -1042,34 +1112,101 @@ async function init3D(){
     const half = i < count/2 ? (count/2 - 1 - i) : (i - count/2);
     return TOOTH_TYPES[Math.min(half, TOOTH_TYPES.length-1)];
   }
-  function buildTooth(type, size, mat){
+
+  /* ---- Organische, glatte Zahnformen: verformte Ellipsoide statt Boxen/Kegel ---- */
+  function makeEllipsoid(rx, ry, rz, segW, segH){
+    const geo = new THREE.SphereGeometry(1, segW, segH);
+    const pos = geo.attributes.position;
+    for(let i=0;i<pos.count;i++){
+      pos.setXYZ(i, pos.getX(i)*rx, pos.getY(i)*ry, pos.getZ(i)*rz);
+    }
+    geo.computeVertexNormals();
+    return geo;
+  }
+  function bulgeFront(geo, amount){
+    const pos = geo.attributes.position;
+    for(let i=0;i<pos.count;i++){
+      const z = pos.getZ(i);
+      if(z > 0){
+        const y = pos.getY(i);
+        const factor = 1 + amount * Math.max(0, 1 - Math.abs(y)*0.6);
+        pos.setZ(i, z*factor);
+      }
+    }
+    geo.computeVertexNormals();
+  }
+  function taperTop(geo, minScale){
+    const pos = geo.attributes.position;
+    let maxY = 0;
+    for(let i=0;i<pos.count;i++) maxY = Math.max(maxY, pos.getY(i));
+    for(let i=0;i<pos.count;i++){
+      const y = pos.getY(i);
+      if(y > 0){
+        const t = y/maxY;
+        const scale = 1 - t*t*(1-minScale);
+        pos.setX(i, pos.getX(i)*scale);
+        pos.setZ(i, pos.getZ(i)*scale);
+      }
+    }
+    geo.computeVertexNormals();
+  }
+  /* Höcker werden direkt in die Kronen-Geometrie eingearbeitet (sanfte Vertex-Anhebung),
+     statt als separate Kugeln aufgesetzt zu werden — dadurch eine einzige durchgehende
+     Fläche ohne sichtbare Nähte ("Cauliflower"-Effekt vermeiden). */
+  function pushCusps(geo, cuspSpecs){
+    const pos = geo.attributes.position;
+    for(let i=0;i<pos.count;i++){
+      const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+      if(y <= 0) continue;
+      let lift = 0;
+      for(const c of cuspSpecs){
+        const dx = x-c.x, dz = z-c.z;
+        const r2 = c.radius*c.radius;
+        const d2 = dx*dx+dz*dz;
+        if(d2 < r2){
+          const t = 1 - d2/r2;
+          lift = Math.max(lift, c.strength*t*t);
+        }
+      }
+      if(lift > 0) pos.setY(i, y+lift);
+    }
+    geo.computeVertexNormals();
+  }
+  function buildTooth(type, size, mat, opts={}){
     const group = new THREE.Group();
-    let crown, cusps = [];
+    let crown;
     if(type === 'incisor'){
-      crown = new THREE.Mesh(new RoundedBoxGeometry(size.w, size.h, size.d, 2, 0.05), mat);
+      const geo = makeEllipsoid(size.w*0.52, size.h*0.5, size.d*0.5, 14, 12);
+      bulgeFront(geo, 0.32);
+      crown = new THREE.Mesh(geo, mat);
     } else if(type === 'canine'){
-      crown = new THREE.Mesh(new THREE.ConeGeometry(size.w*0.46, size.h*1.05, 10), mat);
-      crown.position.y = size.h*0.05;
+      const geo = makeEllipsoid(size.w*0.48, size.h*0.56, size.d*0.5, 14, 12);
+      taperTop(geo, 0.55); // abgerundete Spitze statt Dolch
+      bulgeFront(geo, 0.26);
+      crown = new THREE.Mesh(geo, mat);
+      crown.position.y = size.h*0.02;
     } else if(type === 'premolar'){
-      crown = new THREE.Mesh(new THREE.CylinderGeometry(size.w*0.46, size.w*0.38, size.h*0.8, 10), mat);
-      [-1,1].forEach(sign=>{
-        const cusp = new THREE.Mesh(new THREE.SphereGeometry(size.w*0.24, 10, 10), mat);
-        cusp.position.set(sign*size.w*0.2, size.h*0.36, 0);
-        cusp.scale.y = 0.75;
-        group.add(cusp); cusps.push(cusp);
-      });
+      const geo = makeEllipsoid(size.w*0.5, size.h*0.46, size.d*0.5, 20, 14);
+      const strength = (opts.flattenCusps ? 0.4 : 1) * size.h*0.16;
+      pushCusps(geo, [
+        { x:-size.w*0.16, z:0, radius:size.w*0.34, strength },
+        { x: size.w*0.16, z:0, radius:size.w*0.34, strength },
+      ]);
+      crown = new THREE.Mesh(geo, mat);
     } else { // molar
-      crown = new THREE.Mesh(new RoundedBoxGeometry(size.w*1.05, size.h*0.78, size.d, 2, 0.07), mat);
-      const cx = size.w*0.3, cz = size.d*0.3;
-      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx,sz])=>{
-        const cusp = new THREE.Mesh(new THREE.SphereGeometry(size.w*0.21, 10, 10), mat);
-        cusp.position.set(sx*cx, size.h*0.34, sz*cz);
-        group.add(cusp); cusps.push(cusp);
-      });
+      const geo = makeEllipsoid(size.w*0.56, size.h*0.46, size.d*0.5, 22, 14);
+      const strength = (opts.flattenCusps ? 0.4 : 1) * size.h*0.2;
+      const cx = size.w*0.26, cz = size.d*0.26;
+      pushCusps(geo, [
+        { x:-cx, z:-cz, radius:size.w*0.36, strength },
+        { x: cx, z:-cz, radius:size.w*0.36, strength },
+        { x:-cx, z: cz, radius:size.w*0.36, strength },
+        { x: cx, z: cz, radius:size.w*0.36, strength },
+      ]);
+      crown = new THREE.Mesh(geo, mat);
     }
     group.add(crown);
     group.userData.crown = crown;
-    group.userData.cusps = cusps;
     return group;
   }
 
@@ -1082,14 +1219,15 @@ async function init3D(){
       if(!isUpper && i === SKIP_LOWER_INDEX) return; // Zahnlücke für Implantat-Marker
       const type = toothType(i, positions.length);
       const size = SIZE_BY_TYPE[type];
-      const mat = toothMatBase.clone();
-      const group = buildTooth(type, size, mat);
+      const mat = makeToothMaterial(IVORY_PALETTE[i % IVORY_PALETTE.length]);
+      mat.color.offsetHSL(0, 0, (Math.random()-0.5)*0.025);
+      const group = buildTooth(type, size, mat, { flattenCusps: isUpper && type==='molar' });
       const yOff = isUpper ? -size.h*0.32 : size.h*0.32;
       group.position.set(p.x, y + yOff, p.z);
       group.rotation.y = -p.angle;
       targetGroup.add(group);
       arr.push({
-        group, mat, cusps: group.userData.cusps,
+        group, mat,
         basePos: group.position.clone(), baseColor: mat.color.clone(), baseRotY: -p.angle,
         index:i, type, isUpper, angle:p.angle, phase: i*0.7 + (isUpper?0:3.14),
       });
@@ -1102,16 +1240,23 @@ async function init3D(){
   buildArch(lowerPos, -0.78, false, teeth.lower, lowerJawGroup);
   const allTeeth = [...teeth.upper, ...teeth.lower];
 
-  /* Baseline-Abrieb: obere Molaren-Höcker permanent leicht abgeflacht (Bruxismus-Spuren) */
-  teeth.upper.filter(t=>t.type==='molar').forEach(t=>t.cusps.forEach(c=>c.scale.y *= 0.4));
+  buildGum(0.85, 2.6, 2.0, jaw, true);
+  const lowerGumMesh = buildGum(-0.85, 2.4, 1.85, lowerJawGroup, false);
+  buildPapillae(upperPos, 0.85, 2.6, 2.0, true, jaw);
+  buildPapillae(lowerPos, -0.85, 2.4, 1.85, false, lowerJawGroup);
+
+  allTeeth.forEach((t,i)=>{ t.stainColor = STAIN_PALETTE[i % STAIN_PALETTE.length].clone(); });
 
   /* Beschwerde-Zielzähne */
-  const painTooth = teeth.upper[1];                                   // Backenzahn oben links
-  const frontTeeth = [teeth.upper[5], teeth.upper[6], teeth.upper[7], teeth.upper[8]]; // Schneidezähne oben mitte
-  frontTeeth.forEach(t=>{
-    t.stainColor = new THREE.Color(0xD9C084).offsetHSL((Math.random()-0.5)*0.02, (Math.random()-0.5)*0.08, (Math.random()-0.5)*0.08);
-  });
-  [teeth.upper[3], teeth.upper[10], teeth.lower[4]].forEach(t=>{ if(t) t.looseExtra = true; });
+  const painTooth = teeth.upper[2];                                    // erster Prämolar oben links
+  const frontColdTeeth = [teeth.upper[4], teeth.upper[5], teeth.upper[6], teeth.upper[7], teeth.upper[8], teeth.upper[9]]; // 4 Schneide- + 2 Eckzähne
+  const looseTooth1 = teeth.upper[6]; looseTooth1.loosePhase = 0;        // Schneidezahn oben mitte-links
+  const looseTooth2 = teeth.lower.find(t=>t.index===11); looseTooth2.loosePhase = 1.8; // Prämolar unten rechts
+  function frontCenter(){
+    const v = new THREE.Vector3();
+    frontColdTeeth.forEach(t=>v.add(t.basePos));
+    return v.divideScalar(frontColdTeeth.length);
+  }
 
   /* ---- Marker: Aqua-Kugeln mit Pulse, Klick öffnet Info-Panel ---- */
   function addMarker(id, worldPos, offsetY=0.32){
@@ -1128,11 +1273,17 @@ async function init3D(){
   markers.push(addMarker('karies', painTooth.basePos, 0.32));
   markers.push(addMarker('aesthetik', teeth.upper[6].basePos, 0.34));
   const lowerFront = lowerPos[6];
-  const bleedingOrigin = new THREE.Vector3(lowerFront.x, -0.95, lowerFront.z);
   markers.push(addMarker('parodontitis', new THREE.Vector3(lowerFront.x, -1.15, lowerFront.z), 0));
   const gapPos = lowerPos[SKIP_LOWER_INDEX];
   markers.push(addMarker('implantat', new THREE.Vector3(gapPos.x, -0.78, gapPos.z), 0));
   markers.push(addMarker('cmd', new THREE.Vector3(2.9, 0.3, -0.6), 0));
+
+  /* Position der seitlichen Zahnfleisch-Zone (Kamera-Ziel + Bluttropfen-Ursprung),
+     deckungsgleich mit der Vertex-Color-Zone im unteren Zahnfleisch-Bogen. */
+  const bleedZonePos = (()=>{
+    const p = arcPoint(BLEED_ZONE_ANGLE, 2.4, 1.85);
+    return new THREE.Vector3(p.x, -0.95, p.z);
+  })();
 
   function fitCamera(){
     const rect = holder.getBoundingClientRect();
@@ -1172,23 +1323,50 @@ async function init3D(){
     hint.style.opacity = '0';
     showMarkerInfo(mesh.userData.id);
   }
+
+  /* Kamera-Framing je Beschwerde: eng auf einen Zahn, seitlich auf die Zahnfleischlinie,
+     frontal auf die Front, o.ä. — jeweils passend zum beschriebenen Effekt. */
+  const CAMERA_CONFIGS = {
+    pain: ()=>{
+      const p = painTooth.basePos;
+      const sideSign = p.x < 0 ? -1 : 1;
+      return { pos: p.clone().add(new THREE.Vector3(sideSign*0.4, 0.5, 1.5)), target: p.clone() };
+    },
+    bleeding: ()=>{
+      const p = bleedZonePos;
+      const yaw = THREE.MathUtils.degToRad(-30);
+      return {
+        pos: new THREE.Vector3(p.x + Math.sin(yaw)*3.6, -0.25, p.z + Math.cos(yaw)*3.6),
+        target: new THREE.Vector3(p.x*0.55, -0.9, p.z*0.55+0.35),
+      };
+    },
+    cold: ()=>{
+      const c = frontCenter();
+      return { pos: new THREE.Vector3(c.x, c.y+0.3, c.z+3.1), target: c.clone() };
+    },
+    bruxism: ()=>{
+      const yaw = THREE.MathUtils.degToRad(60);
+      return { pos: new THREE.Vector3(Math.sin(yaw)*5.6, 0.5, Math.cos(yaw)*5.6), target: new THREE.Vector3(0,-0.15,0.2) };
+    },
+    loose: ()=>({ pos: new THREE.Vector3(0.3, 2.7, 8.8), target: new THREE.Vector3(0,-0.1,0.4) }),
+    stain: ()=>{
+      const c = frontCenter();
+      return { pos: new THREE.Vector3(c.x, c.y+0.25, c.z+2.7), target: c.clone() };
+    },
+  };
   function focusComplaint(id){
     const info = COMPLAINT_INFO[id];
     if(!info) return;
     activeComplaint = id;
     clenchActive = false;
-    if(info.targetMarker){
-      const m = markers.find(mk=>mk.userData.id===info.targetMarker);
-      if(m){
-        const dir = m.position.clone().normalize();
-        const toPos = m.position.clone().add(dir.multiplyScalar(1.6)).add(new THREE.Vector3(0,0.3,0.6));
-        tweenCamera(toPos, m.position.clone(), 1200);
-        markers.forEach(mk=>mk.userData.active = mk===m);
-      }
+    const cfg = CAMERA_CONFIGS[id];
+    if(cfg){
+      const c = cfg();
+      tweenCamera(c.pos, c.target, 1200);
     } else {
       tweenCamera(INITIAL_POS, INITIAL_TARGET, 1200);
-      markers.forEach(mk=>mk.userData.active = false);
     }
+    markers.forEach(mk=>mk.userData.active = !!info.targetMarker && mk.userData.id===info.targetMarker);
     resetBtn.classList.add('show');
     hint.style.opacity = '0';
     showComplaintInfo(id);
@@ -1225,155 +1403,221 @@ async function init3D(){
   }
   canvas.addEventListener('pointerup', onPointerUp);
 
-  /* ---- Beschwerde-Animationen ---- */
-  const ZERO = new THREE.Vector3();
+  /* ================= Beschwerde-Animationen ================= */
 
-  // Zahnschmerzen: Vibration + Rot-Verfärbung + pulsierender Glow-Ring
+  /* 2a Zahnschmerzen: Farbe pulsiert Elfenbein↔Rot (~1s-Zyklus), leichte Vibration, Glow-Ring */
   const painGlow = new THREE.Mesh(
     new THREE.RingGeometry(0.16, 0.24, 24),
     new THREE.MeshBasicMaterial({ color:0xD94848, transparent:true, opacity:0, side:THREE.DoubleSide, blending:THREE.AdditiveBlending, depthWrite:false })
   );
   jaw.add(painGlow);
+  function updatePainGlow(dt, elapsed){
+    const active = activeComplaint==='pain';
+    const pulse = Math.sin(elapsed*Math.PI*2)*0.5+0.5;
+    const targetOpacity = active ? (0.15 + pulse*0.25) : 0;
+    painGlow.material.opacity += (targetOpacity - painGlow.material.opacity) * Math.min(1, dt*(active?8:RESET_SPEED));
+    painGlow.position.copy(painTooth.group.position).add(new THREE.Vector3(0,0,0.18));
+    painGlow.quaternion.copy(camera.quaternion);
+  }
 
-  // Blutendes Zahnfleisch: periodisch fallende Bluttropfen
+  /* 2b Blutendes Zahnfleisch: lokale Entzündungsfärbung (Vertex-Colors) + fallende Bluttropfen */
   let bloodDrops = [];
   let lastDropTime = -99;
-  const bloodMat = new THREE.MeshPhysicalMaterial({ color:0xB0181F, roughness:0.1, clearcoat:1, metalness:0 });
+  let bleedProgress = 0;
+  const bloodMat = new THREE.MeshPhysicalMaterial({ color:0xA01818, transmission:0.25, roughness:0.1, clearcoat:1, ior:1.4, metalness:0, transparent:true });
   function spawnBloodDrop(){
-    const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), bloodMat);
-    mesh.position.copy(bleedingOrigin).add(new THREE.Vector3((Math.random()-0.5)*0.2, -0.04, (Math.random()-0.5)*0.1));
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 10), bloodMat.clone());
+    mesh.position.copy(bleedZonePos).add(new THREE.Vector3((Math.random()-0.5)*0.4, 0.02, (Math.random()-0.5)*0.15));
     jaw.add(mesh);
-    bloodDrops.push({ mesh, vy:-0.1, born: performance.now() });
+    bloodDrops.push({ mesh, vy:-0.03, born: performance.now() });
   }
   function updateBloodDrops(dt){
     const now = performance.now();
     bloodDrops = bloodDrops.filter(d=>{
-      d.vy -= dt*0.9;
+      d.vy -= dt*0.35;
       d.mesh.position.y += d.vy*dt;
       const age = (now-d.born)/1000;
-      d.mesh.scale.y = 1 + Math.min(0.6, age*0.4);
-      d.mesh.scale.x = d.mesh.scale.z = 1 - Math.min(0.3, age*0.2);
-      if(age > 2.5){ jaw.remove(d.mesh); return false; }
+      d.mesh.scale.y = 1 + Math.min(0.4, age*0.3);
+      d.mesh.scale.x = d.mesh.scale.z = 1 - Math.min(0.25, age*0.18);
+      d.mesh.material.opacity = 1 - Math.max(0, (age-1.8)/0.7);
+      if(age > 2.5){ jaw.remove(d.mesh); d.mesh.material.dispose(); return false; }
       return true;
     });
   }
+  function updateGumBleed(dt){
+    const target = activeComplaint==='bleeding' ? 1 : 0;
+    if(bleedProgress === target) return;
+    bleedProgress += (target-bleedProgress) * Math.min(1, dt*2.5);
+    if(Math.abs(bleedProgress-target) < 0.003) bleedProgress = target;
+    const arr = lowerGumMesh.userData.colorAttr;
+    const weights = lowerGumMesh.userData.zoneWeights;
+    for(let vi=0; vi<weights.length; vi++){
+      const amt = weights[vi]*bleedProgress;
+      arr[vi*3]   = COLOR_GUM_BASE.r + (COLOR_GUM_INFLAMED.r-COLOR_GUM_BASE.r)*amt;
+      arr[vi*3+1] = COLOR_GUM_BASE.g + (COLOR_GUM_INFLAMED.g-COLOR_GUM_BASE.g)*amt;
+      arr[vi*3+2] = COLOR_GUM_BASE.b + (COLOR_GUM_INFLAMED.b-COLOR_GUM_BASE.b)*amt;
+    }
+    lowerGumMesh.geometry.attributes.color.needsUpdate = true;
+  }
 
-  // Empfindliche Zähne: Frost-Partikel um die Frontzähne
-  const frostCenter = frontTeeth[1].basePos;
-  const FROST_N = 28;
+  /* 2c Empfindliche Zähne: Farb-/Emissive-Wechsel zu eisigem Blau + langsam fallende Frost-Partikel */
+  const frostCenter = frontCenter();
+  const FROST_N = 40;
   const frostPos = new Float32Array(FROST_N*3);
   for(let i=0;i<FROST_N;i++){
-    frostPos[i*3]   = frostCenter.x + (Math.random()-0.5)*1.3;
-    frostPos[i*3+1] = frostCenter.y + (Math.random()-0.5)*0.8;
-    frostPos[i*3+2] = frostCenter.z + (Math.random()-0.5)*0.5 + 0.15;
+    frostPos[i*3]   = frostCenter.x + (Math.random()-0.5)*1.5;
+    frostPos[i*3+1] = frostCenter.y + Math.random()*1.4 - 0.4;
+    frostPos[i*3+2] = frostCenter.z + (Math.random()-0.5)*0.5 + 0.2;
   }
   const frostGeo = new THREE.BufferGeometry();
   frostGeo.setAttribute('position', new THREE.BufferAttribute(frostPos, 3));
-  const frostPoints = new THREE.Points(frostGeo, new THREE.PointsMaterial({ color:0xBFE4F0, size:0.045, transparent:true, opacity:0, depthWrite:false }));
+  const frostPoints = new THREE.Points(frostGeo, new THREE.PointsMaterial({ color:0xFFFFFF, size:0.035, transparent:true, opacity:0, depthWrite:false, sizeAttenuation:true }));
   frostPoints.visible = false;
   jaw.add(frostPoints);
-  function animateFrost(elapsed){
+  function animateFrost(dt, elapsed){
     const arr = frostGeo.attributes.position.array;
     for(let i=0;i<FROST_N;i++){
-      arr[i*3+1] += 0.0018;
-      if(arr[i*3+1] > frostCenter.y + 0.9) arr[i*3+1] -= 1.3;
+      arr[i*3+1] -= 0.09*dt; // driftet langsam nach unten, wie Schnee in Zeitlupe
+      arr[i*3] += Math.sin(elapsed*0.5 + i*1.7)*0.0008; // sanfte horizontale Drift
+      if(arr[i*3+1] < frostCenter.y - 0.6){
+        arr[i*3+1] = frostCenter.y + 0.8;
+        arr[i*3]   = frostCenter.x + (Math.random()-0.5)*1.5;
+        arr[i*3+2] = frostCenter.z + (Math.random()-0.5)*0.5 + 0.2;
+      }
     }
     frostGeo.attributes.position.needsUpdate = true;
-    frostPoints.material.opacity = 0.32 + Math.sin(elapsed*2)*0.1;
+  }
+  function updateFrostVisibility(dt, elapsed){
+    const active = activeComplaint==='cold';
+    frostPoints.visible = active || frostPoints.material.opacity > 0.01;
+    if(active){
+      frostPoints.material.opacity += (0.7 - frostPoints.material.opacity) * Math.min(1, dt*3);
+      animateFrost(dt, elapsed);
+    } else {
+      frostPoints.material.opacity += (0 - frostPoints.material.opacity) * Math.min(1, dt*RESET_SPEED);
+    }
   }
 
-  // Knirschen / CMD: Unterkiefer-Klapp-Animation + Impact-Ring + Modell-Shake, im Loop
-  let clenchActive = false, clenchStart = 0, impactFired = false, lastClenchTime = -99;
-  let jawShakeUntil = 0;
-  let impactRings = [];
-  function triggerClench(elapsed){ clenchActive = true; clenchStart = elapsed; lastClenchTime = elapsed; impactFired = false; }
-  function triggerImpact(){
-    const mesh = new THREE.Mesh(
-      new THREE.RingGeometry(0.1, 0.16, 24),
-      new THREE.MeshBasicMaterial({ color:0x02CCFF, transparent:true, opacity:0.6, side:THREE.DoubleSide })
-    );
-    mesh.position.set(0, -0.05, 1.5);
-    mesh.rotation.x = -Math.PI/2;
-    jaw.add(mesh);
-    impactRings.push({ mesh, born: performance.now() });
-    jawShakeUntil = performance.now() + 100;
+  /* 2d Knirschen / CMD: dreiphasiger Press-Zyklus (hoch, mahlen, zurück) + Zahn-Partikel beim Pressen */
+  let clenchActive = false, clenchStart = 0, impactFired = false, lastClenchTime = -99, pressDir = 1;
+  function easeOutCubic(t){ return 1-Math.pow(1-t,3); }
+  function triggerClench(elapsed){ clenchActive = true; clenchStart = elapsed; lastClenchTime = elapsed; impactFired = false; pressDir = Math.random()<0.5 ? -1 : 1; }
+  let toothChips = [];
+  const chipGeo = new THREE.SphereGeometry(0.02, 6, 6);
+  const chipMat = new THREE.MeshStandardMaterial({ color:0xF0EADB, roughness:0.55, transparent:true });
+  function spawnToothChips(){
+    const molars = teeth.lower.filter(t=>t.type==='molar');
+    if(!molars.length) return;
+    const n = 3 + Math.floor(Math.random()*3); // 3–5
+    for(let i=0;i<n;i++){
+      const src = molars[Math.floor(Math.random()*molars.length)];
+      const mesh = new THREE.Mesh(chipGeo, chipMat.clone());
+      mesh.position.copy(src.basePos).add(new THREE.Vector3(0, 0.12, 0));
+      const dirSign = src.basePos.x < 0 ? -1 : 1; // seitlich nach außen, weg vom Gebiss
+      jaw.add(mesh);
+      toothChips.push({
+        mesh,
+        vel: new THREE.Vector3(dirSign*(0.4+Math.random()*0.3), 0.35, (Math.random()-0.5)*0.3),
+        rotVel: new THREE.Vector3((Math.random()-0.5)*6, (Math.random()-0.5)*6, (Math.random()-0.5)*6),
+        born: performance.now(),
+      });
+    }
   }
-  function updateImpactRings(){
+  function updateToothChips(dt){
     const now = performance.now();
-    impactRings = impactRings.filter(r=>{
-      const age = (now-r.born)/450;
-      if(age >= 1){ jaw.remove(r.mesh); return false; }
-      r.mesh.scale.setScalar(1 + age*2.2);
-      r.mesh.material.opacity = 0.6*(1-age);
+    toothChips = toothChips.filter(c=>{
+      c.vel.y -= dt*0.9;
+      c.mesh.position.addScaledVector(c.vel, dt);
+      c.mesh.rotation.x += c.rotVel.x*dt;
+      c.mesh.rotation.y += c.rotVel.y*dt;
+      c.mesh.rotation.z += c.rotVel.z*dt;
+      const age = (now-c.born)/1000;
+      c.mesh.material.opacity = Math.max(0, 1 - age/2);
+      if(age > 2){ jaw.remove(c.mesh); c.mesh.material.dispose(); return false; }
       return true;
     });
   }
   function updateClench(dt, elapsed){
     if(!clenchActive){
       lowerJawGroup.rotation.x += (0 - lowerJawGroup.rotation.x) * Math.min(1, dt*6);
+      lowerJawGroup.position.x += (0 - lowerJawGroup.position.x) * Math.min(1, dt*6);
+      lowerJawGroup.position.y += (0 - lowerJawGroup.position.y) * Math.min(1, dt*6);
       return;
     }
-    const UP=0.3, HOLD=0.15, DOWN=0.4;
-    const maxAngle = -THREE.MathUtils.degToRad(5);
+    const P1=0.3, P2=0.2, P3=0.4; // Phasenlängen in Sekunden
+    const maxAngle = THREE.MathUtils.degToRad(4);
+    const maxLift = 0.56; // schließt die Ruhe-Kieferlücke, damit das Pressen sichtbaren Kontakt zeigt
     const t = elapsed - clenchStart;
-    let angle;
-    if(t < UP){ angle = maxAngle*easeInOutCubic(t/UP); }
-    else if(t < UP+HOLD){
+    let angle = 0, xShift = 0, yLift = 0;
+    if(t < P1){
+      const e = t/P1;
+      const ee = e*e*e; // ease-in
+      angle = maxAngle * ee;
+      yLift = maxLift * ee;
+    } else if(t < P1+P2){
       angle = maxAngle;
-      if(!impactFired){ triggerImpact(); impactFired = true; }
+      yLift = maxLift;
+      const pt = (t-P1)/P2;
+      xShift = Math.sin(pt*Math.PI) * 0.02 * pressDir; // seitliches Mahlen
+      if(!impactFired){ spawnToothChips(); impactFired = true; }
+    } else if(t < P1+P2+P3){
+      const e = (t-P1-P2)/P3;
+      const eo = easeOutCubic(e);
+      angle = maxAngle * (1-eo);
+      yLift = maxLift * (1-eo);
+    } else {
+      angle = 0; yLift = 0; clenchActive = false;
     }
-    else if(t < UP+HOLD+DOWN){ angle = maxAngle*(1-easeInOutCubic((t-UP-HOLD)/DOWN)); }
-    else { angle = 0; clenchActive = false; }
-    lowerJawGroup.rotation.x = angle;
+    lowerJawGroup.rotation.x = -angle;
+    lowerJawGroup.position.set(xShift, yLift, 0);
   }
 
-  /* ---- Gesamtes per-Frame-Update aller Beschwerde-Effekte ---- */
-  function updateComplaintVisuals(dt, elapsed){
+  /* ---- Einheitliches per-Zahn-Update: Priorität pain > cold > stain > loose > Ruhelage ---- */
+  function updateAllTeeth(dt, elapsed){
     allTeeth.forEach(t=>{
-      let desiredColor = t.baseColor, posOffset = null, rotZ = 0, rotYExtra = 0;
+      let colorTarget = t.baseColor, colorSpeed = RESET_SPEED;
+      let coldOn = false;
       if(activeComplaint==='pain' && t===painTooth){
-        desiredColor = COLOR_PAIN;
-        posOffset = new THREE.Vector3(Math.sin(elapsed*40)*0.02, 0, Math.cos(elapsed*40)*0.02);
-      } else if(activeComplaint==='cold' && frontTeeth.includes(t)){
-        desiredColor = COLOR_COLD;
-      } else if(activeComplaint==='stain' && frontTeeth.includes(t)){
-        desiredColor = t.stainColor;
-      } else if(activeComplaint==='loose'){
-        rotZ = Math.sin(elapsed*2 + t.phase) * (t.looseExtra ? 0.1 : 0.06);
-        if(t.looseExtra) rotYExtra = 0.26;
+        const pulse = Math.sin(elapsed*Math.PI*2)*0.5+0.5;
+        colorTarget = t.baseColor.clone().lerp(COLOR_PAIN, pulse);
+        colorSpeed = 12;
+      } else if(activeComplaint==='cold' && frontColdTeeth.includes(t)){
+        colorTarget = COLOR_COLD; colorSpeed = 2.5; coldOn = true;
+      } else if(activeComplaint==='stain'){
+        colorTarget = t.stainColor; colorSpeed = 2.5;
       }
-      t.mat.color.lerp(desiredColor, Math.min(1, dt*3));
-      const targetPos = posOffset ? t.basePos.clone().add(posOffset) : t.basePos;
-      t.group.position.lerp(targetPos, Math.min(1, dt*6));
-      t.group.rotation.z += (rotZ - t.group.rotation.z) * Math.min(1, dt*5);
-      t.group.rotation.y += ((t.baseRotY + rotYExtra) - t.group.rotation.y) * Math.min(1, dt*5);
+      t.mat.color.lerp(colorTarget, Math.min(1, dt*colorSpeed));
+      t.mat.emissive.lerp(coldOn ? EMISSIVE_COLD : BLACK, Math.min(1, dt*2.5));
+      t.mat.emissiveIntensity += ((coldOn?0.25:0) - t.mat.emissiveIntensity) * Math.min(1, dt*2.5);
+      t.mat.clearcoat += ((coldOn?1.0:CLEARCOAT_BASE) - t.mat.clearcoat) * Math.min(1, dt*2.5);
+
+      let posTarget = t.basePos, posSpeed = RESET_SPEED, rotZ = 0, rotX = 0;
+      if(activeComplaint==='pain' && t===painTooth){
+        posTarget = new THREE.Vector3(t.basePos.x + Math.sin(elapsed*40)*0.004, t.basePos.y, t.basePos.z);
+        posSpeed = 30;
+        rotZ = Math.sin(elapsed*35)*0.02;
+      } else if(activeComplaint==='loose' && (t===looseTooth1 || t===looseTooth2)){
+        posTarget = t.basePos.clone();
+        posTarget.x += Math.sin(elapsed*3)*0.008;
+        posSpeed = 8;
+        rotX = Math.sin(elapsed*2.5 + t.loosePhase)*0.12;
+      }
+      t.group.position.lerp(posTarget, Math.min(1, dt*posSpeed));
+      t.group.rotation.z += (rotZ - t.group.rotation.z) * Math.min(1, dt*(posSpeed));
+      t.group.rotation.x += (rotX - t.group.rotation.x) * Math.min(1, dt*(posSpeed));
     });
+  }
 
-    const painActive = activeComplaint==='pain';
-    const painTargetOpacity = painActive ? (0.4 + Math.sin(elapsed*2*Math.PI*0.8)*0.2) : 0;
-    painGlow.material.opacity += (painTargetOpacity - painGlow.material.opacity) * Math.min(1, dt*5);
-    painGlow.position.copy(painTooth.group.position).add(new THREE.Vector3(0,0,0.18));
-    painGlow.quaternion.copy(camera.quaternion);
-
-    gumMat.color.lerp(activeComplaint==='bleeding' ? COLOR_GUM_INFLAMED : COLOR_GUM_BASE, Math.min(1, dt*3));
-    if(activeComplaint==='bleeding' && elapsed - lastDropTime > 1.5){ spawnBloodDrop(); lastDropTime = elapsed; }
+  function updateComplaintVisuals(dt, elapsed){
+    updateAllTeeth(dt, elapsed);
+    updatePainGlow(dt, elapsed);
+    updateGumBleed(dt);
+    if(activeComplaint==='bleeding' && elapsed - lastDropTime > 1.2){ spawnBloodDrop(); lastDropTime = elapsed; }
     updateBloodDrops(dt);
-
-    const coldActive = activeComplaint==='cold';
-    frostPoints.visible = coldActive || frostPoints.material.opacity > 0.01;
-    const frostTarget = coldActive ? 1 : 0;
-    if(coldActive) animateFrost(elapsed);
-    else frostPoints.material.opacity += (0 - frostPoints.material.opacity) * Math.min(1, dt*5);
-
-    if(activeComplaint==='bruxism' && !clenchActive && elapsed - lastClenchTime > 2.0){ triggerClench(elapsed); }
+    updateFrostVisibility(dt, elapsed);
+    if(activeComplaint==='bruxism' && !clenchActive && elapsed - lastClenchTime > 1.5){ triggerClench(elapsed); }
     updateClench(dt, elapsed);
-    updateImpactRings();
-
-    if(performance.now() < jawShakeUntil){
-      jaw.position.set((Math.random()-0.5)*0.03, (Math.random()-0.5)*0.03, 0);
-    } else {
-      jaw.position.lerp(ZERO, Math.min(1, dt*8));
-    }
+    updateToothChips(dt);
   }
 
   const clock = new THREE.Clock();
