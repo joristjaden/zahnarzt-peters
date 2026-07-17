@@ -49,8 +49,12 @@ section{padding:100px 0;position:relative;}
 .header{position:fixed;top:0;left:0;width:100%;border-radius:0;background:rgba(250,250,247,.92);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(14,27,34,.08);box-shadow:0 4px 24px rgba(14,27,34,.06);z-index:1000;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1240px;margin:0 auto;}
 @media(min-width:768px){.header-inner{padding:16px 40px;}}
-.header-logo img{height:56px;width:auto;}
+.header-logo img{height:73px;width:auto;}
 @media(max-width:767px){.header-logo img{height:46px;}}
+.header-mobile-actions{display:flex;align-items:center;gap:10px;}
+@media(min-width:1024px){.header-mobile-actions{display:none;}}
+.header-call-mobile{display:inline-flex;align-items:center;gap:6px;background:var(--gradient);color:var(--ink);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap;}
+.header-call-mobile .icon{color:var(--ink);width:14px;height:14px;}
 .header-nav{display:none;}
 @media(min-width:1024px){
   .header-nav{display:flex;align-items:center;gap:32px;font-size:14.5px;font-weight:500;}
@@ -68,11 +72,17 @@ section{padding:100px 0;position:relative;}
 .header-burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .header-burger.active span:nth-child(2){opacity:0;}
 .header-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;background:rgba(250,250,247,.98);backdrop-filter:blur(10px);z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);}
-.mobile-menu.active{opacity:1;pointer-events:auto;}
-.mobile-menu a{font-family:var(--serif);font-size:26px;color:var(--ink);}
-.mobile-menu a.btn{margin-top:10px;font-family:var(--sans);font-size:15px;color:#fff;}
+.mobile-menu{position:fixed;inset:0;z-index:1100;visibility:hidden;pointer-events:none;}
+.mobile-menu.active{visibility:visible;pointer-events:auto;}
 @media(min-width:1024px){.mobile-menu{display:none;}}
+.mobile-menu-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease);}
+.mobile-menu.active .mobile-menu-overlay{opacity:1;}
+.mobile-menu-panel{position:absolute;top:0;right:0;height:100%;width:80vw;max-width:360px;background:rgba(255,255,255,.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-left:1px solid rgba(255,255,255,.5);box-shadow:-20px 0 60px rgba(14,27,34,.2);display:flex;flex-direction:column;justify-content:center;padding:32px 24px;transform:translateX(100%);transition:transform .3s ease-out;}
+.mobile-menu.active .mobile-menu-panel{transform:translateX(0);}
+.mobile-menu-nav{display:flex;flex-direction:column;}
+.mobile-menu-nav a{font-family:var(--serif);font-size:23px;color:var(--ink);padding:14px 12px;border-radius:12px;transition:background .2s,color .2s;}
+.mobile-menu-nav a:hover,.mobile-menu-nav a:active{background:var(--gradient);color:var(--ink);}
+.mobile-menu-call{margin-top:22px;background:var(--gradient);color:var(--ink);border-radius:999px;padding:16px 22px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:16px;}
 
 /* PAGE INTRO */
 .page-intro{padding-top:170px;text-align:center;}
@@ -138,17 +148,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <a href="index.html#kontakt">Kontakt</a>
     </nav>
     <a href="tel:04931 4551" class="header-phone" aria-label="Praxis anrufen unter 04931 / 4551"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
-    <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="header-mobile-actions">
+      <a href="tel:049314551" class="header-call-mobile" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
+      <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#leistungen">Leistungen</a>
-  <a href="index.html#scanner">Zahn-Scanner</a>
-  <a href="index.html#praxis">Praxis</a>
-  <a href="index.html#oeffnungszeiten">Öffnungszeiten</a>
-  <a href="team.html">Team</a>
-  <a href="index.html#kontakt">Kontakt</a>
-  <a href="tel:04931 4551" class="btn btn-dark" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <nav class="mobile-menu-nav">
+      <a href="index.html#leistungen">Leistungen</a>
+      <a href="index.html#scanner">Zahn-Scanner</a>
+      <a href="index.html#praxis">Praxis</a>
+      <a href="index.html#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="team.html">Team</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <a href="tel:04931 4551" class="mobile-menu-call" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+  </div>
 </div>
 
 <section class="page-intro">
@@ -247,6 +265,9 @@ burger?.addEventListener('click', ()=>{
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
   mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
 }));
+document.getElementById('mobileMenuOverlay')?.addEventListener('click', ()=>{
+  mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
+});
 const revealEls = document.querySelectorAll('.reveal');
 if('IntersectionObserver' in window){
   const io = new IntersectionObserver((entries)=>{

@@ -43,6 +43,7 @@ ul{list-style:none;}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:-.01em;}
 .section-title{font-size:clamp(28px,4vw,44px);color:var(--ink);}
 .section-title em{font-style:italic;font-weight:500;}
+.grad-text{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:normal;}
 .section-sub{color:var(--muted);font-size:16px;margin-top:14px;max-width:520px;}
 .section-head{margin-bottom:56px;}
 section{padding:100px 0;position:relative;}
@@ -64,8 +65,12 @@ section{padding:100px 0;position:relative;}
 .header.scrolled{top:0;left:0;transform:none;width:100%;max-width:none;border-radius:0;background:rgba(250,250,247,.92);border:none;border-bottom:1px solid rgba(14,27,34,.08);box-shadow:0 4px 24px rgba(14,27,34,.06);}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
 .header.scrolled .header-inner{padding:16px 40px;max-width:1240px;margin:0 auto;}
-.header-logo img{height:56px;width:auto;}
+.header-logo img{height:73px;width:auto;}
 @media(max-width:767px){.header-logo img{height:46px;}}
+.header-mobile-actions{display:flex;align-items:center;gap:10px;}
+@media(min-width:1024px){.header-mobile-actions{display:none;}}
+.header-call-mobile{display:inline-flex;align-items:center;gap:6px;background:var(--gradient);color:var(--ink);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap;}
+.header-call-mobile .icon{color:var(--ink);width:14px;height:14px;}
 .header-nav{display:none;}
 @media(min-width:1024px){
   .header-nav{display:flex;align-items:center;gap:32px;font-size:14.5px;font-weight:500;}
@@ -82,17 +87,27 @@ section{padding:100px 0;position:relative;}
 .header-burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .header-burger.active span:nth-child(2){opacity:0;}
 .header-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;background:rgba(250,250,247,.98);backdrop-filter:blur(10px);z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);}
-.mobile-menu.active{opacity:1;pointer-events:auto;}
-.mobile-menu a{font-family:var(--serif);font-size:26px;color:var(--ink);}
-.mobile-menu a.btn{margin-top:10px;font-family:var(--sans);font-size:15px;color:#fff;}
+.mobile-menu{position:fixed;inset:0;z-index:1100;visibility:hidden;pointer-events:none;}
+.mobile-menu.active{visibility:visible;pointer-events:auto;}
 @media(min-width:1024px){.mobile-menu{display:none;}}
+.mobile-menu-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease);}
+.mobile-menu.active .mobile-menu-overlay{opacity:1;}
+.mobile-menu-panel{position:absolute;top:0;right:0;height:100%;width:80vw;max-width:360px;background:rgba(255,255,255,.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-left:1px solid rgba(255,255,255,.5);box-shadow:-20px 0 60px rgba(14,27,34,.2);display:flex;flex-direction:column;justify-content:center;padding:32px 24px;transform:translateX(100%);transition:transform .3s ease-out;}
+.mobile-menu.active .mobile-menu-panel{transform:translateX(0);}
+.mobile-menu-nav{display:flex;flex-direction:column;}
+.mobile-menu-nav a{font-family:var(--serif);font-size:23px;color:var(--ink);padding:14px 12px;border-radius:12px;transition:background .2s,color .2s;}
+.mobile-menu-nav a:hover,.mobile-menu-nav a:active{background:var(--gradient);color:var(--ink);}
+.mobile-menu-call{margin-top:22px;background:var(--gradient);color:var(--ink);border-radius:999px;padding:16px 22px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:16px;}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:720px;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;color:#fff;text-align:center;background:var(--ink);}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.38) 60%,rgba(0,0,0,.58) 100%);}
 .hero-content{position:relative;z-index:2;padding:0 20px;max-width:900px;display:flex;flex-direction:column;align-items:center;}
+@media(max-width:767px){
+  .hero{justify-content:flex-start;}
+  .hero-content{padding-top:104px;padding-bottom:32px;}
+}
 .live-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);padding:8px 18px 8px 14px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.03em;margin-bottom:28px;}
 .live-pill .dot{width:8px;height:8px;border-radius:50%;background:#ff5c5c;box-shadow:0 0 0 4px rgba(255,92,92,.2);}
 .live-pill.is-open .dot{background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.22);}
@@ -111,10 +126,10 @@ section{padding:100px 0;position:relative;}
 .float-cta.show{display:inline-flex;opacity:1;transform:translateY(0);}
 
 /* ============ MARQUEE ============ */
-.marquee{background:var(--gradient);overflow:hidden;padding:16px 0;white-space:nowrap;}
-.marquee-track{display:inline-flex;animation:marquee 38s linear infinite;}
-.marquee-track span{font-size:14px;letter-spacing:.1em;font-weight:600;color:var(--ink);}
-.marquee-track .mq-dot{padding:0 14px;opacity:.6;}
+.marquee{background:var(--gradient);overflow:hidden;padding:10px 0;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:marquee 46s linear infinite;}
+.marquee-track span{font-size:14.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--ink);}
+.marquee-track .mq-dot{padding:0 12px;opacity:.5;font-size:11px;}
 .marquee-track .mq-item{padding:0;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
@@ -143,9 +158,10 @@ section{padding:100px 0;position:relative;}
 .stat-box .t{font-size:12.5px;color:var(--muted);font-weight:500;margin-top:2px;}
 
 /* ============ LEISTUNGEN ============ */
-.serv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-@media(min-width:900px){.serv-grid{grid-template-columns:repeat(4,1fr);}}
-.serv-card{background:#fff;border-radius:24px;padding:28px 22px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;}
+.serv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch;}
+@media(max-width:399px){.serv-grid{grid-template-columns:minmax(0,1fr);}}
+@media(min-width:900px){.serv-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}}
+.serv-card{background:#fff;border-radius:24px;padding:28px 22px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;min-width:0;}
 .serv-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -16px rgba(2,204,255,.25);border-color:rgba(2,204,255,.3);}
 .serv-card .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:transform .3s var(--ease);}
 .serv-card:hover .ic{transform:scale(1.05);}
@@ -158,8 +174,8 @@ section{padding:100px 0;position:relative;}
 .ic-rose{background:#FADADD;color:#B04A5F;}
 .ic-yellow{background:#FBF1C7;color:#A67C1A;}
 .ic-coral{background:#FBD8D3;color:#B03A2E;}
-.serv-card h3{font-size:19px;margin-bottom:8px;}
-.serv-card p{font-size:13.5px;color:var(--muted);}
+.serv-card h3{font-size:19px;margin-bottom:8px;overflow-wrap:anywhere;}
+.serv-card p{font-size:13.5px;color:var(--muted);overflow-wrap:anywhere;}
 
 /* ============ SCANNER ============ */
 .scanner-wrap{display:grid;grid-template-columns:1fr;gap:32px;}
@@ -173,9 +189,6 @@ section{padding:100px 0;position:relative;}
 .scanner-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(14,27,34,.72);color:#fff;font-size:12px;padding:8px 16px;border-radius:999px;backdrop-filter:blur(6px);pointer-events:none;transition:opacity .4s;}
 .scanner-fallback{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;}
 .scanner-fallback svg{width:100%;max-width:340px;height:auto;}
-.hotspot{cursor:pointer;transform-origin:center;transition:transform .2s;}
-.hotspot:hover,.hotspot.active{transform:scale(1.25);}
-.hotspot circle{fill:url(#hotspotGradient);}
 .panel{background:#fff;border-radius:24px;padding:28px;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -12px rgba(14,27,34,.08);}
 .panel-title{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px;}
 .panel-title .icon{width:15px;height:15px;color:#02c4de;}
@@ -191,28 +204,25 @@ section{padding:100px 0;position:relative;}
 .panel-cta strong{font-family:var(--serif);font-size:18px;font-style:italic;display:block;color:#fff;}
 
 /* ============ PRAXIS ============ */
-.praxis-grid{display:grid;grid-template-columns:1fr;gap:16px;}
-@media(min-width:900px){
-  .praxis-grid{grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:18px;}
-  .pg-eingang{grid-row:1/3;}
-}
-.pg-item{position:relative;border-radius:20px;overflow:hidden;min-height:240px;}
+.praxis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+@media(min-width:768px){.praxis-grid{gap:20px;}}
+.pg-item{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;}
 .pg-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .6s var(--ease);}
 .pg-item:hover img{transform:scale(1.05);}
-.pg-eingang{aspect-ratio:3/4;}
-@media(min-width:900px){.pg-eingang{aspect-ratio:auto;}}
-.pg-cap{position:absolute;left:0;right:0;bottom:0;padding:20px;background:linear-gradient(0deg,rgba(0,0,0,.6) 0%,transparent 100%);color:#fff;font-weight:600;font-size:14.5px;z-index:2;}
-.pg-full{grid-column:1/-1;aspect-ratio:16/6;}
+.pg-cap{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);z-index:2;display:flex;flex-direction:column;gap:3px;}
+.pg-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#00CCFF;font-weight:600;}
+.pg-title{font-family:var(--serif);font-size:16px;color:#fff;font-weight:500;}
+@media(min-width:768px){.pg-cap{padding:20px;} .pg-label{font-size:11px;} .pg-title{font-size:22px;}}
 
 /* ============ REVIEWS ============ */
-.rev-rating{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:10px;}
-.rev-rating .stars{color:#00CCFF;letter-spacing:2px;}
+.rev-rating{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);margin-top:18px;}
+.rev-rating .stars{color:#F5B301;letter-spacing:2px;}
 .reviews-viewport{overflow:hidden;}
 .reviews-track{display:flex;transition:transform .55s var(--ease);}
 .review-card{flex:0 0 100%;padding:6px;}
 @media(min-width:900px){.review-card{flex:0 0 33.3333%;}}
 .review-inner{background:#fff;border-radius:24px;padding:28px;height:100%;border:1px solid rgba(14,27,34,.06);box-shadow:0 8px 24px -14px rgba(14,27,34,.1);}
-.review-inner .stars{color:#00CCFF;letter-spacing:2px;font-size:14px;margin-bottom:14px;}
+.review-inner .stars{color:#F5B301;letter-spacing:2px;font-size:14px;margin-bottom:14px;}
 .review-inner blockquote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--ink);}
 .review-meta{margin-top:20px;display:flex;flex-direction:column;gap:2px;}
 .review-meta .name{font-weight:600;font-size:14px;}
@@ -344,17 +354,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <a href="#kontakt">Kontakt</a>
     </nav>
     <a href="tel:04931 4551" class="header-phone" aria-label="Praxis anrufen unter 04931 / 4551"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
-    <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="header-mobile-actions">
+      <a href="tel:049314551" class="header-call-mobile" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
+      <button class="header-burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#leistungen">Leistungen</a>
-  <a href="#scanner">Zahn-Scanner</a>
-  <a href="#praxis">Praxis</a>
-  <a href="#oeffnungszeiten">Öffnungszeiten</a>
-  <a href="team.html">Team</a>
-  <a href="#kontakt">Kontakt</a>
-  <a href="tel:04931 4551" class="btn btn-dark" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <nav class="mobile-menu-nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#scanner">Zahn-Scanner</a>
+      <a href="#praxis">Praxis</a>
+      <a href="#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="team.html">Team</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="tel:04931 4551" class="mobile-menu-call" aria-label="Praxis anrufen"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>04931 / 4551</a>
+  </div>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -407,7 +425,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
     </div>
     <div class="philo-text">
       <div class="label"><span class="bar"></span>Philosophie</div>
-      <h2 class="section-title">Zahnmedizin mit <em>Herz</em> und Präzision</h2>
+      <h2 class="section-title">Zahnmedizin mit <em>Herz</em> und <span class="grad-text">Präzision</span></h2>
       <p style="margin-top:20px;">Seit über 40 Jahren steht unsere Praxis für Zahnmedizin, die den Menschen in den Mittelpunkt stellt. Als Familienpraxis behandeln wir mittlerweile in zweiter Generation — mit derselben Sorgfalt, demselben Anspruch an höchste Qualität und derselben Ruhe, die unsere Patientinnen und Patienten seit Jahrzehnten schätzen.</p>
       <p>Besonders am Herzen liegt uns die einfühlsame Begleitung von Angstpatienten: Wir nehmen uns Zeit, erklären jeden Schritt und schaffen eine Atmosphäre, in der Vertrauen wachsen kann — für Groß und Klein, von der ersten Kontrolle bis zur komplexen Behandlung.</p>
       <div class="philo-stats">
@@ -423,7 +441,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Leistungen</div>
-      <h2 class="section-title">Was wir für Sie tun.</h2>
+      <h2 class="section-title">Was wir für <span class="grad-text">Sie</span> tun</h2>
     </div>
     <div class="serv-grid reveal">
       <div class="serv-card"><div class="ic ic-mint"><svg class="icon" aria-hidden="true"><use href="#i-stetho"/></svg></div><h3>Allgemeine Zahnheilkunde</h3><p>Kontrolle, Füllungen, Wurzelbehandlung.</p></div>
@@ -443,20 +461,20 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Zahn-Scanner</div>
-      <h2 class="section-title">Wo drückt der Schuh?</h2>
-      <p class="section-sub">Tippen Sie auf die betroffene Zahnregion — wir zeigen Ihnen sofort die passende Behandlung.</p>
+      <h2 class="section-title">Wo <span class="grad-text">drückt</span> der Schuh?</h2>
+      <p class="section-sub">Wählen Sie unten Ihre Beschwerde aus — wir zeigen Ihnen direkt am 3D-Modell, worum es geht.</p>
     </div>
     <div class="scanner-wrap reveal">
-      <div class="scanner-canvas-holder" id="scannerHolder" role="img" aria-label="Interaktives 3D-Modell eines Gebisses mit sechs anklickbaren Problemzonen">
+      <div class="scanner-canvas-holder" id="scannerHolder" role="img" aria-label="Interaktives, frei drehbares 3D-Modell eines Gebisses">
         <canvas id="scanner-canvas"></canvas>
         <button class="scanner-reset" id="scannerReset" aria-label="Zurück zur Übersicht"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>Übersicht</button>
-        <div class="scanner-hint" id="scannerHint">Ziehen zum Drehen · Tippen auf einen Punkt</div>
+        <div class="scanner-hint" id="scannerHint">Ziehen zum Drehen</div>
       </div>
       <div>
         <div class="panel">
           <div class="panel-title"><svg class="icon" aria-hidden="true"><use href="#i-scan"/></svg>Zahn-Scanner</div>
           <div id="panel-heading">Wählen Sie einen Bereich am Gebiss.</div>
-          <p id="panel-desc">Klicken Sie auf einen der markierten Punkte am 3D-Modell oder wählen Sie unten eine Beschwerde aus.</p>
+          <p id="panel-desc">Wählen Sie unten Ihre Beschwerde aus — wir zeigen Ihnen direkt am Modell, worum es geht.</p>
           <div class="panel-note" id="panelNote" style="display:none;"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin nötig? Rufen Sie uns an: 04931 / 4551</div>
           <div class="chips-title">Häufige Beschwerden</div>
           <div class="chips">
@@ -479,17 +497,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 </section>
 
 <!-- ============ PRAXIS ============ -->
-<section id="praxis" style="background:#fff;">
+<section id="praxis" style="background:var(--ink);">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="label"><span class="bar"></span>Praxis</div>
-      <h2 class="section-title">Ein Ort zum Wohlfühlen.</h2>
+      <div class="label" style="color:#fff;"><span class="bar"></span>Praxis</div>
+      <h2 class="section-title" style="color:#fff;">Ein Ort zum <span class="grad-text">Wohlfühlen</span></h2>
     </div>
     <div class="praxis-grid reveal">
-      <div class="pg-item pg-eingang"><img src="eingang.peters.png" alt="Eingang der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Eingang außen</div></div>
-      <div class="pg-item"><img src="wartezimmer.peters.png" alt="Wartezimmer der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Wartezimmer</div></div>
-      <div class="pg-item"><img src="behandlungsraum1.peters.png" alt="Behandlungsraum 1 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 1</div></div>
-      <div class="pg-item pg-full"><img src="behandlungsraum2.peters.png" alt="Behandlungsraum 2 der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap">Behandlungsraum 2</div></div>
+      <div class="pg-item"><img src="eingang.peters.png" alt="Eingang der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap"><span class="pg-label">Herzlich willkommen</span><span class="pg-title">Eingang außen</span></div></div>
+      <div class="pg-item"><img src="wartezimmer.peters.png" alt="Wartezimmer der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap"><span class="pg-label">Ankommen &amp; durchatmen</span><span class="pg-title">Wartezimmer</span></div></div>
+      <div class="pg-item"><img src="behandlungsraum1.peters.png" alt="Behandlungsraum Prophylaxe der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap"><span class="pg-label">Vorsorge &amp; Prophylaxe</span><span class="pg-title">Behandlungsraum Prophylaxe</span></div></div>
+      <div class="pg-item"><img src="behandlungsraum2.peters.png" alt="Behandlungsraum Chirurgie der Zahnarztpraxis Dr. Peters" loading="lazy"><div class="pg-cap"><span class="pg-label">Implantologie &amp; Ästhetik</span><span class="pg-title">Behandlungsraum Chirurgie</span></div></div>
     </div>
   </div>
 </section>
@@ -498,9 +516,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 <section id="stimmen">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="rev-rating"><span class="stars">★★★★★</span> 4,8 — 110 Rezensionen auf Google</div>
-      <div class="label"><span class="bar"></span>Stimmen</div>
-      <h2 class="section-title">Was unsere Patienten sagen.</h2>
+      <div class="label"><span class="bar"></span>Patientenstimmen</div>
+      <h2 class="section-title">Was unsere Patienten <span class="grad-text">sagen</span></h2>
+      <div class="rev-rating"><span class="stars">★★★★★</span> 4,8/5 — 110 Rezensionen auf Google</div>
     </div>
     <div class="reviews-viewport reveal" id="revViewport">
       <div class="reviews-track" id="revTrack">
@@ -521,7 +539,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Gut zu wissen</div>
-      <h2 class="section-title">Bevor Sie zu uns kommen.</h2>
+      <h2 class="section-title">Bevor Sie zu uns <span class="grad-text">kommen</span></h2>
     </div>
     <div class="tip-grid reveal">
       <div class="tip-card"><div class="ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div><h3>Neupatient?</h3><p>Bringen Sie Ihre Versichertenkarte und ggf. Bonusheft mit.</p></div>
@@ -537,7 +555,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Öffnungszeiten</div>
-      <h2 class="section-title">Wann Sie uns finden.</h2>
+      <h2 class="section-title">Wann Sie uns <span class="grad-text">finden</span></h2>
       <p class="section-sub">Termine nach Vereinbarung — rufen Sie uns gerne an.</p>
     </div>
     <div class="oz-grid reveal">
@@ -587,7 +605,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap" style="max-width:840px;">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Häufige Fragen</div>
-      <h2 class="section-title">Antworten auf einen Blick.</h2>
+      <h2 class="section-title"><span class="grad-text">Antworten</span> auf einen Blick</h2>
     </div>
     <div class="reveal" id="faqList">
       <div class="faq-item open">
@@ -633,7 +651,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="wrap">
     <div class="section-head reveal">
       <div class="label"><span class="bar"></span>Kontakt</div>
-      <h2 class="section-title">Wir freuen uns auf Ihren Anruf.</h2>
+      <h2 class="section-title">Wir freuen uns auf <span class="grad-text">Ihren Anruf</span></h2>
     </div>
     <div class="kontakt-grid reveal">
       <div class="kcard-list">
@@ -752,6 +770,9 @@ burger?.addEventListener('click', ()=>{
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
   mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
 }));
+document.getElementById('mobileMenuOverlay')?.addEventListener('click', ()=>{
+  mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
+});
 
 /* ============ REVEAL ON SCROLL ============ */
 const revealEls = document.querySelectorAll('.reveal');
@@ -832,25 +853,15 @@ document.querySelectorAll('.chip').forEach(chip=>{
 } }
 </script>
 <script type="module">
-/* Statischer Info-Text bei Direktklick auf einen 3D-Marker / SVG-Hotspot */
-const MARKER_INFO = {
-  weisheit:     { title: "Weisheitszähne — Extraktion & Nachsorge", desc: "Wenn Weisheitszähne drücken, schief wachsen oder sich entzünden, prüfen wir schonend, ob eine Entfernung sinnvoll ist. Die Nachsorge liegt uns dabei besonders am Herzen." },
-  karies:       { title: "Karies & Füllungen — Moderne Composite-Restaurationen", desc: "Kleine Löcher, große Wirkung: Mit zahnfarbenen Composite-Füllungen versorgen wir Karies unsichtbar und erhalten so viel gesunde Zahnsubstanz wie möglich." },
-  aesthetik:    { title: "Ästhetik & Veneers — Sichtbar schöne Frontzähne", desc: "Verfärbte oder unregelmäßige Frontzähne lassen sich mit Bleaching oder hauchdünnen Veneers dezent und natürlich verschönern." },
-  parodontitis: { title: "Parodontitis & Prophylaxe — Gesundes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen. Mit professioneller Prophylaxe und, wenn nötig, einer Parodontitis-Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
-  implantat:    { title: "Implantologie & Zahnersatz — Ihre Lücke schließen", desc: "Ein fehlender Zahn muss nicht auffallen. Mit hochwertigen Implantaten oder festsitzendem Zahnersatz schließen wir Lücken dauerhaft und natürlich." },
-  cmd:          { title: "CMD & Knirschen — Schiene und Behandlung", desc: "Nächtliches Knirschen oder ein verspannter Kiefer können auf eine CMD hindeuten. Mit einer individuellen Schiene und gezielter Behandlung schaffen wir Entlastung." },
-};
-
-/* Beschwerde-Chips: jeder Chip triggert denselben Fokus wie der zugeordnete Marker
-   (targetMarker) plus eine eigene, laufende Zahn-Animation (siehe animateComplaints). */
+/* Beschwerde-Chips: jeder Chip triggert eine eigene, laufende Zahn-Animation
+   (siehe animateComplaints) plus den passenden Kamera-Zoom. */
 const COMPLAINT_INFO = {
-  pain:     { targetMarker: "karies",       title: "Zahnschmerzen", desc: "Ein pochender oder ziehender Schmerz deutet häufig auf Karies oder eine Entzündung hin. Wir finden die Ursache und lindern den Schmerz schnellstmöglich." },
-  bleeding: { targetMarker: "parodontitis", title: "Blutendes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen für Parodontitis. Mit professioneller Prophylaxe und gezielter Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
-  cold:     { targetMarker: "aesthetik",    title: "Empfindliche Zähne", desc: "Ein ziehender Schmerz bei Heißem oder Kaltem kann an freiliegenden Zahnhälsen oder feinen Rissen liegen. Wir finden die Ursache und schützen Ihre Zähne nachhaltig." },
-  bruxism:  { targetMarker: "cmd",          title: "Knirschen & Kiefer-Verspannung", desc: "Nächtliches Knirschen belastet Zähne, Kaufläche und Kiefergelenk. Mit einer individuell angepassten Schiene schaffen wir spürbare Entlastung." },
-  loose:    { targetMarker: null,           title: "Lockere Zähne", desc: "Lockere Zähne können auf Knochenabbau durch Parodontitis hindeuten. Eine frühzeitige Behandlung hilft, Ihre Zähne dauerhaft zu erhalten." },
-  stain:    { targetMarker: "aesthetik",    title: "Verfärbungen & Ästhetik", desc: "Verfärbte oder unregelmäßige Frontzähne lassen sich mit Bleaching oder hauchdünnen Veneers dezent und natürlich verschönern." },
+  pain:     { title: "Zahnschmerzen", desc: "Ein pochender oder ziehender Schmerz deutet häufig auf Karies oder eine Entzündung hin. Wir finden die Ursache und lindern den Schmerz schnellstmöglich." },
+  bleeding: { title: "Blutendes Zahnfleisch", desc: "Blutendes oder gerötetes Zahnfleisch ist oft ein erstes Warnzeichen für Parodontitis. Mit professioneller Prophylaxe und gezielter Behandlung erhalten wir Ihr Zahnfleisch langfristig gesund." },
+  cold:     { title: "Empfindliche Zähne", desc: "Ein ziehender Schmerz bei Heißem oder Kaltem kann an freiliegenden Zahnhälsen oder feinen Rissen liegen. Wir finden die Ursache und schützen Ihre Zähne nachhaltig." },
+  bruxism:  { title: "Knirschen & Kiefer-Verspannung", desc: "Nächtliches Knirschen belastet Zähne, Kaufläche und Kiefergelenk. Mit einer individuell angepassten Schiene schaffen wir spürbare Entlastung." },
+  loose:    { title: "Lockere Zähne", desc: "Lockere Zähne können auf Knochenabbau durch Parodontitis hindeuten. Eine frühzeitige Behandlung hilft, Ihre Zähne dauerhaft zu erhalten." },
+  stain:    { title: "Verfärbungen & Ästhetik", desc: "Verfärbte oder unregelmäßige Frontzähne lassen sich mit Bleaching oder hauchdünnen Veneers dezent und natürlich verschönern." },
 };
 
 const panelHeading = document.getElementById('panel-heading');
@@ -859,14 +870,6 @@ const panelNote = document.getElementById('panelNote');
 const resetBtn = document.getElementById('scannerReset');
 const hint = document.getElementById('scannerHint');
 
-function showMarkerInfo(id){
-  const info = MARKER_INFO[id];
-  if(!info) return;
-  panelHeading.textContent = info.title;
-  panelDesc.textContent = info.desc;
-  panelNote.style.display = 'flex';
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-}
 function showComplaintInfo(id){
   const info = COMPLAINT_INFO[id];
   if(!info) return;
@@ -877,7 +880,7 @@ function showComplaintInfo(id){
 }
 function resetPanel(){
   panelHeading.textContent = 'Wählen Sie einen Bereich am Gebiss.';
-  panelDesc.textContent = 'Klicken Sie auf einen der markierten Punkte am 3D-Modell oder wählen Sie unten eine Beschwerde aus.';
+  panelDesc.textContent = 'Wählen Sie unten Ihre Beschwerde aus — wir zeigen Ihnen direkt am Modell, worum es geht.';
   panelNote.style.display = 'none';
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
 }
@@ -909,31 +912,13 @@ function initFallback(){
   wrap.className = 'scanner-fallback';
   wrap.innerHTML = `
   <svg viewBox="0 0 300 260" aria-hidden="true">
-    <defs><radialGradient id="hotspotGradient"><stop offset="0%" stop-color="#99FFFF"/><stop offset="100%" stop-color="#00CCFF"/></radialGradient></defs>
     <ellipse cx="150" cy="60" rx="105" ry="50" fill="#F5F5F0" stroke="#E3E3DC" stroke-width="2"/>
     <ellipse cx="150" cy="190" rx="95" ry="46" fill="#F5F5F0" stroke="#E3E3DC" stroke-width="2"/>
     <ellipse cx="150" cy="125" rx="60" ry="18" fill="#F5C7C2" opacity="0.5"/>
-    <g class="hotspot" data-marker="weisheit" tabindex="0" role="button" aria-label="Weisheitszähne"><circle cx="248" cy="70" r="9"/></g>
-    <g class="hotspot" data-marker="karies" tabindex="0" role="button" aria-label="Karies und Füllungen"><circle cx="70" cy="55" r="9"/></g>
-    <g class="hotspot" data-marker="aesthetik" tabindex="0" role="button" aria-label="Ästhetik und Veneers"><circle cx="150" cy="22" r="9"/></g>
-    <g class="hotspot" data-marker="parodontitis" tabindex="0" role="button" aria-label="Parodontitis und Prophylaxe"><circle cx="150" cy="150" r="9"/></g>
-    <g class="hotspot" data-marker="implantat" tabindex="0" role="button" aria-label="Implantologie und Zahnersatz"><circle cx="95" cy="205" r="9"/></g>
-    <g class="hotspot" data-marker="cmd" tabindex="0" role="button" aria-label="CMD und Knirschen"><circle cx="255" cy="200" r="9"/></g>
   </svg>`;
   holder.appendChild(wrap);
-  wrap.querySelectorAll('.hotspot').forEach(h=>{
-    const activate = ()=>{
-      wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('active'));
-      h.classList.add('active');
-      showMarkerInfo(h.dataset.marker);
-    };
-    h.addEventListener('click', activate);
-    h.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); activate(); } });
-  });
   window.scannerSelectComplaint = (id)=>{
-    const info = COMPLAINT_INFO[id];
-    if(!info) return;
-    wrap.querySelectorAll('.hotspot').forEach(x=>x.classList.toggle('active', !!info.targetMarker && x.dataset.marker===info.targetMarker));
+    if(!COMPLAINT_INFO[id]) return;
     showComplaintInfo(id);
     document.getElementById('scanner')?.scrollIntoView({behavior:'smooth', block:'center'});
   };
@@ -1015,7 +1000,6 @@ async function init3D(){
   /* Eigenes Material für den unteren Zahnfleisch-Bogen: Vertex-Colors erlauben eine lokal
      begrenzte Entzündungsfärbung (blutendes Zahnfleisch), statt den ganzen Bogen einzufärben. */
   const gumMatVertex = new THREE.MeshStandardMaterial({ color:0xffffff, roughness:0.65, metalness:0, vertexColors:true, bumpMap:gumBump, bumpScale:0.012 });
-  const markerMat = new THREE.MeshStandardMaterial({ color: 0x02FFFF, emissive: 0x02CCFF, emissiveIntensity: 0.7, roughness: 0.3 });
 
   const COLOR_GUM_BASE = new THREE.Color(0xE8A8A0);
   const COLOR_GUM_INFLAMED = new THREE.Color(0xB84545);
@@ -1033,7 +1017,7 @@ async function init3D(){
 
   /* ---- Kiefer-Bögen (Zahnfleisch) ---- */
   /* Bogen-Parametrisierung: angle 0 = Frontzahn (max. z, nah an der Kamera),
-     angle ±~86° = hinterster Molar (min. z, weiter hinten). Teeth-Positionen
+     größere |angle| = weiter hinten liegender Molar (min. z). Teeth-Positionen
      und Zahnfleisch-Tube nutzen dieselbe Formel, damit beides deckungsgleich bleibt. */
   function arcPoint(angle, radiusX, radiusZ){
     return { x: Math.sin(angle)*radiusX, z: Math.cos(angle)*radiusZ };
@@ -1041,10 +1025,11 @@ async function init3D(){
   const BLEED_ZONE_ANGLE = -0.62; // seitlicher Bereich unten links, siehe CAMERA_CONFIGS.bleeding
   const BLEED_ZONE_WIDTH = 0.55;
   function buildGum(y, radiusX, radiusZ, targetGroup, isUpper){
+    const span = GUM_ARC_SPAN, start = -span/2;
     const pts = [];
     const N = 40;
     for(let i=0;i<=N;i++){
-      const angle = -1.5 + (i/N)*3.0;
+      const angle = start + (i/N)*span;
       const p = arcPoint(angle, radiusX, radiusZ);
       pts.push(new THREE.Vector3(p.x, y, p.z));
     }
@@ -1063,7 +1048,7 @@ async function init3D(){
     for(let vi=0; vi<count; vi++){
       const ring = Math.floor(vi/ringVerts);
       const u = ring/tubularSegments;
-      const angle = -1.5 + u*3.0;
+      const angle = start + u*span;
       const dist = Math.abs(angle - BLEED_ZONE_ANGLE);
       const w = Math.max(0, 1 - dist/BLEED_ZONE_WIDTH);
       zoneWeights[vi] = w*w;
@@ -1089,13 +1074,34 @@ async function init3D(){
   }
 
   /* ---- Zahn-Positionen entlang des Bogens ---- */
+  /* Zahnbreiten-basierte Bogen-Platzierung: Der Winkel-Abstand zwischen zwei Zähnen ist
+     proportional zur Summe ihrer Kronenbreiten (statt gleichmäßiger Winkelschritte) —
+     schmale Schneidezähne rücken eng zusammen, breite Molaren bekommen etwas mehr Raum.
+     Die Abstände werden auf eine feste Gesamtspannweite (TOTAL_ARC_SPAN, enger als zuvor)
+     normiert, damit der Bogen spürbar geschlossener wirkt, ohne Radius/Kamera-Tuning
+     an anderer Stelle im Code zu beeinflussen. */
+  const TOTAL_ARC_SPAN = 2.5;
+  const GUM_ARC_SPAN = TOTAL_ARC_SPAN + 0.3; // etwas Zahnfleisch-Überstand hinter dem letzten Molaren
   function archPositions(count, radiusX, radiusZ){
+    const weights = [];
+    for(let i=0;i<count-1;i++){
+      const wA = SIZE_BY_TYPE[toothType(i, count)].w;
+      const wB = SIZE_BY_TYPE[toothType(i+1, count)].w;
+      weights.push((wA+wB)/2);
+    }
+    const totalWeight = weights.reduce((a,b)=>a+b, 0);
+    const gaps = weights.map(w => (w/totalWeight)*TOTAL_ARC_SPAN);
+    // count ist immer gerade (zwei mittlere Schneidezähne symmetrisch um die Vorderfront-Mitte)
+    const lo = count/2 - 1, hi = count/2;
+    const angles = new Array(count);
+    angles[lo] = -gaps[lo]/2;
+    angles[hi] = gaps[lo]/2;
+    for(let i=lo-1;i>=0;i--) angles[i] = angles[i+1] - gaps[i];
+    for(let i=hi+1;i<count;i++) angles[i] = angles[i-1] + gaps[i-1];
     const positions = [];
     for(let i=0;i<count;i++){
-      const t = i/(count-1);
-      const angle = -1.5 + t*3.0; // -~86° bis +~86°
-      const p = arcPoint(angle, radiusX, radiusZ);
-      positions.push({ x: p.x, z: p.z, angle });
+      const p = arcPoint(angles[i], radiusX, radiusZ);
+      positions.push({ x: p.x, z: p.z, angle: angles[i] });
     }
     return positions;
   }
@@ -1103,10 +1109,10 @@ async function init3D(){
   /* ---- Zahntypen entlang des Bogens: Schneide-/Eck-/Prämolar/Molar, gespiegelt um die Mitte ---- */
   const TOOTH_TYPES = ['incisor','incisor','canine','premolar','premolar','molar','molar'];
   const SIZE_BY_TYPE = {
-    incisor:  { w:0.34, h:0.62, d:0.3 },
-    canine:   { w:0.34, h:0.7,  d:0.34 },
-    premolar: { w:0.42, h:0.56, d:0.42 },
-    molar:    { w:0.52, h:0.5,  d:0.5 },
+    incisor:  { w:0.39, h:0.62, d:0.3 },
+    canine:   { w:0.39, h:0.7,  d:0.34 },
+    premolar: { w:0.48, h:0.56, d:0.42 },
+    molar:    { w:0.6,  h:0.5,  d:0.5 },
   };
   function toothType(i, count){
     const half = i < count/2 ? (count/2 - 1 - i) : (i - count/2);
@@ -1210,13 +1216,8 @@ async function init3D(){
     return group;
   }
 
-  /* Marker-Zuordnung: Index 13 = hinten rechts (Weisheitszahn), Index 1 = links hinten (Backenzahn),
-     Index 6-7 = Mitte oben (Schneidezahn). Unten: Index 10 wird ausgelassen (Lücke/Implantat-Marker). */
-  const SKIP_LOWER_INDEX = 10;
-
   function buildArch(positions, y, isUpper, arr, targetGroup){
     positions.forEach((p, i)=>{
-      if(!isUpper && i === SKIP_LOWER_INDEX) return; // Zahnlücke für Implantat-Marker
       const type = toothType(i, positions.length);
       const size = SIZE_BY_TYPE[type];
       const mat = makeToothMaterial(IVORY_PALETTE[i % IVORY_PALETTE.length]);
@@ -1258,26 +1259,6 @@ async function init3D(){
     return v.divideScalar(frontColdTeeth.length);
   }
 
-  /* ---- Marker: Aqua-Kugeln mit Pulse, Klick öffnet Info-Panel ---- */
-  function addMarker(id, worldPos, offsetY=0.32){
-    const geo = new THREE.SphereGeometry(0.09, 16, 16);
-    const mesh = new THREE.Mesh(geo, markerMat);
-    mesh.position.copy(worldPos).add(new THREE.Vector3(0, offsetY, 0));
-    mesh.userData = { id, pulseOffset: Math.random()*Math.PI*2 };
-    jaw.add(mesh);
-    return mesh;
-  }
-
-  const markers = [];
-  markers.push(addMarker('weisheit', teeth.upper[13].basePos, 0.32));
-  markers.push(addMarker('karies', painTooth.basePos, 0.32));
-  markers.push(addMarker('aesthetik', teeth.upper[6].basePos, 0.34));
-  const lowerFront = lowerPos[6];
-  markers.push(addMarker('parodontitis', new THREE.Vector3(lowerFront.x, -1.15, lowerFront.z), 0));
-  const gapPos = lowerPos[SKIP_LOWER_INDEX];
-  markers.push(addMarker('implantat', new THREE.Vector3(gapPos.x, -0.78, gapPos.z), 0));
-  markers.push(addMarker('cmd', new THREE.Vector3(2.9, 0.3, -0.6), 0));
-
   /* Position der seitlichen Zahnfleisch-Zone (Kamera-Ziel + Bluttropfen-Ursprung),
      deckungsgleich mit der Vertex-Color-Zone im unteren Zahnfleisch-Bogen. */
   const bleedZonePos = (()=>{
@@ -1312,18 +1293,6 @@ async function init3D(){
       if(t>=1) tween = null;
     };
   }
-  function focusMarker(mesh){
-    activeComplaint = null;
-    clenchActive = false;
-    const dir = mesh.position.clone().normalize();
-    const toPos = mesh.position.clone().add(dir.multiplyScalar(1.6)).add(new THREE.Vector3(0,0.3,0.6));
-    tweenCamera(toPos, mesh.position.clone(), 1200);
-    markers.forEach(m=>m.userData.active = m===mesh);
-    resetBtn.classList.add('show');
-    hint.style.opacity = '0';
-    showMarkerInfo(mesh.userData.id);
-  }
-
   /* Kamera-Framing je Beschwerde: eng auf einen Zahn, seitlich auf die Zahnfleischlinie,
      frontal auf die Front, o.ä. — jeweils passend zum beschriebenen Effekt. */
   const CAMERA_CONFIGS = {
@@ -1366,7 +1335,6 @@ async function init3D(){
     } else {
       tweenCamera(INITIAL_POS, INITIAL_TARGET, 1200);
     }
-    markers.forEach(mk=>mk.userData.active = !!info.targetMarker && mk.userData.id===info.targetMarker);
     resetBtn.classList.add('show');
     hint.style.opacity = '0';
     showComplaintInfo(id);
@@ -1377,7 +1345,6 @@ async function init3D(){
     activeComplaint = null;
     clenchActive = false;
     tweenCamera(INITIAL_POS, INITIAL_TARGET, 1000);
-    markers.forEach(m=>m.userData.active=false);
     resetBtn.classList.remove('show');
     hint.style.opacity = '1';
     resetPanel();
@@ -1388,20 +1355,6 @@ async function init3D(){
     focusComplaint(id);
     document.getElementById('scanner').scrollIntoView({behavior:'smooth', block:'center'});
   };
-
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  function onPointerUp(e){
-    const rect = canvas.getBoundingClientRect();
-    const cx = e.clientX ?? (e.changedTouches && e.changedTouches[0].clientX);
-    const cy = e.clientY ?? (e.changedTouches && e.changedTouches[0].clientY);
-    pointer.x = ((cx-rect.left)/rect.width)*2-1;
-    pointer.y = -((cy-rect.top)/rect.height)*2+1;
-    raycaster.setFromCamera(pointer, camera);
-    const hits = raycaster.intersectObjects(markers);
-    if(hits.length){ focusMarker(hits[0].object); }
-  }
-  canvas.addEventListener('pointerup', onPointerUp);
 
   /* ================= Beschwerde-Animationen ================= */
 
@@ -1626,11 +1579,6 @@ async function init3D(){
     requestAnimationFrame(animate);
     const dt = Math.min(0.05, clock.getDelta());
     elapsedTime += dt;
-    markers.forEach(m=>{
-      const base = m.userData.active ? 1.5 : 1;
-      const s = base + Math.sin(elapsedTime*3 + m.userData.pulseOffset)*0.18;
-      m.scale.setScalar(s);
-    });
     updateComplaintVisuals(dt, elapsedTime);
     if(tween) tween(performance.now());
     controls.update();
