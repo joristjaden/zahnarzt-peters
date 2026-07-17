@@ -102,13 +102,13 @@ section{padding:100px 0;position:relative;}
 .mobile-menu-call{margin-top:22px;background:var(--gradient);color:var(--ink);border-radius:999px;padding:16px 22px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:16px;}
 
 /* ============ HERO ============ */
-.hero{position:relative;min-height:720px;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;color:#fff;text-align:center;background:var(--ink);}
+.hero{position:relative;min-height:720px;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;color:#fff;text-align:center;background:var(--ink);}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.38) 60%,rgba(0,0,0,.58) 100%);}
-.hero-content{position:relative;z-index:2;padding:0 20px;max-width:900px;display:flex;flex-direction:column;align-items:center;}
+.hero-content{position:relative;z-index:2;padding:187px 20px 60px;max-width:900px;display:flex;flex-direction:column;align-items:center;}
 @media(max-width:767px){
-  .hero{justify-content:flex-start;min-height:0;height:100vh;}
-  .hero-content{padding-top:108px;padding-bottom:20px;}
+  .hero{min-height:0;height:100vh;}
+  .hero-content{padding-top:135px;padding-bottom:20px;}
 }
 @supports (height:100svh){@media(max-width:767px){.hero{height:100svh;}}}
 .live-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);padding:8px 18px 8px 14px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.03em;margin-bottom:28px;}
@@ -126,17 +126,14 @@ section{padding:100px 0;position:relative;}
 @media(max-width:767px){.hero-services{margin-top:8px;font-size:13px;}}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px;}
 @media(max-width:767px){.hero-ctas{margin-top:20px;gap:10px;}}
-.hero-bullets{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;margin-top:52px;max-width:620px;}
-@media(min-width:768px){.hero-bullets{grid-template-columns:repeat(4,auto);}}
-@media(max-width:767px){.hero-bullets{display:none;}}
-.hero-bullets li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.92);}
-.hero-bullets .icon{color:var(--aqua-2);width:18px;height:18px;flex-shrink:0;}
-.hero-stats-mobile{display:none;}
-@media(max-width:767px){
-  .hero-stats-mobile{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px;max-width:340px;width:100%;}
-  .hero-stats-mobile li{display:flex;flex-direction:column;align-items:center;gap:2px;}
-  .hero-stats-mobile .stat-num{font-family:var(--serif);font-size:22px;font-weight:600;font-style:italic;color:var(--aqua-2);}
-  .hero-stats-mobile .stat-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500;white-space:nowrap;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px;max-width:340px;width:100%;}
+.hero-stats li{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.hero-stats .stat-num{font-family:var(--serif);font-size:22px;font-weight:600;font-style:italic;color:#08CCFF;}
+.hero-stats .stat-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500;white-space:nowrap;}
+@media(min-width:768px){
+  .hero-stats{gap:56px;max-width:460px;margin-top:44px;}
+  .hero-stats .stat-num{font-size:32px;}
+  .hero-stats .stat-label{font-size:12.5px;letter-spacing:.1em;}
 }
 .float-cta{position:fixed;right:22px;bottom:22px;z-index:900;background:var(--gradient);color:var(--ink);padding:15px 22px;border-radius:999px;display:none;align-items:center;gap:9px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(2,204,255,.4);opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease),box-shadow .25s var(--ease);}
 .float-cta:hover{box-shadow:0 14px 34px rgba(2,204,255,.55);}
@@ -410,13 +407,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <a href="tel:04931 4551" class="btn btn-gradient" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
       <a href="#leistungen" class="btn btn-outline">Unsere Leistungen</a>
     </div>
-    <ul class="hero-bullets">
-      <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Über 40 Jahre Erfahrung</li>
-      <li><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>Moderne Ausstattung</li>
-      <li><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Angstpatienten willkommen</li>
-      <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Kurzfristige Notfalltermine</li>
-    </ul>
-    <ul class="hero-stats-mobile">
+    <ul class="hero-stats">
       <li><span class="stat-num">40+</span><span class="stat-label">Jahre</span></li>
       <li><span class="stat-num">8+</span><span class="stat-label">Fachgebiete</span></li>
       <li><span class="stat-num">✓</span><span class="stat-label">Kassenpraxis</span></li>
