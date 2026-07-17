@@ -43,7 +43,7 @@ ul{list-style:none;}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:-.01em;}
 .section-title{font-size:clamp(28px,4vw,44px);color:var(--ink);}
 .section-title em{font-style:italic;font-weight:500;}
-.grad-text{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:normal;}
+.grad-text{color:#08CCFF;font-style:normal;}
 .section-sub{color:var(--muted);font-size:16px;margin-top:14px;max-width:520px;}
 .section-head{margin-bottom:56px;}
 section{padding:100px 0;position:relative;}
@@ -87,13 +87,15 @@ section{padding:100px 0;position:relative;}
 .header-burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .header-burger.active span:nth-child(2){opacity:0;}
 .header-burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;z-index:1100;visibility:hidden;pointer-events:none;}
-.mobile-menu.active{visibility:visible;pointer-events:auto;}
+.mobile-menu{position:fixed;inset:0;z-index:1100;visibility:hidden;pointer-events:none;transition:visibility 0s linear .3s;}
+.mobile-menu.active{visibility:visible;pointer-events:auto;transition:visibility 0s linear 0s;}
 @media(min-width:1024px){.mobile-menu{display:none;}}
 .mobile-menu-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease);}
 .mobile-menu.active .mobile-menu-overlay{opacity:1;}
 .mobile-menu-panel{position:absolute;top:0;right:0;height:100%;width:80vw;max-width:360px;background:rgba(255,255,255,.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-left:1px solid rgba(255,255,255,.5);box-shadow:-20px 0 60px rgba(14,27,34,.2);display:flex;flex-direction:column;justify-content:center;padding:32px 24px;transform:translateX(100%);transition:transform .3s ease-out;}
 .mobile-menu.active .mobile-menu-panel{transform:translateX(0);}
+.mobile-menu-close{position:absolute;top:10px;right:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:24px;border-radius:50%;transition:background .2s;}
+.mobile-menu-close:hover{background:rgba(14,27,34,.06);}
 .mobile-menu-nav{display:flex;flex-direction:column;}
 .mobile-menu-nav a{font-family:var(--serif);font-size:23px;color:var(--ink);padding:14px 12px;border-radius:12px;transition:background .2s,color .2s;}
 .mobile-menu-nav a:hover,.mobile-menu-nav a:active{background:var(--gradient);color:var(--ink);}
@@ -105,31 +107,46 @@ section{padding:100px 0;position:relative;}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.38) 60%,rgba(0,0,0,.58) 100%);}
 .hero-content{position:relative;z-index:2;padding:0 20px;max-width:900px;display:flex;flex-direction:column;align-items:center;}
 @media(max-width:767px){
-  .hero{justify-content:flex-start;}
-  .hero-content{padding-top:104px;padding-bottom:32px;}
+  .hero{justify-content:flex-start;min-height:0;height:100vh;}
+  .hero-content{padding-top:108px;padding-bottom:20px;}
 }
+@supports (height:100svh){@media(max-width:767px){.hero{height:100svh;}}}
 .live-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);padding:8px 18px 8px 14px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.03em;margin-bottom:28px;}
+@media(max-width:767px){.live-pill{margin-bottom:16px;}}
 .live-pill .dot{width:8px;height:8px;border-radius:50%;background:#ff5c5c;box-shadow:0 0 0 4px rgba(255,92,92,.2);}
 .live-pill.is-open .dot{background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.22);}
 .hero h1{font-size:clamp(34px,6vw,64px);text-shadow:0 4px 24px rgba(0,0,0,.4);color:#fff;}
 .hero .hl{font-style:italic;position:relative;display:inline-block;}
 .hero .hl svg{position:absolute;left:0;bottom:-.16em;width:100%;height:.3em;overflow:visible;}
+.hero-line2{white-space:nowrap;}
+@media(max-width:359px){.hero-line2{letter-spacing:-.02em;}}
 .hero-subline{margin-top:22px;font-size:18px;letter-spacing:.04em;font-weight:500;}
+@media(max-width:767px){.hero-subline{margin-top:14px;font-size:16px;}}
 .hero-services{margin-top:10px;font-size:14.5px;color:rgba(255,255,255,.82);max-width:640px;}
+@media(max-width:767px){.hero-services{margin-top:8px;font-size:13px;}}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px;}
+@media(max-width:767px){.hero-ctas{margin-top:20px;gap:10px;}}
 .hero-bullets{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;margin-top:52px;max-width:620px;}
 @media(min-width:768px){.hero-bullets{grid-template-columns:repeat(4,auto);}}
+@media(max-width:767px){.hero-bullets{display:none;}}
 .hero-bullets li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.92);}
 .hero-bullets .icon{color:var(--aqua-2);width:18px;height:18px;flex-shrink:0;}
+.hero-stats-mobile{display:none;}
+@media(max-width:767px){
+  .hero-stats-mobile{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px;max-width:340px;width:100%;}
+  .hero-stats-mobile li{display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .hero-stats-mobile .stat-num{font-family:var(--serif);font-size:22px;font-weight:600;font-style:italic;color:var(--aqua-2);}
+  .hero-stats-mobile .stat-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500;white-space:nowrap;}
+}
 .float-cta{position:fixed;right:22px;bottom:22px;z-index:900;background:var(--gradient);color:var(--ink);padding:15px 22px;border-radius:999px;display:none;align-items:center;gap:9px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(2,204,255,.4);opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease),box-shadow .25s var(--ease);}
 .float-cta:hover{box-shadow:0 14px 34px rgba(2,204,255,.55);}
 .float-cta.show{display:inline-flex;opacity:1;transform:translateY(0);}
 
 /* ============ MARQUEE ============ */
-.marquee{background:var(--gradient);overflow:hidden;padding:10px 0;white-space:nowrap;}
-.marquee-track{display:inline-flex;animation:marquee 46s linear infinite;}
-.marquee-track span{font-size:14.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--ink);}
-.marquee-track .mq-dot{padding:0 12px;opacity:.5;font-size:11px;}
+.marquee{background:var(--gradient);overflow:hidden;padding:13px 0;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:marquee 65s linear infinite;}
+.marquee-track span{font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:400;color:var(--ink);}
+.marquee-track .mq-dot{padding:0 40px;opacity:.5;font-size:11px;}
 .marquee-track .mq-item{padding:0;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
@@ -150,6 +167,7 @@ section{padding:100px 0;position:relative;}
 .philo-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
 @media(min-width:900px){.philo-grid{grid-template-columns:.85fr 1fr;gap:70px;}}
 .philo-img{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px -20px rgba(14,27,34,.25);}
+@media(max-width:899px){.philo-img{aspect-ratio:16/9;border-radius:20px;}}
 .philo-img img{width:100%;height:100%;object-fit:cover;}
 .philo-text p{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:560px;}
 .philo-stats{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
@@ -333,6 +351,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 <symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M9 8c0 1.5 1.3 2.5 3 2.5S15 9.5 15 8"/><path d="M12 13c-4 0-7 2.5-7 7h14c0-4.5-3-7-7-7z"/></symbol>
 <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
 <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 6 6L20 6"/></symbol>
 <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.4 6.4L3 16M3 21v-5h5"/></symbol>
 <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
@@ -363,6 +382,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
   <div class="mobile-menu-panel">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Menü schließen"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     <nav class="mobile-menu-nav">
       <a href="#leistungen">Leistungen</a>
       <a href="#scanner">Zahn-Scanner</a>
@@ -383,7 +403,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="live-pill" data-live-pill><span class="dot"></span><span class="live-text">Aktuell geöffnet</span></div>
-    <h1>Zahngesundheit, der Sie<br><span class="hl">vertrauen<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="swooshGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#99FFFF"/><stop offset="50%" stop-color="#02FFFF"/><stop offset="100%" stop-color="#00CCFF"/></linearGradient></defs><path d="M2 14 C 50 3, 150 3, 198 12" stroke="url(#swooshGrad)" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span>.</h1>
+    <h1>Zahngesundheit, der<br><span class="hero-line2">Sie <span class="hl">vertrauen<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="swooshGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#99FFFF"/><stop offset="50%" stop-color="#02FFFF"/><stop offset="100%" stop-color="#00CCFF"/></linearGradient></defs><path d="M2 14 C 50 3, 150 3, 198 12" stroke="url(#swooshGrad)" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span>.</span></h1>
     <p class="hero-subline">Praxis Dr. Peters · Norden</p>
     <p class="hero-services">Allgemeine Zahnheilkunde · Implantologie · Prophylaxe · Angstpatienten-Behandlung · Notfallversorgung</p>
     <div class="hero-ctas">
@@ -396,6 +416,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <li><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Angstpatienten willkommen</li>
       <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Kurzfristige Notfalltermine</li>
     </ul>
+    <ul class="hero-stats-mobile">
+      <li><span class="stat-num">40+</span><span class="stat-label">Jahre</span></li>
+      <li><span class="stat-num">8+</span><span class="stat-label">Fachgebiete</span></li>
+      <li><span class="stat-num">✓</span><span class="stat-label">Kassenpraxis</span></li>
+    </ul>
   </div>
 </section>
 <a href="tel:04931 4551" class="float-cta" id="floatCta" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
@@ -403,8 +428,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">·</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">·</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">·</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">·</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">·</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">·</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">·</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">·</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">·</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">·</span>
-    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">·</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">·</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">·</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">·</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">·</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">·</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">·</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">·</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">·</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">·</span>
+    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">◆</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">◆</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">◆</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">◆</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">◆</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">◆</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">◆</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">◆</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">◆</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">◆</span>
+    <span class="mq-item">4,8 BEI GOOGLE</span><span class="mq-dot">◆</span><span class="mq-item">IMPLANTOLOGIE</span><span class="mq-dot">◆</span><span class="mq-item">SEIT ÜBER 40 JAHREN IN NORDEN</span><span class="mq-dot">◆</span><span class="mq-item">ANGSTPATIENTEN WILLKOMMEN</span><span class="mq-dot">◆</span><span class="mq-item">NOTFALLTERMINE</span><span class="mq-dot">◆</span><span class="mq-item">GLÜCKAUF 8A</span><span class="mq-dot">◆</span><span class="mq-item">MODERNSTE TECHNIK</span><span class="mq-dot">◆</span><span class="mq-item">PROPHYLAXE</span><span class="mq-dot">◆</span><span class="mq-item">ÄSTHETISCHE ZAHNHEILKUNDE</span><span class="mq-dot">◆</span><span class="mq-item">110 REZENSIONEN</span><span class="mq-dot">◆</span>
   </div>
 </div>
 
@@ -767,12 +792,12 @@ burger?.addEventListener('click', ()=>{
   burger.classList.toggle('active', active);
   burger.setAttribute('aria-expanded', String(active));
 });
-mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+function closeMobileMenu(){
   mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
-}));
-document.getElementById('mobileMenuOverlay')?.addEventListener('click', ()=>{
-  mobileMenu.classList.remove('active'); burger.classList.remove('active'); burger.setAttribute('aria-expanded','false');
-});
+}
+mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobileMenu));
+document.getElementById('mobileMenuOverlay')?.addEventListener('click', closeMobileMenu);
+document.getElementById('mobileMenuClose')?.addEventListener('click', closeMobileMenu);
 
 /* ============ REVEAL ON SCROLL ============ */
 const revealEls = document.querySelectorAll('.reveal');
@@ -841,6 +866,13 @@ document.querySelectorAll('.chip').forEach(chip=>{
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
     chip.classList.add('active');
     if(window.scannerSelectComplaint) window.scannerSelectComplaint(chip.dataset.complaint);
+    /* Mobile: Canvas + Panel stehen untereinander, daher zum Canvas scrollen statt
+       zur ganzen Section, damit die laufende Animation sichtbar im Viewport landet. */
+    const isMobile = window.innerWidth < 768;
+    const scrollTarget = document.getElementById(isMobile ? 'scannerHolder' : 'scanner');
+    setTimeout(()=>{
+      scrollTarget?.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 50);
   });
 });
 </script>
@@ -920,7 +952,6 @@ function initFallback(){
   window.scannerSelectComplaint = (id)=>{
     if(!COMPLAINT_INFO[id]) return;
     showComplaintInfo(id);
-    document.getElementById('scanner')?.scrollIntoView({behavior:'smooth', block:'center'});
   };
 }
 
@@ -1353,7 +1384,6 @@ async function init3D(){
   resetBtn.addEventListener('click', resetView);
   window.scannerSelectComplaint = (id)=>{
     focusComplaint(id);
-    document.getElementById('scanner').scrollIntoView({behavior:'smooth', block:'center'});
   };
 
   /* ================= Beschwerde-Animationen ================= */
