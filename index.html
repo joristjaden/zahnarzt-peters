@@ -111,6 +111,17 @@ section{padding:100px 0;position:relative;}
   .hero-content{padding-top:115px;padding-bottom:20px;}
 }
 @supports (height:100svh){@media(max-width:767px){.hero{height:100svh;}}}
+.hero-spacer{flex:0 0 auto;height:0;}
+/* Desktop: .hero is a hard 100vh box, so a flex-start block shorter than the
+   viewport leaves unpredictable leftover space below it before the marquee —
+   padding-bottom alone can never fix that. Instead hero-content spans the full
+   section height and .hero-spacer (flex:1) absorbs the leftover space, pinning
+   the pill to a fixed offset from the header and the stats to a fixed offset
+   from the marquee, regardless of viewport height. */
+@media(min-width:768px){
+  .hero-content{position:absolute;top:0;right:0;bottom:0;left:0;margin:0 auto;padding:143px 20px 24px;}
+  .hero-spacer{flex:1 1 auto;}
+}
 .live-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);padding:8px 18px 8px 14px;border-radius:999px;font-size:13px;font-weight:500;letter-spacing:.03em;margin-bottom:28px;}
 @media(max-width:767px){.live-pill{margin-bottom:16px;}}
 .live-pill .dot{width:8px;height:8px;border-radius:50%;background:#ff5c5c;box-shadow:0 0 0 4px rgba(255,92,92,.2);}
@@ -414,6 +425,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.75);padding:70px 0 0;}
       <a href="tel:04931 4551" class="btn btn-gradient" aria-label="Termin telefonisch vereinbaren"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Termin vereinbaren</a>
       <a href="#leistungen" class="btn btn-outline">Unsere Leistungen</a>
     </div>
+    <div class="hero-spacer" aria-hidden="true"></div>
     <ul class="hero-stats">
       <li><span class="stat-num">40+</span><span class="stat-label">Jahre</span></li>
       <li><span class="stat-num">8+</span><span class="stat-label">Fachgebiete</span></li>
